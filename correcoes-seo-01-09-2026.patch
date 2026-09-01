@@ -1,0 +1,231 @@
+diff --git a/galeria_geral.html b/galeria_geral.html
+index 53d991b..d553970 100644
+--- a/galeria_geral.html
++++ b/galeria_geral.html
+@@ -4,6 +4,16 @@
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Galeria de fotos da pousada e da Praia do Campeche, em Florianópolis/SC.">
++  <meta name="robots" content="index,follow,max-image-preview:large">
++  <link rel="canonical" href="https://pousada.aetsolidez.com.br/galeria_geral.html">
++  <meta property="og:type" content="website">
++  <meta property="og:locale" content="pt_BR">
++  <meta property="og:site_name" content="Campeche Lofts">
++  <meta property="og:title" content="Galeria | Campeche Lofts">
++  <meta property="og:description" content="Galeria de fotos da pousada e da Praia do Campeche, em Florianópolis/SC.">
++  <meta property="og:url" content="https://pousada.aetsolidez.com.br/galeria_geral.html">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/galeria_geral/pousada_00001.jpeg">
++  <meta name="twitter:card" content="summary_large_image">
+   <title>Galeria | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+   <link rel="stylesheet" href="navegacao-unificada.css">
+diff --git a/index.html b/index.html
+index e616da3..4bc0100 100644
+--- a/index.html
++++ b/index.html
+@@ -4,6 +4,16 @@
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Campeche Lofts: hospedagem tranquila, com estrutura para home-office e a poucos metros da Praia do Campeche, em Florianópolis/SC.">
++  <meta name="robots" content="index,follow,max-image-preview:large">
++  <link rel="canonical" href="https://pousada.aetsolidez.com.br/">
++  <meta property="og:type" content="website">
++  <meta property="og:locale" content="pt_BR">
++  <meta property="og:site_name" content="Campeche Lofts">
++  <meta property="og:title" content="Campeche Lofts | Florianópolis/SC">
++  <meta property="og:description" content="Campeche Lofts: hospedagem tranquila, com estrutura para home-office e a poucos metros da Praia do Campeche, em Florianópolis/SC.">
++  <meta property="og:url" content="https://pousada.aetsolidez.com.br/">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft03/Loft03_00001.jpg">
++  <meta name="twitter:card" content="summary_large_image">
+   <title>Campeche Lofts | Florianópolis/SC</title>
+   <link rel="stylesheet" href="campeche.css">
+   <script type="application/ld+json">
+@@ -24,7 +34,7 @@
+           "postalCode": "88063-160",
+           "addressCountry": "BR"
+         },
+-        "sameAs": ["https://www.instagram.com/campechelofts/"]
++        "sameAs": ["https://www.instagram.com/campechelofts/", "https://www.facebook.com/campechelofts"]
+       },
+       {
+         "@type": "WebSite",
+diff --git a/loft_03.html b/loft_03.html
+index bb51865..bd8a7cd 100644
+--- a/loft_03.html
++++ b/loft_03.html
+@@ -4,6 +4,16 @@
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft 03 no Campeche Lofts, em Florianópolis/SC.">
++  <meta name="robots" content="index,follow,max-image-preview:large">
++  <link rel="canonical" href="https://pousada.aetsolidez.com.br/loft_03.html">
++  <meta property="og:type" content="website">
++  <meta property="og:locale" content="pt_BR">
++  <meta property="og:site_name" content="Campeche Lofts">
++  <meta property="og:title" content="Loft 03 | Campeche Lofts">
++  <meta property="og:description" content="Loft 03 no Campeche Lofts, em Florianópolis/SC.">
++  <meta property="og:url" content="https://pousada.aetsolidez.com.br/loft_03.html">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft03/Loft03_00001.jpg">
++  <meta name="twitter:card" content="summary_large_image">
+   <title>Loft 03 | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+   <link rel="stylesheet" href="navegacao-unificada.css">
+diff --git a/loft_04.html b/loft_04.html
+index 8f74a3c..2994f46 100644
+--- a/loft_04.html
++++ b/loft_04.html
+@@ -4,6 +4,16 @@
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft 04 no Campeche Lofts, em Florianópolis/SC.">
++  <meta name="robots" content="index,follow,max-image-preview:large">
++  <link rel="canonical" href="https://pousada.aetsolidez.com.br/loft_04.html">
++  <meta property="og:type" content="website">
++  <meta property="og:locale" content="pt_BR">
++  <meta property="og:site_name" content="Campeche Lofts">
++  <meta property="og:title" content="Loft 04 | Campeche Lofts">
++  <meta property="og:description" content="Loft 04 no Campeche Lofts, em Florianópolis/SC.">
++  <meta property="og:url" content="https://pousada.aetsolidez.com.br/loft_04.html">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft04/Loft04_00001.jpeg">
++  <meta name="twitter:card" content="summary_large_image">
+   <title>Loft 04 | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+   <link rel="stylesheet" href="navegacao-unificada.css">
+diff --git a/loft_05.html b/loft_05.html
+index b8809ca..68e7abd 100644
+--- a/loft_05.html
++++ b/loft_05.html
+@@ -4,6 +4,16 @@
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft 05 no Campeche Lofts, em Florianópolis/SC.">
++  <meta name="robots" content="index,follow,max-image-preview:large">
++  <link rel="canonical" href="https://pousada.aetsolidez.com.br/loft_05.html">
++  <meta property="og:type" content="website">
++  <meta property="og:locale" content="pt_BR">
++  <meta property="og:site_name" content="Campeche Lofts">
++  <meta property="og:title" content="Loft 05 | Campeche Lofts">
++  <meta property="og:description" content="Loft 05 no Campeche Lofts, em Florianópolis/SC.">
++  <meta property="og:url" content="https://pousada.aetsolidez.com.br/loft_05.html">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft05/Loft05_00001.jpg">
++  <meta name="twitter:card" content="summary_large_image">
+   <title>Loft 05 | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+   <link rel="stylesheet" href="navegacao-unificada.css">
+diff --git a/loft_06.html b/loft_06.html
+index 030622d..04b0c57 100644
+--- a/loft_06.html
++++ b/loft_06.html
+@@ -4,6 +4,16 @@
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft 06 no Campeche Lofts, em Florianópolis/SC.">
++  <meta name="robots" content="index,follow,max-image-preview:large">
++  <link rel="canonical" href="https://pousada.aetsolidez.com.br/loft_06.html">
++  <meta property="og:type" content="website">
++  <meta property="og:locale" content="pt_BR">
++  <meta property="og:site_name" content="Campeche Lofts">
++  <meta property="og:title" content="Loft 06 | Campeche Lofts">
++  <meta property="og:description" content="Loft 06 no Campeche Lofts, em Florianópolis/SC.">
++  <meta property="og:url" content="https://pousada.aetsolidez.com.br/loft_06.html">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft06/Loft06_00001.jpg">
++  <meta name="twitter:card" content="summary_large_image">
+   <title>Loft 06 | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+   <link rel="stylesheet" href="navegacao-unificada.css">
+diff --git a/loft_07.html b/loft_07.html
+index 79128d4..9f3b731 100644
+--- a/loft_07.html
++++ b/loft_07.html
+@@ -4,6 +4,16 @@
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft 07 no Campeche Lofts, em Florianópolis/SC.">
++  <meta name="robots" content="index,follow,max-image-preview:large">
++  <link rel="canonical" href="https://pousada.aetsolidez.com.br/loft_07.html">
++  <meta property="og:type" content="website">
++  <meta property="og:locale" content="pt_BR">
++  <meta property="og:site_name" content="Campeche Lofts">
++  <meta property="og:title" content="Loft 07 | Campeche Lofts">
++  <meta property="og:description" content="Loft 07 no Campeche Lofts, em Florianópolis/SC.">
++  <meta property="og:url" content="https://pousada.aetsolidez.com.br/loft_07.html">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft07/Loft07_00001.jpeg">
++  <meta name="twitter:card" content="summary_large_image">
+   <title>Loft 07 | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+   <link rel="stylesheet" href="navegacao-unificada.css">
+diff --git a/loft_08.html b/loft_08.html
+index 261373f..12bfd29 100644
+--- a/loft_08.html
++++ b/loft_08.html
+@@ -4,6 +4,16 @@
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft 08 no Campeche Lofts, em Florianópolis/SC.">
++  <meta name="robots" content="index,follow,max-image-preview:large">
++  <link rel="canonical" href="https://pousada.aetsolidez.com.br/loft_08.html">
++  <meta property="og:type" content="website">
++  <meta property="og:locale" content="pt_BR">
++  <meta property="og:site_name" content="Campeche Lofts">
++  <meta property="og:title" content="Loft 08 | Campeche Lofts">
++  <meta property="og:description" content="Loft 08 no Campeche Lofts, em Florianópolis/SC.">
++  <meta property="og:url" content="https://pousada.aetsolidez.com.br/loft_08.html">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft08/Loft08_00001.JPG">
++  <meta name="twitter:card" content="summary_large_image">
+   <title>Loft 08 | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+   <link rel="stylesheet" href="navegacao-unificada.css">
+diff --git a/loft_09.html b/loft_09.html
+index c10d9da..0933176 100644
+--- a/loft_09.html
++++ b/loft_09.html
+@@ -4,6 +4,16 @@
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft 09 no Campeche Lofts, em Florianópolis/SC.">
++  <meta name="robots" content="index,follow,max-image-preview:large">
++  <link rel="canonical" href="https://pousada.aetsolidez.com.br/loft_09.html">
++  <meta property="og:type" content="website">
++  <meta property="og:locale" content="pt_BR">
++  <meta property="og:site_name" content="Campeche Lofts">
++  <meta property="og:title" content="Loft 09 | Campeche Lofts">
++  <meta property="og:description" content="Loft 09 no Campeche Lofts, em Florianópolis/SC.">
++  <meta property="og:url" content="https://pousada.aetsolidez.com.br/loft_09.html">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft09/Loft09_00001.jpeg">
++  <meta name="twitter:card" content="summary_large_image">
+   <title>Loft 09 | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+   <link rel="stylesheet" href="navegacao-unificada.css">
+diff --git a/planejador.html b/planejador.html
+index 9917e37..7dbe7f1 100644
+--- a/planejador.html
++++ b/planejador.html
+@@ -5,6 +5,16 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Planejador de Viagem | Campeche Lofts</title>
+ <meta name="description" content="Planeje sua chegada até a Campeche Lofts com previsão de chuva, trânsito e melhor horário de saída.">
++<meta name="robots" content="index,follow,max-image-preview:large">
++<link rel="canonical" href="https://pousada.aetsolidez.com.br/planejador.html">
++<meta property="og:type" content="website">
++<meta property="og:locale" content="pt_BR">
++<meta property="og:site_name" content="Campeche Lofts">
++<meta property="og:title" content="Planejador de Viagem | Campeche Lofts">
++<meta property="og:description" content="Planeje sua chegada até a Campeche Lofts com previsão de chuva, trânsito e melhor horário de saída.">
++<meta property="og:url" content="https://pousada.aetsolidez.com.br/planejador.html">
++<meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_horizontal.webp">
++<meta name="twitter:card" content="summary_large_image">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+diff --git a/sitemap.xml b/sitemap.xml
+index 5825331..c21a979 100644
+--- a/sitemap.xml
++++ b/sitemap.xml
+@@ -9,6 +9,7 @@
+   <url><loc>https://pousada.aetsolidez.com.br/loft_08.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+   <url><loc>https://pousada.aetsolidez.com.br/loft_09.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+   <url><loc>https://pousada.aetsolidez.com.br/galeria_geral.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
++  <url><loc>https://pousada.aetsolidez.com.br/planejador.html</loc><lastmod>2026-09-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+   <url><loc>https://pousada.aetsolidez.com.br/blog/</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+   <url><loc>https://pousada.aetsolidez.com.br/blog/baleias-franca-litoral-santa-catarina/</loc><lastmod>2026-08-26</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
+   <url><loc>https://pousada.aetsolidez.com.br/blog/temporada-trabalho-remoto-florianopolis/</loc><lastmod>2026-08-26</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
