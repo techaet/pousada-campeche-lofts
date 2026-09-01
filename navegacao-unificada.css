@@ -1,0 +1,40 @@
+/* Navegação unificada do Campeche Lofts — arquivo complementar */
+.site-nav {
+  gap: clamp(.72rem, 1.35vw, 1.65rem);
+}
+.site-nav a {
+  font-size: .78rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 1080px) {
+  .menu-toggle {
+    display: inline-grid !important;
+    place-items: center;
+  }
+  .site-nav {
+    position: fixed !important;
+    inset: 76px 0 auto !important;
+    display: grid !important;
+    gap: 0 !important;
+    padding: 1rem 16px 1.2rem !important;
+    background: rgba(247, 243, 236, .98) !important;
+    border-bottom: 1px solid var(--line, #d8d1c4) !important;
+    box-shadow: 0 16px 24px rgba(13, 35, 36, .08) !important;
+    transform: translateY(-125%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .22s ease, opacity .22s ease;
+    z-index: 200;
+  }
+  .site-nav.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .site-nav a {
+    padding: .9rem 0;
+    border-bottom: 1px solid var(--line, #d8d1c4);
+    font-size: .83rem;
+  }
+}

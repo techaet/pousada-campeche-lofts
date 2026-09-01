@@ -1,0 +1,21 @@
+CAMPECHE LOFTS — SITE COMPLETO COM GUIA PROTEGIDO
+
+Este ZIP contém a versão completa do site, agora com o Guia do Hóspede protegido por senha e com o mapa de estacionamento. O visitante acessa o site, clica em “Guia do Hóspede”, informa a senha e abre diretamente a versão em português. Depois da autenticação, pode trocar para inglês ou espanhol pelos atalhos no cabeçalho.
+
+PUBLICAÇÃO
+
+Extraia o conteúdo deste pacote e envie seus arquivos para a raiz de pousada.aetsolidez.com.br por FTP ou pelo Gerenciador de Arquivos do cPanel. Autorize a substituição dos arquivos existentes. É essencial enviar a pasta guia completa, sem mudar nomes ou estrutura.
+
+A página inicial atualizada é index.html. Ela contém o novo link “Guia do Hóspede” no menu e no rodapé. A área protegida está na pasta guia, com os arquivos PHP de acesso, as três versões de idioma, a folha de estilos e as imagens do logo e do mapa de estacionamento.
+
+ENDEREÇO DO GUIA
+
+Após o envio, o guia estará em https://pousada.aetsolidez.com.br/guia/. Os endereços anteriores guia-do-hospede.html, guest-guide.html e guia-del-huesped.html foram convertidos em redirecionamentos para a mesma área protegida.
+
+FOTOS JÁ HOSPEDADAS
+
+As fotografias dos lofts e da galeria geral não estão neste ZIP. As páginas continuam utilizando as imagens já existentes nas pastas images/loft03 a images/loft09 e images/galeria_geral do servidor. O logo necessário está incluído em images/logo_campeche_lofts_horizontal.webp.
+
+TESTE FINAL
+
+Após publicar, abra https://pousada.aetsolidez.com.br/guia/ em uma aba anônima. A tela de senha deverá aparecer antes do conteúdo. Depois de acessar, confirme a abertura em português, o funcionamento dos atalhos EN e ES e a presença do mapa na seção “Portão e estacionamento”.

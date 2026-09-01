@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planejador de Viagem | Campeche Lofts</title>
+<meta name="description" content="Planeje sua chegada até a Campeche Lofts com previsão de chuva, trânsito e melhor horário de saída.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #1B3A3A;
+    --teal-light: #24504F;
+    --cream: #F3ECE1;
+    --cream-2: #EAE1D3;
+    --white: #FFFFFF;
+    --ink: #24302E;
+    --ink-soft: #5B6663;
+    --line: #DCD3C3;
+    --gold: #C99A4A;
+    --radius: 18px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, var(--teal) 0%, var(--teal-light) 100%);
+    color: var(--cream);
+    padding: 72px 0 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -120px;
+    top: -160px;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    border: 1px solid rgba(243,236,225,0.14);
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    right: -60px;
+    top: -80px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(243,236,225,0.14);
+  }
+
+  .hero-logo {
+    height: 34px;
+    width: auto;
+    margin-bottom: 24px;
+    opacity: 0.96;
+    position: relative;
+    z-index: 2;
+  }
+
+  .marca-dagua {
+    position: absolute;
+    right: -60px;
+    bottom: -40px;
+    width: 380px;
+    height: auto;
+    opacity: 0.12;
+    transform: rotate(-10deg);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .voltar-site {
+    display: inline-block;
+    color: rgba(243,236,225,0.75);
+    font-size: 13.5px;
+    text-decoration: none;
+    margin-bottom: 28px;
+    transition: color 0.15s ease;
+  }
+  .voltar-site:hover { color: var(--cream); }
+  .voltar-site:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  .eyebrow {
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: var(--gold);
+    display: inline-block;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(34px, 6vw, 52px);
+    line-height: 1.08;
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--gold);
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: rgba(243,236,225,0.82);
+    max-width: 46ch;
+    margin: 0;
+  }
+
+  .credibilidade {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(243,236,225,0.16);
+    max-width: 50ch;
+    font-size: 13px;
+    color: rgba(243,236,225,0.68);
+    position: relative;
+    z-index: 2;
+  }
+  .credibilidade-selo {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(201,154,74,0.16);
+    border: 1px solid rgba(201,154,74,0.4);
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 12px;
+    padding: 5px 11px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .credibilidade a {
+    color: var(--cream);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .redes-sociais {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 16px;
+    position: relative;
+    z-index: 2;
+  }
+  .rede-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(243,236,225,0.1);
+    color: rgba(243,236,225,0.85);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .rede-link:hover {
+    background: rgba(201,154,74,0.25);
+    color: var(--gold);
+  }
+  .rede-link:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  /* FORM CARD */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 24px 48px -24px rgba(27,58,58,0.28);
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 560px) {
+    .field-row { grid-template-columns: 1fr; }
+  }
+
+  label {
+    display: block;
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+    margin-bottom: 7px;
+  }
+
+  input[type="text"], input[type="date"], input[type="time"] {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    background: var(--cream);
+    transition: border-color 0.15s ease;
+  }
+  input:focus {
+    outline: none;
+    border-color: var(--teal);
+    background: var(--white);
+  }
+  input:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 1px;
+  }
+
+  .field { margin-bottom: 16px; }
+
+  .field-hint {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+  }
+
+  .optional-toggle {
+    background: none;
+    border: none;
+    color: var(--teal);
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 4px 0;
+    cursor: pointer;
+    margin-bottom: 18px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  #camposExtra { display: none; }
+  #camposExtra.aberto { display: block; }
+
+  button.enviar {
+    width: 100%;
+    background: var(--teal);
+    color: var(--cream);
+    border: none;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 15.5px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  button.enviar:hover { background: var(--teal-light); }
+  button.enviar:active { transform: scale(0.99); }
+  button.enviar:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  button.enviar:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  /* RESULT */
+  .resultado {
+    margin-top: 28px;
+    display: none;
+  }
+  .resultado.visivel { display: block; }
+
+  .resultado-box {
+    background: var(--cream-2);
+    border-radius: 14px;
+    padding: 24px;
+    border: 1px solid var(--line);
+  }
+
+  .resultado-linha {
+    font-size: 14.5px;
+    line-height: 1.7;
+    white-space: pre-line;
+  }
+
+  .resultado-linha strong { color: var(--teal); }
+
+  /* CABEÇALHO DO RESULTADO */
+  .res-cabecalho {
+    font-size: 14px;
+    line-height: 1.85;
+    margin-bottom: 18px;
+  }
+  .res-cabecalho .rotulo {
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+  .res-titulo {
+    font-family: 'Fraunces', serif;
+    font-size: 21px;
+    font-weight: 600;
+    color: var(--teal);
+    margin: 0 0 4px;
+  }
+  .res-duracao {
+    display: inline-block;
+    background: var(--teal);
+    color: var(--cream);
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 14px;
+  }
+
+  .btn-mapa {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--white);
+    border: 1.5px solid var(--teal);
+    color: var(--teal);
+    padding: 10px 18px;
+    border-radius: 9px;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 18px;
+  }
+  .btn-mapa:hover { background: rgba(27,58,58,0.06); }
+
+  .aviso-incidente {
+    background: #FBF1DE;
+    border: 1px solid #E3C98A;
+    color: #6B5115;
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+
+  /* TABELA DE HORÁRIOS */
+  .tabela-horarios {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  .tabela-horarios th {
+    text-align: left;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+    font-weight: 600;
+    padding: 0 10px 8px;
+    border-bottom: 1.5px solid var(--line);
+  }
+  .tabela-horarios td {
+    padding: 11px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .tabela-horarios tr:last-child td { border-bottom: none; }
+  .tabela-horarios .col-horario {
+    font-weight: 700;
+    color: var(--teal);
+    white-space: nowrap;
+    width: 68px;
+  }
+  .seq-item { white-space: nowrap; }
+  .seq-hora { color: var(--ink-soft); font-size: 12px; }
+  .seq-seta { color: var(--ink-soft); margin: 0 3px; }
+
+  /* MODO VERIFICAÇÃO */
+  .veredito-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  .veredito-box.boa { background: #E7F0EA; border: 1px solid #B9D4C2; }
+  .veredito-box.atencao { background: #FBF1DE; border: 1px solid #E3C98A; }
+  .veredito-icone { font-size: 20px; line-height: 1; }
+  .veredito-texto strong { display: block; font-size: 14.5px; margin-bottom: 2px; }
+  .veredito-texto span { font-size: 13px; color: var(--ink-soft); }
+
+  .comparacoes-titulo {
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+    font-weight: 600;
+    margin: 18px 0 8px;
+  }
+
+  .toggle-detalhes {
+    margin-top: 16px;
+    background: none;
+    border: 1.5px solid var(--teal);
+    color: var(--teal);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  .toggle-detalhes:hover { background: rgba(27,58,58,0.06); }
+
+  .detalhamento {
+    display: none;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 13.5px;
+    white-space: pre-line;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .detalhamento.aberto { display: block; }
+
+  .erro-box {
+    background: #FBEAE5;
+    border: 1px solid #E3B7A8;
+    color: #8A3A20;
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 14px;
+    display: none;
+  }
+  .erro-box.visivel { display: block; }
+
+  .carregando {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    padding: 8px 0;
+  }
+  .carregando.visivel { display: flex; }
+
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--line);
+    border-top-color: var(--teal);
+    border-radius: 50%;
+    animation: girar 0.7s linear infinite;
+  }
+  @keyframes girar { to { transform: rotate(360deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spinner { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  .contato-whats {
+    text-align: center;
+    margin: 36px 0 8px;
+    padding-top: 8px;
+  }
+  .contato-whats p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0 0 12px;
+  }
+  .btn-whats {
+    display: inline-block;
+    background: var(--white);
+    color: var(--teal);
+    border: 1.5px solid var(--teal);
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 14.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+  .btn-whats:hover { background: rgba(27,58,58,0.06); }
+  .btn-whats:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 24px 56px;
+    color: var(--ink-soft);
+    font-size: 12.5px;
+  }
+  footer a { color: var(--teal); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="https://www.pousada.aetsolidez.com.br/images/logo_campeche_lofts_horizontal.webp" alt="" class="marca-dagua">
+  <div class="wrap">
+    <a href="https://www.pousada.aetsolidez.com.br/" class="voltar-site">&larr; Voltar para o site</a>
+    <div class="eyebrow">Campeche Lofts · Florianópolis/SC</div>
+    <h1>Chegue tranquilo,<br><em>sem correr da chuva.</em></h1>
+    <p>Me conta de onde você vai sair e eu te ajudo a escolher o melhor horário — considerando chuva, trânsito e se vai escurecer no caminho.</p>
+    <div class="credibilidade">
+      <span class="credibilidade-selo">★ Superhost Airbnb</span>
+      <span>Cortesia da Pousada Campeche Lofts — 15 trimestres consecutivos como Superhost Airbnb.</span>
+    </div>
+    <div class="redes-sociais">
+      <a href="https://www.instagram.com/campechelofts/" target="_blank" rel="noopener" aria-label="Instagram da Campeche Lofts" class="rede-link">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 9.837a3.837 3.837 0 1 1 0-7.674 3.837 3.837 0 0 1 0 7.674zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/campechelofts" target="_blank" rel="noopener" aria-label="Facebook da Campeche Lofts" class="rede-link">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22 12.06C22 6.505 17.523 2 12 2S2 6.505 2 12.06c0 5.02 3.657 9.184 8.438 9.94v-7.03H7.898v-2.91h2.54V9.845c0-2.522 1.492-3.915 3.777-3.915 1.094 0 2.238.197 2.238.197v2.476h-1.26c-1.243 0-1.63.775-1.63 1.57v1.888h2.773l-.443 2.91h-2.33V22c4.78-.756 8.437-4.92 8.437-9.94z"/></svg>
+      </a>
+      <a href="https://www.pousada.aetsolidez.com.br/" aria-label="Site da Campeche Lofts" class="rede-link">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.4 2.6 3.7 5.9 3.7 9.5s-1.3 6.9-3.7 9.5c-2.4-2.6-3.7-5.9-3.7-9.5S9.6 5.1 12 2.5z"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card">
+    <form id="formViagem">
+      <div class="field-row">
+        <div class="field">
+          <label for="origem">Ponto de partida</label>
+          <input type="text" id="origem" name="origem" placeholder="Cidade, endereço ou local" required>
+        </div>
+        <div class="field">
+          <label for="destino">Destino</label>
+          <input type="text" id="destino" name="destino" placeholder="Pousada (ou outro destino)" required>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="data">Data da viagem</label>
+          <input type="date" id="data" name="data" required>
+        </div>
+        <div class="field">
+          <label for="horario">Horário de saída <span style="text-transform:none;font-weight:400;">(opcional)</span></label>
+          <input type="time" id="horario" name="horario">
+        </div>
+      </div>
+      <div class="field-hint" style="margin-top:-8px;margin-bottom:16px;">Sem horário definido? Eu te mostro as melhores opções ao longo do dia.</div>
+
+      <button type="button" class="optional-toggle" id="btnExtra">+ Passar por algum lugar no caminho</button>
+
+      <div id="camposExtra">
+        <div class="field-row">
+          <div class="field">
+            <label for="passandoPor1">Passando por (opcional)</label>
+            <input type="text" id="passandoPor1" name="passandoPor1" placeholder="Ex: Muçum">
+          </div>
+          <div class="field">
+            <label for="passandoPor2">E também por (opcional)</label>
+            <input type="text" id="passandoPor2" name="passandoPor2" placeholder="Ex: Gramado">
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="enviar" id="btnEnviar">Planejar minha viagem</button>
+    </form>
+
+    <div class="carregando" id="carregando">
+      <span class="spinner"></span>
+      <span id="carregandoTexto">Buscando sua rota e verificando a previsão do tempo...</span>
+    </div>
+
+    <div class="erro-box" id="erroBox"></div>
+
+    <div class="resultado" id="resultado">
+      <div class="resultado-box" id="resultadoBox"></div>
+    </div>
+  </div>
+
+  <div class="contato-whats">
+    <p>Prefere combinar direto com a gente?</p>
+    <a href="https://wa.me/5548991223600?text=Ol%C3%A1%20Leonardo!%20Tenho%20uma%20d%C3%BAvida%20sobre%20minha%20viagem%20at%C3%A9%20a%20Campeche%20Lofts." target="_blank" rel="noopener" class="btn-whats">Falar no WhatsApp</a>
+  </div>
+</div>
+
+<footer>
+  Campeche Lofts &middot; Rua das Cortiçeiras, 270 &middot; Florianópolis/SC<br>
+  <a href="https://www.pousada.aetsolidez.com.br/">Voltar para o site</a> &middot;
+  Previsão via <a href="https://openweathermap.org" target="_blank" rel="noopener">OpenWeather</a>
+</footer>
+
+<script>
+  const API_URL = "https://pousada-bot.onrender.com/api/planejar";
+  const SITE_TOKEN = "b6d5c9fbe9dbe797a0bdea432496e370";
+
+  const form = document.getElementById('formViagem');
+  const btnEnviar = document.getElementById('btnEnviar');
+  const carregando = document.getElementById('carregando');
+  const carregandoTexto = document.getElementById('carregandoTexto');
+  const erroBox = document.getElementById('erroBox');
+  const resultado = document.getElementById('resultado');
+  const resultadoBox = document.getElementById('resultadoBox');
+  const btnExtra = document.getElementById('btnExtra');
+  const camposExtra = document.getElementById('camposExtra');
+
+  btnExtra.addEventListener('click', () => {
+    const aberto = camposExtra.classList.toggle('aberto');
+    btnExtra.textContent = aberto ? '– Passar por algum lugar no caminho' : '+ Passar por algum lugar no caminho';
+  });
+
+  // Define a data mínima como hoje
+  document.getElementById('data').min = new Date().toISOString().split('T')[0];
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str == null ? '' : String(str);
+    return div.innerHTML;
+  }
+
+  function renderSequencia(sequencia) {
+    return sequencia.map((p, i) => {
+      const horario = p.horario ? ` <span class="seq-hora">(${escapeHtml(p.horario)})</span>` : '';
+      const item = `<span class="seq-item">${p.icone} ${escapeHtml(p.cidade)}${horario}</span>`;
+      return i === 0 ? item : `<span class="seq-seta">&rarr;</span>${item}`;
+    }).join(' ');
+  }
+
+  function renderResultado(dados) {
+    const est = dados.estruturado;
+    let html = '';
+
+    html += `<div class="res-cabecalho">`;
+    html += `<p class="res-titulo">${escapeHtml(est.origem)} &rarr; ${escapeHtml(est.destino)}</p>`;
+
+    const duracaoLabel = est.duracao
+      ? est.duracao
+      : `${est.duracaoMin} a ${est.duracaoMax}`;
+    html += `<span class="res-duracao">⏱ ${escapeHtml(duracaoLabel)}</span>`;
+
+    if (est.passandoPor && est.passandoPor.length) {
+      html += `<div><span class="rotulo">Passando por</span> ${escapeHtml(est.passandoPor.join(', '))}</div>`;
+    }
+    html += `</div>`;
+
+    if (est.rotaUrl) {
+      html += `<a href="${escapeHtml(est.rotaUrl)}" target="_blank" rel="noopener" class="btn-mapa">🗺️ Ver rota no Google Maps</a>`;
+    }
+
+    if (est.avisoIncidente) {
+      html += `<div class="aviso-incidente">⚠️ ${escapeHtml(est.avisoIncidente)}</div>`;
+    }
+
+    if (est.horarios) {
+      // MODO VARREDURA
+      html += `<table class="tabela-horarios"><thead><tr><th>Horário</th><th>Trajeto</th></tr></thead><tbody>`;
+      est.horarios.forEach(h => {
+        html += `<tr><td class="col-horario">${escapeHtml(h.horario)}</td><td>${renderSequencia(h.sequencia)}</td></tr>`;
+      });
+      html += `</tbody></table>`;
+    }
+
+    if (est.verificacao) {
+      // MODO VERIFICAÇÃO
+      const v = est.verificacao;
+      const boa = v.veredito !== 'atencao';
+      html += `<div class="veredito-box ${boa ? 'boa' : 'atencao'}">`;
+      html += `<span class="veredito-icone">${boa ? '👍' : '🤔'}</span>`;
+      html += `<div class="veredito-texto"><strong>${v.horario} — ${boa ? 'boa pedida' : 'vale repensar'}</strong>`;
+      html += `<span>${renderSequencia(v.sequencia)}</span></div></div>`;
+
+      if (v.comparacoes && v.comparacoes.length) {
+        html += `<div class="comparacoes-titulo">Horários de comparação</div>`;
+        html += `<table class="tabela-horarios"><tbody>`;
+        v.comparacoes.forEach(c => {
+          html += `<tr><td class="col-horario">${escapeHtml(c.horario)}</td><td>${renderSequencia(c.sequencia)}</td></tr>`;
+        });
+        html += `</tbody></table>`;
+      }
+    }
+
+    if (dados.detalhamento) {
+      html += `<button class="toggle-detalhes" id="btnDetalhes" type="button">Ver trajeto completo, ponto a ponto</button>`;
+      html += `<div class="detalhamento" id="detalhamentoTexto">${escapeHtml(dados.detalhamento)}</div>`;
+    }
+
+    if (est.atribuicao) {
+      html += `<div style="margin-top:18px;font-size:11.5px;color:var(--ink-soft);">${escapeHtml(est.atribuicao)}</div>`;
+    }
+
+    resultadoBox.innerHTML = html;
+
+    const btnDetalhes = document.getElementById('btnDetalhes');
+    const detalhamentoTexto = document.getElementById('detalhamentoTexto');
+    if (btnDetalhes) {
+      btnDetalhes.addEventListener('click', () => {
+        const aberto = detalhamentoTexto.classList.toggle('aberto');
+        btnDetalhes.textContent = aberto ? 'Esconder trajeto completo' : 'Ver trajeto completo, ponto a ponto';
+      });
+    }
+  }
+
+  let avisoTimeout;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    erroBox.classList.remove('visivel');
+    resultado.classList.remove('visivel');
+    btnEnviar.disabled = true;
+    carregando.classList.add('visivel');
+    carregandoTexto.textContent = 'Buscando sua rota e verificando a previsão do tempo...';
+
+    avisoTimeout = setTimeout(() => {
+      carregandoTexto.textContent = 'Ainda buscando a previsão do tempo, só mais um instantinho...';
+    }, 15000);
+
+    const passandoPor = [
+      document.getElementById('passandoPor1').value.trim(),
+      document.getElementById('passandoPor2').value.trim()
+    ].filter(Boolean);
+
+    const payload = {
+      codigo: SITE_TOKEN,
+      origem: document.getElementById('origem').value.trim(),
+      destino: document.getElementById('destino').value.trim(),
+      data: document.getElementById('data').value,
+      horario: document.getElementById('horario').value || undefined,
+      passandoPor: passandoPor.length ? passandoPor : undefined
+    };
+
+    try {
+      const resp = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const dados = await resp.json();
+
+      clearTimeout(avisoTimeout);
+      carregando.classList.remove('visivel');
+      btnEnviar.disabled = false;
+
+      if (!resp.ok || !dados.sucesso) {
+        erroBox.textContent = dados.erro || 'Não consegui planejar essa viagem. Confira os dados e tente de novo.';
+        erroBox.classList.add('visivel');
+        return;
+      }
+
+      renderResultado(dados);
+      resultado.classList.add('visivel');
+      resultado.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    } catch (err) {
+      clearTimeout(avisoTimeout);
+      carregando.classList.remove('visivel');
+      btnEnviar.disabled = false;
+      erroBox.textContent = 'Não consegui me conectar agora. Verifique sua internet e tente novamente em instantes.';
+      erroBox.classList.add('visivel');
+    }
+  });
+</script>
+
+</body>
+</html>

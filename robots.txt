@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /guia/
+Disallow: /guia-do-hospede.html
+Disallow: /guest-guide.html
+Disallow: /guia-del-huesped.html
+
+Sitemap: https://pousada.aetsolidez.com.br/sitemap.xml

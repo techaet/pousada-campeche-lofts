@@ -1,0 +1,19 @@
+PACOTE LOCAL — BLOG E SEO | CAMPECHE LOFTS
+Data de preparação: 26/08/2026
+
+Este pacote foi reconciliado a partir do arquivo sitepousada-index.html recebido como referência oficial. A página inicial preserva a navegação, os CTAs e o conteúdo existente, com a inclusão do link Blog nos pontos de navegação previstos.
+
+O pacote inclui:
+- blog/ com a página inicial do Blog e dois artigos-piloto;
+- campeche.css com os componentes editoriais do Blog;
+- robots.txt, sitemap.xml e feed RSS para indexação orgânica;
+- a estrutura já existente do guia protegido e os ativos locais disponíveis.
+
+ANTES DE PUBLICAR
+1. Revisar e aprovar os dois conteúdos-piloto do Blog.
+2. Fazer cópia de segurança completa do diretório atual no servidor.
+3. Enviar os arquivos deste pacote preservando a hierarquia de pastas.
+4. Verificar o funcionamento de /blog/, /robots.txt e /sitemap.xml.
+5. Após a publicação, cadastrar o sitemap no Google Search Console e no Bing Webmaster Tools quando os acessos estiverem disponíveis.
+
+Não publicar substituindo o diretório sem manter um backup. Este pacote não contém alterações de preços, disponibilidade ou condições comerciais.

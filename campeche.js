@@ -1,0 +1,84 @@
+(() => {
+  const body = document.body;
+
+  const menuButton = document.querySelector('.menu-toggle');
+  const siteNav = document.querySelector('.site-nav');
+  if (menuButton && siteNav) {
+    menuButton.addEventListener('click', () => {
+      const isOpen = siteNav.classList.toggle('is-open');
+      body.classList.toggle('menu-open', isOpen);
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Fechar navegação' : 'Abrir navegação');
+    });
+    siteNav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        siteNav.classList.remove('is-open');
+        body.classList.remove('menu-open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Abrir navegação');
+      });
+    });
+  }
+
+  document.querySelectorAll('[data-rail-control]').forEach((control) => {
+    control.addEventListener('click', () => {
+      const rail = document.querySelector(control.dataset.railControl);
+      if (!rail) return;
+      const direction = control.dataset.direction === 'prev' ? -1 : 1;
+      const amount = Math.max(rail.clientWidth * .78, 280) * direction;
+      rail.scrollBy({ left: amount, behavior: 'smooth' });
+    });
+  });
+
+  const triggers = Array.from(document.querySelectorAll('.gallery-trigger[data-full]'));
+  const lightbox = document.querySelector('.lightbox');
+  if (!triggers.length || !lightbox) return;
+
+  const image = lightbox.querySelector('img');
+  const caption = lightbox.querySelector('figcaption');
+  const close = lightbox.querySelector('.lightbox-close');
+  const previous = lightbox.querySelector('.lightbox-prev');
+  const next = lightbox.querySelector('.lightbox-next');
+  let activeIndex = 0;
+  let lastTrigger = null;
+
+  const renderImage = (index) => {
+    activeIndex = (index + triggers.length) % triggers.length;
+    const trigger = triggers[activeIndex];
+    image.src = trigger.dataset.full;
+    image.alt = trigger.dataset.alt || '';
+    caption.textContent = trigger.dataset.caption || '';
+  };
+
+  const openLightbox = (trigger) => {
+    lastTrigger = trigger;
+    renderImage(triggers.indexOf(trigger));
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    body.style.overflow = 'hidden';
+    close.focus();
+  };
+
+  const closeLightbox = () => {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    body.style.overflow = '';
+    if (lastTrigger) lastTrigger.focus();
+  };
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener('click', () => openLightbox(trigger));
+  });
+  close.addEventListener('click', closeLightbox);
+  previous.addEventListener('click', () => renderImage(activeIndex - 1));
+  next.addEventListener('click', () => renderImage(activeIndex + 1));
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (!lightbox.classList.contains('is-open')) return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowLeft') renderImage(activeIndex - 1);
+    if (event.key === 'ArrowRight') renderImage(activeIndex + 1);
+  });
+})();
