@@ -1,0 +1,183 @@
+diff --git a/blog/baleias-franca-litoral-santa-catarina/index.html b/blog/baleias-franca-litoral-santa-catarina/index.html
+index 56ace25..cccd520 100644
+--- a/blog/baleias-franca-litoral-santa-catarina/index.html
++++ b/blog/baleias-franca-litoral-santa-catarina/index.html
+@@ -19,7 +19,7 @@
+   <meta property="og:title" content="Temporada de baleias-franca no litoral de Santa Catarina: como acompanhar com respeito">
+   <meta property="og:description" content="Quando acompanhar, onde consultar informações atualizadas e como colocar o respeito à fauna no centro do roteiro.">
+   <meta property="og:url" content="https://pousada.aetsolidez.com.br/blog/baleias-franca-litoral-santa-catarina/">
+-  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/blog/baleia-franca-campeche.webp">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png">
+   <meta name="twitter:card" content="summary_large_image">
+   <title>Temporada de baleias-franca em SC: como acompanhar | Campeche Lofts</title>
+   <link rel="stylesheet" href="../../campeche.css">
+@@ -35,7 +35,7 @@
+     "inLanguage":"pt-BR",
+     "mainEntityOfPage":{"@type":"WebPage","@id":"https://pousada.aetsolidez.com.br/blog/baleias-franca-litoral-santa-catarina/"},
+     "author":{"@type":"Organization","name":"Campeche Lofts","url":"https://pousada.aetsolidez.com.br/"},
+-    "publisher":{"@type":"Organization","name":"Campeche Lofts","url":"https://pousada.aetsolidez.com.br/","logo":{"@type":"ImageObject","url":"https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_horizontal.webp"}}
++    "publisher":{"@type":"Organization","name":"Campeche Lofts","url":"https://pousada.aetsolidez.com.br/","logo":{"@type":"ImageObject","url":"https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png"}}
+   }
+   </script>
+ </head>
+diff --git a/blog/index.html b/blog/index.html
+index 053cd6e..1b12ccb 100644
+--- a/blog/index.html
++++ b/blog/index.html
+@@ -19,7 +19,7 @@
+   <meta property="og:title" content="Blog | Campeche Lofts">
+   <meta property="og:description" content="Guias práticos para conhecer Florianópolis e o Campeche com contexto local, planejamento e boas ideias de viagem.">
+   <meta property="og:url" content="https://pousada.aetsolidez.com.br/blog/">
+-  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/blog/baleia-franca-campeche.webp">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png">
+   <meta name="twitter:card" content="summary_large_image">
+   <title>Blog | Campeche Lofts</title>
+   <link rel="stylesheet" href="../campeche.css">
+diff --git a/blog/temporada-trabalho-remoto-florianopolis/index.html b/blog/temporada-trabalho-remoto-florianopolis/index.html
+index ff325af..a3380a4 100644
+--- a/blog/temporada-trabalho-remoto-florianopolis/index.html
++++ b/blog/temporada-trabalho-remoto-florianopolis/index.html
+@@ -16,11 +16,11 @@
+   <meta property="og:type" content="article"><meta property="og:locale" content="pt_BR"><meta property="og:site_name" content="Campeche Lofts">
+   <meta property="og:title" content="Trabalho remoto em Florianópolis: como planejar uma temporada com mais leveza">
+   <meta property="og:description" content="Um roteiro prático para organizar espaço, rotina, deslocamentos e o que confirmar antes de escolher uma hospedagem temporária.">
+-  <meta property="og:url" content="https://pousada.aetsolidez.com.br/blog/temporada-trabalho-remoto-florianopolis/"><meta property="og:image" content="https://pousada.aetsolidez.com.br/images/blog/trabalho-remoto-campeche.webp"><meta name="twitter:card" content="summary_large_image">
++  <meta property="og:url" content="https://pousada.aetsolidez.com.br/blog/temporada-trabalho-remoto-florianopolis/"><meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png"><meta name="twitter:card" content="summary_large_image">
+   <title>Trabalho remoto em Florianópolis: como planejar | Campeche Lofts</title>
+   <link rel="stylesheet" href="../../campeche.css">
+   <script type="application/ld+json">
+-  {"@context":"https://schema.org","@type":"BlogPosting","headline":"Trabalho remoto em Florianópolis: como planejar uma temporada com mais leveza","description":"Um roteiro prático para planejar uma temporada de trabalho remoto em Florianópolis: hospedagem, rotina, internet, deslocamentos e o que confirmar antes da viagem.","image":"https://pousada.aetsolidez.com.br/images/blog/trabalho-remoto-campeche.webp","datePublished":"2026-08-26","dateModified":"2026-08-26","inLanguage":"pt-BR","mainEntityOfPage":{"@type":"WebPage","@id":"https://pousada.aetsolidez.com.br/blog/temporada-trabalho-remoto-florianopolis/"},"author":{"@type":"Organization","name":"Campeche Lofts","url":"https://pousada.aetsolidez.com.br/"},"publisher":{"@type":"Organization","name":"Campeche Lofts","url":"https://pousada.aetsolidez.com.br/","logo":{"@type":"ImageObject","url":"https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_horizontal.webp"}}}
++  {"@context":"https://schema.org","@type":"BlogPosting","headline":"Trabalho remoto em Florianópolis: como planejar uma temporada com mais leveza","description":"Um roteiro prático para planejar uma temporada de trabalho remoto em Florianópolis: hospedagem, rotina, internet, deslocamentos e o que confirmar antes da viagem.","image":"https://pousada.aetsolidez.com.br/images/blog/trabalho-remoto-campeche.webp","datePublished":"2026-08-26","dateModified":"2026-08-26","inLanguage":"pt-BR","mainEntityOfPage":{"@type":"WebPage","@id":"https://pousada.aetsolidez.com.br/blog/temporada-trabalho-remoto-florianopolis/"},"author":{"@type":"Organization","name":"Campeche Lofts","url":"https://pousada.aetsolidez.com.br/"},"publisher":{"@type":"Organization","name":"Campeche Lofts","url":"https://pousada.aetsolidez.com.br/","logo":{"@type":"ImageObject","url":"https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png"}}}
+   </script>
+ </head>
+ <body>
+diff --git a/galeria_geral.html b/galeria_geral.html
+index 48beb3b..3b9ccaa 100644
+--- a/galeria_geral.html
++++ b/galeria_geral.html
+@@ -19,7 +19,7 @@
+   <meta property="og:title" content="Galeria | Campeche Lofts">
+   <meta property="og:description" content="Galeria de fotos da pousada e da Praia do Campeche, em Florianópolis/SC.">
+   <meta property="og:url" content="https://pousada.aetsolidez.com.br/galeria_geral.html">
+-  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/galeria_geral/pousada_00001.jpeg">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png">
+   <meta name="twitter:card" content="summary_large_image">
+   <title>Galeria | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+diff --git a/index.html b/index.html
+index 22bcfc0..abb859e 100644
+--- a/index.html
++++ b/index.html
+@@ -19,7 +19,7 @@
+   <meta property="og:title" content="Campeche Lofts | Florianópolis/SC">
+   <meta property="og:description" content="Campeche Lofts: hospedagem tranquila, com estrutura para home-office e a poucos metros da Praia do Campeche, em Florianópolis/SC.">
+   <meta property="og:url" content="https://pousada.aetsolidez.com.br/">
+-  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/galeria_geral/pousada_00002.jpeg">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png">
+   <meta name="twitter:card" content="summary_large_image">
+   <title>Campeche Lofts | Florianópolis/SC</title>
+   <link rel="stylesheet" href="campeche.css">
+diff --git a/loft_03.html b/loft_03.html
+index 0edaf4e..b1350d7 100644
+--- a/loft_03.html
++++ b/loft_03.html
+@@ -19,7 +19,7 @@
+   <meta property="og:title" content="Loft 03 | Campeche Lofts">
+   <meta property="og:description" content="Loft 03 no Campeche Lofts, em Florianópolis/SC.">
+   <meta property="og:url" content="https://pousada.aetsolidez.com.br/loft_03.html">
+-  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft03/Loft03_00001.jpg">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png">
+   <meta name="twitter:card" content="summary_large_image">
+   <title>Loft 03 | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+diff --git a/loft_04.html b/loft_04.html
+index 1a7e572..8d69e70 100644
+--- a/loft_04.html
++++ b/loft_04.html
+@@ -19,7 +19,7 @@
+   <meta property="og:title" content="Loft 04 | Campeche Lofts">
+   <meta property="og:description" content="Loft 04 no Campeche Lofts, em Florianópolis/SC.">
+   <meta property="og:url" content="https://pousada.aetsolidez.com.br/loft_04.html">
+-  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft04/Loft04_00001.jpeg">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png">
+   <meta name="twitter:card" content="summary_large_image">
+   <title>Loft 04 | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+diff --git a/loft_05.html b/loft_05.html
+index de81080..cbfa6f0 100644
+--- a/loft_05.html
++++ b/loft_05.html
+@@ -19,7 +19,7 @@
+   <meta property="og:title" content="Loft 05 | Campeche Lofts">
+   <meta property="og:description" content="Loft 05 no Campeche Lofts, em Florianópolis/SC.">
+   <meta property="og:url" content="https://pousada.aetsolidez.com.br/loft_05.html">
+-  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft05/Loft05_00001.jpg">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png">
+   <meta name="twitter:card" content="summary_large_image">
+   <title>Loft 05 | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+diff --git a/loft_06.html b/loft_06.html
+index ab88ec1..e828fa5 100644
+--- a/loft_06.html
++++ b/loft_06.html
+@@ -19,7 +19,7 @@
+   <meta property="og:title" content="Loft 06 | Campeche Lofts">
+   <meta property="og:description" content="Loft 06 no Campeche Lofts, em Florianópolis/SC.">
+   <meta property="og:url" content="https://pousada.aetsolidez.com.br/loft_06.html">
+-  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft06/Loft06_00001.jpg">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png">
+   <meta name="twitter:card" content="summary_large_image">
+   <title>Loft 06 | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+diff --git a/loft_07.html b/loft_07.html
+index cece367..5645060 100644
+--- a/loft_07.html
++++ b/loft_07.html
+@@ -19,7 +19,7 @@
+   <meta property="og:title" content="Loft 07 | Campeche Lofts">
+   <meta property="og:description" content="Loft 07 no Campeche Lofts, em Florianópolis/SC.">
+   <meta property="og:url" content="https://pousada.aetsolidez.com.br/loft_07.html">
+-  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft07/Loft07_00001.jpeg">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png">
+   <meta name="twitter:card" content="summary_large_image">
+   <title>Loft 07 | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+diff --git a/loft_08.html b/loft_08.html
+index b9181b1..979a0eb 100644
+--- a/loft_08.html
++++ b/loft_08.html
+@@ -19,7 +19,7 @@
+   <meta property="og:title" content="Loft 08 | Campeche Lofts">
+   <meta property="og:description" content="Loft 08 no Campeche Lofts, em Florianópolis/SC.">
+   <meta property="og:url" content="https://pousada.aetsolidez.com.br/loft_08.html">
+-  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft08/Loft08_00001.JPG">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png">
+   <meta name="twitter:card" content="summary_large_image">
+   <title>Loft 08 | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+diff --git a/loft_09.html b/loft_09.html
+index 989702c..3e73821 100644
+--- a/loft_09.html
++++ b/loft_09.html
+@@ -19,7 +19,7 @@
+   <meta property="og:title" content="Loft 09 | Campeche Lofts">
+   <meta property="og:description" content="Loft 09 no Campeche Lofts, em Florianópolis/SC.">
+   <meta property="og:url" content="https://pousada.aetsolidez.com.br/loft_09.html">
+-  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft09/Loft09_00001.jpeg">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png">
+   <meta name="twitter:card" content="summary_large_image">
+   <title>Loft 09 | Campeche Lofts</title>
+   <link rel="stylesheet" href="campeche.css">
+diff --git a/planejador.html b/planejador.html
+index aa8db1d..cd4a32e 100644
+--- a/planejador.html
++++ b/planejador.html
+@@ -20,7 +20,7 @@
+ <meta property="og:title" content="Planejador de Viagem | Campeche Lofts">
+ <meta property="og:description" content="Planeje sua chegada até a Campeche Lofts com previsão de chuva, trânsito e melhor horário de saída.">
+ <meta property="og:url" content="https://pousada.aetsolidez.com.br/planejador.html">
+-<meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_horizontal.webp">
++<meta property="og:image" content="https://pousada.aetsolidez.com.br/images/logo_campeche_lofts_quadrada.png">
+ <meta name="twitter:card" content="summary_large_image">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
