@@ -1,0 +1,306 @@
+diff --git a/blog/baleias-franca-litoral-santa-catarina/index.html b/blog/baleias-franca-litoral-santa-catarina/index.html
+index 2e9ee86..56ace25 100644
+--- a/blog/baleias-franca-litoral-santa-catarina/index.html
++++ b/blog/baleias-franca-litoral-santa-catarina/index.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Saiba quando ocorre a temporada de baleias-franca no litoral de Santa Catarina, como acompanhar avistagens atualizadas e por que a observação responsável importa.">
+diff --git a/blog/index.html b/blog/index.html
+index e0f1c58..053cd6e 100644
+--- a/blog/index.html
++++ b/blog/index.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Guias práticos para conhecer Florianópolis e o Campeche com contexto local, planejamento e boas ideias de viagem.">
+diff --git a/blog/temporada-trabalho-remoto-florianopolis/index.html b/blog/temporada-trabalho-remoto-florianopolis/index.html
+index edd0ff4..ff325af 100644
+--- a/blog/temporada-trabalho-remoto-florianopolis/index.html
++++ b/blog/temporada-trabalho-remoto-florianopolis/index.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Um roteiro prático para planejar uma temporada de trabalho remoto em Florianópolis: hospedagem, rotina, internet, deslocamentos e o que confirmar antes da viagem.">
+diff --git a/galeria_geral.html b/galeria_geral.html
+index d553970..48beb3b 100644
+--- a/galeria_geral.html
++++ b/galeria_geral.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Galeria de fotos da pousada e da Praia do Campeche, em Florianópolis/SC.">
+diff --git a/guest-guide.html b/guest-guide.html
+index 9445d0a..f36fa01 100644
+--- a/guest-guide.html
++++ b/guest-guide.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="robots" content="noindex, nofollow">
+diff --git a/guia-del-huesped.html b/guia-del-huesped.html
+index ca47ae0..0b327ce 100644
+--- a/guia-del-huesped.html
++++ b/guia-del-huesped.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="es">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="robots" content="noindex, nofollow">
+diff --git a/guia-do-hospede.html b/guia-do-hospede.html
+index 2d7a565..bebf4d6 100644
+--- a/guia-do-hospede.html
++++ b/guia-do-hospede.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="robots" content="noindex, nofollow">
+diff --git a/index.html b/index.html
+index 4bc0100..b198360 100644
+--- a/index.html
++++ b/index.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Campeche Lofts: hospedagem tranquila, com estrutura para home-office e a poucos metros da Praia do Campeche, em Florianópolis/SC.">
+diff --git a/loft_03.html b/loft_03.html
+index bd8a7cd..0edaf4e 100644
+--- a/loft_03.html
++++ b/loft_03.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft 03 no Campeche Lofts, em Florianópolis/SC.">
+diff --git a/loft_04.html b/loft_04.html
+index 2994f46..1a7e572 100644
+--- a/loft_04.html
++++ b/loft_04.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft 04 no Campeche Lofts, em Florianópolis/SC.">
+diff --git a/loft_05.html b/loft_05.html
+index 68e7abd..de81080 100644
+--- a/loft_05.html
++++ b/loft_05.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft 05 no Campeche Lofts, em Florianópolis/SC.">
+diff --git a/loft_06.html b/loft_06.html
+index 04b0c57..ab88ec1 100644
+--- a/loft_06.html
++++ b/loft_06.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft 06 no Campeche Lofts, em Florianópolis/SC.">
+diff --git a/loft_07.html b/loft_07.html
+index 9f3b731..cece367 100644
+--- a/loft_07.html
++++ b/loft_07.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft 07 no Campeche Lofts, em Florianópolis/SC.">
+diff --git a/loft_08.html b/loft_08.html
+index 12bfd29..b9181b1 100644
+--- a/loft_08.html
++++ b/loft_08.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft 08 no Campeche Lofts, em Florianópolis/SC.">
+diff --git a/loft_09.html b/loft_09.html
+index 0933176..989702c 100644
+--- a/loft_09.html
++++ b/loft_09.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft 09 no Campeche Lofts, em Florianópolis/SC.">
+diff --git a/planejador.html b/planejador.html
+index 7dbe7f1..aa8db1d 100644
+--- a/planejador.html
++++ b/planejador.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Planejador de Viagem | Campeche Lofts</title>
+diff --git a/template_loft.html b/template_loft.html
+index 36d6e6f..bc3975a 100644
+--- a/template_loft.html
++++ b/template_loft.html
+@@ -1,6 +1,13 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
++  <link rel="icon" type="image/x-icon" href="/favicon.ico">
++  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
++  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
++  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
++  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
++  <link rel="manifest" href="/site.webmanifest">
++  <meta name="theme-color" content="#d77d55">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Loft {{LOFT}} no Campeche Lofts, em Florianópolis/SC.">
