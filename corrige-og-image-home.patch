@@ -1,0 +1,13 @@
+diff --git a/index.html b/index.html
+index b198360..22bcfc0 100644
+--- a/index.html
++++ b/index.html
+@@ -19,7 +19,7 @@
+   <meta property="og:title" content="Campeche Lofts | Florianópolis/SC">
+   <meta property="og:description" content="Campeche Lofts: hospedagem tranquila, com estrutura para home-office e a poucos metros da Praia do Campeche, em Florianópolis/SC.">
+   <meta property="og:url" content="https://pousada.aetsolidez.com.br/">
+-  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/loft03/Loft03_00001.jpg">
++  <meta property="og:image" content="https://pousada.aetsolidez.com.br/images/galeria_geral/pousada_00002.jpeg">
+   <meta name="twitter:card" content="summary_large_image">
+   <title>Campeche Lofts | Florianópolis/SC</title>
+   <link rel="stylesheet" href="campeche.css">
