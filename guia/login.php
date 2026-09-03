@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <title>Acesso ao Guia do Hóspede | Campeche Lofts</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="campeche.css?v=20260820-guia-protegido-v1">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:opsz,wght@5..1200,500;5..1200,600;5..1200,700&display=swap"><link rel="stylesheet" href="campeche.css?v=20260820-guia-protegido-v1">
   <style>
     .guide-login { min-height: 100svh; display: grid; grid-template-rows: auto 1fr auto; background: var(--paper); }
     .guide-login-main { display: grid; place-items: center; padding: clamp(2rem, 6vw, 4.5rem) 24px; }

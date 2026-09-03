@@ -15,7 +15,7 @@ if (empty($_SESSION['guide_authenticated'])) {
   <title>Guest Guide | Campeche Lofts</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="campeche.css?v=20260820-guia-protegido-v1">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:opsz,wght@5..1200,500;5..1200,600;5..1200,700&display=swap"><link rel="stylesheet" href="campeche.css?v=20260820-guia-protegido-v1">
 </head>
 <body>
   <a class="skip-link" href="#content">Skip to content</a>
