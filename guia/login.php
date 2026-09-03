@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="guide-login">
   <header class="site-header guide-header">
     <div class="header-inner">
-      <a class="brand" href="../index.html" aria-label="Campeche Lofts — página inicial"><span class="brand-logo-frame"><img class="brand-logo" src="images/logo_campeche_lofts_horizontal.webp" alt="Campeche Lofts"></span></a>
+      <a class="brand" href="../index.html" aria-label="Campeche Lofts — página inicial"><span class="brand-logo-frame"><img class="brand-logo" src="images/logo_campeche_lofts_horizontal.webp" alt="Campeche Lofts" width="460" height="307"></span></a>
     </div>
   </header>
   <main class="guide-login-main">

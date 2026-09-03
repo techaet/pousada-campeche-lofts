@@ -24,7 +24,7 @@ if (empty($_SESSION['guide_authenticated'])) {
     <div class="header-inner">
       <a class="brand" href="../index.html" aria-label="Campeche Lofts — página inicial">
         <span class="brand-logo-frame">
-          <img class="brand-logo" src="images/logo_campeche_lofts_horizontal.webp" alt="Campeche Lofts">
+          <img class="brand-logo" src="images/logo_campeche_lofts_horizontal.webp" alt="Campeche Lofts" width="460" height="307">
         </span>
       </a>
       <div class="guide-header-actions">

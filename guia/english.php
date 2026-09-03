@@ -23,7 +23,7 @@ if (empty($_SESSION['guide_authenticated'])) {
   <header class="site-header guide-header">
     <div class="header-inner">
       <a class="brand" href="../index.html" aria-label="Campeche Lofts — home page">
-        <span class="brand-logo-frame"><img class="brand-logo" src="images/logo_campeche_lofts_horizontal.webp" alt="Campeche Lofts"></span>
+        <span class="brand-logo-frame"><img class="brand-logo" src="images/logo_campeche_lofts_horizontal.webp" alt="Campeche Lofts" width="460" height="307"></span>
       </a>
       <div class="guide-header-actions">
         <a class="guide-language" href="index.php" lang="pt-BR" hreflang="pt-BR" aria-label="Ver este guia em português">PT</a>
