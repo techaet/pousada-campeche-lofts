@@ -271,7 +271,7 @@ main { overflow: clip; }
 .loft-index a:hover, .loft-index a:focus-visible { color: var(--ocean); }
 
 .gallery-invite { position: relative; min-height: 555px; display: grid; overflow: hidden; color: var(--white); border-radius: var(--radius-lg); isolation: isolate; }
-.gallery-invite::before { position: absolute; inset: 0; z-index: -2; content: ""; background: url('https://pousada.aetsolidez.com.br/images/galeria_geral/pousada_00012.jpeg') center / cover no-repeat; transition: transform .8s ease; }
+.gallery-invite::before { position: absolute; inset: 0; z-index: -2; content: ""; background: url('https://pousada.aetsolidez.com.br/images/galeria_geral/pousada_00033_capa.webp') center / cover no-repeat; transition: transform .8s ease; }
 .gallery-invite:hover::before { transform: scale(1.03); }
 .gallery-invite::after { position: absolute; inset: 0; z-index: -1; content: ""; background: linear-gradient(90deg, rgba(13,37,39,.86), rgba(13,37,39,.22)); }
 .gallery-invite-content { width: min(550px, 100%); align-self: end; padding: clamp(2rem, 5vw, 4.2rem); }
