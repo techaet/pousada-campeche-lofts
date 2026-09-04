@@ -124,6 +124,25 @@
     outline-offset: 2px;
   }
 
+  .lang-switch-tool { display: inline-flex; gap: 8px; margin: 0 0 28px 14px; vertical-align: middle; }
+  .lang-switch-tool a, .lang-switch-tool span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    min-height: 26px;
+    padding: .2rem .5rem;
+    border: 1px solid rgba(243,236,225,0.35);
+    border-radius: 999px;
+    color: rgba(243,236,225,0.75);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .lang-switch-tool a:hover, .lang-switch-tool a:focus-visible { color: var(--cream); border-color: var(--gold); }
+  .lang-switch-tool .is-current { color: var(--teal); background: var(--gold); border-color: var(--gold); cursor: default; }
+
   .eyebrow {
     font-size: 12.5px;
     letter-spacing: 0.14em;
@@ -566,6 +585,7 @@
   <img src="https://www.pousada.aetsolidez.com.br/images/logo_campeche_lofts_horizontal.webp" alt="" class="marca-dagua">
   <div class="wrap">
     <a href="https://www.pousada.aetsolidez.com.br/" class="voltar-site">&larr; Voltar para o site</a>
+    <span class="lang-switch-tool" aria-label="Traduzir esta página"><span class="is-current" aria-current="true">PT</span><a href="https://translate.google.com/translate?sl=pt&amp;tl=en&amp;u=https://pousada.aetsolidez.com.br/planejador.html" target="_blank" rel="nofollow noopener" aria-label="Translate this page to English">EN</a><a href="https://translate.google.com/translate?sl=pt&amp;tl=es&amp;u=https://pousada.aetsolidez.com.br/planejador.html" target="_blank" rel="nofollow noopener" aria-label="Traducir esta página al español">ES</a></span>
     <div class="eyebrow">Campeche Lofts · Florianópolis/SC</div>
     <h1>Chegue tranquilo,<br><em>sem correr da chuva.</em></h1>
     <p>Me conta de onde você vai sair e eu te ajudo a escolher o melhor horário — considerando chuva, trânsito e se vai escurecer no caminho.</p>
