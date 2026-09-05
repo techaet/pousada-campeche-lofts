@@ -6,9 +6,10 @@ if (empty($_SESSION['guide_authenticated'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" translate="no">
 <head>
   <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Guia do hóspede do Campeche Lofts: convivência, estacionamento, portão, Wi-Fi e orientações práticas.">
   <meta name="robots" content="noindex, nofollow">
