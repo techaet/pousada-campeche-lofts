@@ -1,3 +1,14 @@
+# Redireciona http:// e www. para https://pousada.aetsolidez.com.br (canônico)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  RewriteCond %{HTTP_HOST} ^www\.pousada\.aetsolidez\.com\.br$ [NC]
+  RewriteRule ^(.*)$ https://pousada.aetsolidez.com.br/$1 [L,R=301]
+</IfModule>
+
 # Headers de segurança — baixo risco, não deveriam quebrar nada do site
 <IfModule mod_headers.c>
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
