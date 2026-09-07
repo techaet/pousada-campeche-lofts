@@ -10,6 +10,15 @@ if (empty($_SESSION['guide_authenticated'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="google" content="notranslate">
+ <!-- Google tag (gtag.js) -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-E857NMXM15"></script>
+ <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E857NMXM15');
+ </script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Guía del huésped de Campeche Lofts: convivencia, estacionamiento, portón, Wi-Fi e información práctica.">
   <meta name="robots" content="noindex, nofollow">
