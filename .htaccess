@@ -1,12 +1,27 @@
-# Redireciona http:// e www. para https://pousada.aetsolidez.com.br (canônico)
+# Domínio canônico: https://www.campechelofts.floripa.br
+# Hosts antigos, sem www e http redirecionam (301) para ele.
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  # Não redirecionar validações de certificado (AutoSSL/Let's Encrypt)
+  RewriteRule ^\.well-known/ - [L]
+
+  # 1) Hosts antigos -> novo domínio
+  RewriteCond %{HTTP_HOST} ^(www\.)?(pousada|campechelofts)\.aetsolidez\.com\.br$ [NC]
+  RewriteRule ^(.*)$ https://www.campechelofts.floripa.br/$1 [R=301,L]
+
+  # 2) Sem www -> com www
+  RewriteCond %{HTTP_HOST} ^campechelofts\.floripa\.br$ [NC]
+  RewriteRule ^(.*)$ https://www.campechelofts.floripa.br/$1 [R=301,L]
+
+  # 3) http -> https no domínio novo
+  RewriteCond %{HTTP_HOST} ^www\.campechelofts\.floripa\.br$ [NC]
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://www.campechelofts.floripa.br/$1 [R=301,L]
+
+  # Rede de segurança: qualquer outro host em http vai para https
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-  RewriteCond %{HTTP_HOST} ^www\.pousada\.aetsolidez\.com\.br$ [NC]
-  RewriteRule ^(.*)$ https://pousada.aetsolidez.com.br/$1 [L,R=301]
 </IfModule>
 
 # Headers de segurança — baixo risco, não deveriam quebrar nada do site
