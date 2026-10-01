@@ -202,7 +202,7 @@ main { overflow: clip; }
   inset: 0;
   z-index: -2;
   content: "";
-  background: url('https://pousada.aetsolidez.com.br/images/galeria_geral/pousada_00001.jpeg') center / cover no-repeat;
+  background: url('https://www.campechelofts.floripa.br/images/galeria_geral/pousada_00001.jpeg') center / cover no-repeat;
 }
 .home-hero::after {
   position: absolute;
@@ -271,7 +271,7 @@ main { overflow: clip; }
 .loft-index a:hover, .loft-index a:focus-visible { color: var(--ocean); }
 
 .gallery-invite { position: relative; min-height: 555px; display: grid; overflow: hidden; color: var(--white); border-radius: var(--radius-lg); isolation: isolate; }
-.gallery-invite::before { position: absolute; inset: 0; z-index: -2; content: ""; background: url('https://pousada.aetsolidez.com.br/images/galeria_geral/pousada_00033_capa.webp') center / cover no-repeat; transition: transform .8s ease; }
+.gallery-invite::before { position: absolute; inset: 0; z-index: -2; content: ""; background: url('https://www.campechelofts.floripa.br/images/galeria_geral/pousada_00033_capa.webp') center / cover no-repeat; transition: transform .8s ease; }
 .gallery-invite:hover::before { transform: scale(1.03); }
 .gallery-invite::after { position: absolute; inset: 0; z-index: -1; content: ""; background: linear-gradient(90deg, rgba(13,37,39,.55), rgba(13,37,39,.08)); }
 .gallery-invite-content { width: min(550px, 100%); align-self: end; padding: clamp(2rem, 5vw, 4.2rem); }
@@ -336,7 +336,7 @@ main { overflow: clip; }
 .reserve-actions { display: flex; flex-wrap: wrap; gap: .7rem; justify-content: end; }
 
 /* General gallery */
-.gallery-banner { min-height: 365px; display: grid; align-items: end; color: var(--white); background: var(--ink) url('https://pousada.aetsolidez.com.br/images/galeria_geral/pousada_00001.jpeg') center / cover no-repeat; background-blend-mode: soft-light; }
+.gallery-banner { min-height: 365px; display: grid; align-items: end; color: var(--white); background: var(--ink) url('https://www.campechelofts.floripa.br/images/galeria_geral/pousada_00001.jpeg') center / cover no-repeat; background-blend-mode: soft-light; }
 .gallery-banner-inner { width: min(var(--max), calc(100% - 48px)); margin: auto; padding: 4.5rem 0; }
 .gallery-banner .eyebrow { color: #f0d7b6; }
 .gallery-banner h1 { max-width: 720px; margin: 0; font-family: "Playfair Display", Georgia, serif; font-size: clamp(3rem, 7vw, 6.2rem); font-weight: 600; line-height: .94; letter-spacing: -.065em; }

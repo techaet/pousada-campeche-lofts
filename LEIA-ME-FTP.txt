@@ -4,13 +4,13 @@ Este ZIP contém a versão completa do site, agora com o Guia do Hóspede proteg
 
 PUBLICAÇÃO
 
-Extraia o conteúdo deste pacote e envie seus arquivos para a raiz de pousada.aetsolidez.com.br por FTP ou pelo Gerenciador de Arquivos do cPanel. Autorize a substituição dos arquivos existentes. É essencial enviar a pasta guia completa, sem mudar nomes ou estrutura.
+Extraia o conteúdo deste pacote e envie seus arquivos para a raiz de www.campechelofts.floripa.br por FTP ou pelo Gerenciador de Arquivos do cPanel. Autorize a substituição dos arquivos existentes. É essencial enviar a pasta guia completa, sem mudar nomes ou estrutura.
 
 A página inicial atualizada é index.html. Ela contém o novo link “Guia do Hóspede” no menu e no rodapé. A área protegida está na pasta guia, com os arquivos PHP de acesso, as três versões de idioma, a folha de estilos e as imagens do logo e do mapa de estacionamento.
 
 ENDEREÇO DO GUIA
 
-Após o envio, o guia estará em https://pousada.aetsolidez.com.br/guia/. Os endereços anteriores guia-do-hospede.html, guest-guide.html e guia-del-huesped.html foram convertidos em redirecionamentos para a mesma área protegida.
+Após o envio, o guia estará em https://www.campechelofts.floripa.br/guia/. Os endereços anteriores guia-do-hospede.html, guest-guide.html e guia-del-huesped.html foram convertidos em redirecionamentos para a mesma área protegida.
 
 FOTOS JÁ HOSPEDADAS
 
@@ -18,4 +18,4 @@ As fotografias dos lofts e da galeria geral não estão neste ZIP. As páginas c
 
 TESTE FINAL
 
-Após publicar, abra https://pousada.aetsolidez.com.br/guia/ em uma aba anônima. A tela de senha deverá aparecer antes do conteúdo. Depois de acessar, confirme a abertura em português, o funcionamento dos atalhos EN e ES e a presença do mapa na seção “Portão e estacionamento”.
+Após publicar, abra https://www.campechelofts.floripa.br/guia/ em uma aba anônima. A tela de senha deverá aparecer antes do conteúdo. Depois de acessar, confirme a abertura em português, o funcionamento dos atalhos EN e ES e a presença do mapa na seção “Portão e estacionamento”.
