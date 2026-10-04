@@ -60,7 +60,7 @@ Conteúdo: usar a skill `criar-artigo-blog` (marca "Campeche Lofts"). Publicaç�
 ### Aprovação por e-mail
 
 - Push em `artigo/**` → workflow `artigo-revisao.yml` abre uma issue (label `artigo`) mencionando @LSFcamp → GitHub envia e-mail com link de prévia (raw.githack).
-- Leonardo responde o e-mail com `PUBLICAR` ou `EXCLUIR` na primeira linha → `artigo-decisao.yml` (só aceita LSFcamp/techaet): publicar = merge do branch na main + `publicar_artigo.py` + `check_site.py` + push + dispara `deploy.yml`; excluir = apaga o branch. Push de novo no mesmo branch = comentário "rascunho atualizado" na mesma issue.
+- Leonardo responde o e-mail com `PUBLICAR` ou `EXCLUIR` como primeira palavra (o resto, como assinatura e e-mail citado, é ignorado) → `artigo-decisao.yml` (só aceita LSFcamp/techaet): publicar = merge do branch na main + `publicar_artigo.py` + `check_site.py` + push + dispara `deploy.yml`; excluir = apaga o branch. Push de novo no mesmo branch = comentário "rascunho atualizado" na mesma issue.
 - Automação semanal: tarefa agendada no app Claude deste Mac, quintas 8h, 1 artigo PT + 1 ES.
 
 ## Guias (iscas digitais / lead magnets)
