@@ -10,6 +10,9 @@ WHATSAPP = "554861369146"
 NAO_PUBLICAS = {"404.html", "google7ce71e8fb9f4b842.html", "template_loft.html",
                 "guia-do-hospede.html", "guest-guide.html", "guia-del-huesped.html"}
 IMG_LIMITE_KB = 500
+# Texto único dos links de WhatsApp (menos o formulário de cotação e o guia/). Ver CLAUDE.md
+WA_TEXTOS = {"Olá! Vim pelo site do Campeche Lofts e gostaria de mais informações.",
+             "¡Hola! Vine desde el sitio de Campeche Lofts y quisiera más información."}
 
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 erros, avisos = [], []
@@ -39,6 +42,10 @@ for f in htmls:
         erros.append(f"{f}: ainda cita o domínio antigo aetsolidez.com.br")
     for n in set(re.findall(r"wa\.me/(\d+)", s)) - {WHATSAPP}:
         erros.append(f"{f}: WhatsApp {n} diferente de {WHATSAPP}")
+    if not f.startswith("guia/"):
+        for q in re.findall(r'href="https://wa\.me/\d+([^"]*)"', s):
+            if urllib.parse.unquote(q[len("?text="):] if q.startswith("?text=") else "?") not in WA_TEXTOS:
+                erros.append(f"{f}: link de WhatsApp fora do texto padrão -> {urllib.parse.unquote(q) or '(sem texto)'}")
     for ref in re.findall(r'(?:src|href)="([^"#?]+)', s):
         if "${" in ref or "{{" in ref:
             continue
