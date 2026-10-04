@@ -29,7 +29,9 @@ O mesmo script roda no GitHub Actions e **bloqueia o deploy** se falhar.
 
 ## Dados fixos (não inventar outros)
 
-- WhatsApp: `5548991223600` → `https://wa.me/5548991223600?text=...` (mensagem pré-preenchida no idioma da página)
+- WhatsApp: `554861369146` (robô de atendimento, Sra. Constância) → `https://wa.me/554861369146?text=...` (mensagem pré-preenchida no idioma da página, saudação neutra "Olá!" / "¡Hola!"). O número humano `5548991223600` só continua no Guia do Hóspede (`guia/`).
+- Formulário de cotação no hero da home (`#cotacao`, JS inline no `index.html`): monta a mensagem que o robô entende (`Check In`, `Check Out` ou `Mês`, `Nº Adultos (+18 anos)`, `Nº Crianças (+12 anos)`, `Nº Crianças (até 12 anos)`, e `Lofts necessários` quando o grupo não cabe num loft) em PT/ES/EN. O site não calcula preço nem lê o tarifário: quem cota é o robô. Mudou o formato aceito pelo robô? Mudar o formulário.
+- Leads do formulário: ao clicar em "Enviar pelo WhatsApp" abre uma janelinha pedindo nome, WhatsApp e e-mail; os dados vão por POST para um Google Apps Script (URL `/exec` no JS inline do `index.html`; código em `scripts/leads_site.gs`, colado na planilha Campeche Automation) que grava na aba `leads_site` (mesmos cabeçalhos da `leads_brasil`, ligados pelo nome) e depois o WhatsApp abre na mesma aba. Se o envio falhar, o WhatsApp abre do mesmo jeito. Mudou o script? Reimplantar no Apps Script e, se o URL mudar, atualizar o `index.html`. Dados de leads nunca entram neste repositório.
 - Endereço: Rua das Corticeiras, 270 · Campeche · Florianópolis/SC · CEP 88063-160
 - Instagram: `https://www.instagram.com/campechelofts/`
 - GA4: `G-E857NMXM15` (bloco gtag em toda página pública) · `fb:app_id` `1058264569998928`

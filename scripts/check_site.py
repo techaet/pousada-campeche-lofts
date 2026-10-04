@@ -5,7 +5,7 @@ import os, re, subprocess, sys, urllib.parse
 
 BASE = "https://www.campechelofts.floripa.br"
 GA4 = "G-E857NMXM15"
-WHATSAPP = "5548991223600"
+WHATSAPP = "554861369146"
 # Páginas que não são conteúdo indexável (redirecionamentos, verificação, modelo)
 NAO_PUBLICAS = {"404.html", "google7ce71e8fb9f4b842.html", "template_loft.html",
                 "guia-do-hospede.html", "guest-guide.html", "guia-del-huesped.html"}
