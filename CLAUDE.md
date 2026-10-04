@@ -60,6 +60,19 @@ Conteúdo: usar a skill `criar-artigo-blog` (marca "Campeche Lofts"). Publicaç�
 
 Conteúdo: skill `criar-guia-html`. Publicação: pasta própria na raiz (`/<slug>/index.html`, modelo: `guia-floripa-argentinos/`), canonical/og/GA4 como qualquer página pública, entrada no `sitemap.xml`, e link a partir de pelo menos uma página existente (home, blog ou artigo relacionado) para não ficar órfão.
 
+## Comprovantes de reserva (não é parte do site)
+
+Quando o Leonardo pedir um comprovante ("comprovante pra Fulana, CPF …, loft 5, 2 adultos, 10 a 14/01, R$ 1.800"):
+
+```bash
+python3 scripts/comprovante.py --nome "Fulana de Tal" --doc 000.000.000-00 --loft 5 --hospedes "2 adultos" --checkin 2027-01-10 --checkout 2027-01-14 --total 1800
+```
+
+- `--idioma es` para argentinos (`--doc` vira DNI/Pasaporte, "seña"); `--sinal` só se não for 50%; `--forcar` só depois de confirmar com ele uma data que gerou AVISO.
+- Faltou dado (CPF/DNI, nº de hóspedes, valor total, ano das datas)? Perguntar por questionário, nunca inventar.
+- Saída: PDF numerado (`2026-001…`) + linha no `registro_comprovantes.csv`, em `iCloud Drive/Documents/Pousada/Comprovantes/`. Modelo visual: `scripts/comprovante.html`.
+- **Dados de hóspedes nunca entram neste repositório (é público).** O `.gitignore` bloqueia `*.pdf` e `comprovante*`; não repetir CPF/nome no chat além do necessário.
+
 ## Convenções técnicas
 
 - Toda página pública: favicons, GA4, `canonical` absoluto no domínio novo, `og:*`, `twitter:card`, `meta description`, `viewport`.

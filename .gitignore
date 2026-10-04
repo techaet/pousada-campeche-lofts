@@ -1,2 +1,6 @@
 .DS_Store
 __pycache__/
+# Comprovantes têm dados pessoais (CPF) — nunca no repositório público
+*.pdf
+comprovante*
+!scripts/comprovante.*

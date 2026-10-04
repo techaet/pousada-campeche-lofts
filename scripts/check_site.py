@@ -15,7 +15,7 @@ os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 erros, avisos = [], []
 ler = lambda f: open(f, encoding="utf-8", errors="ignore").read()
 arquivos = subprocess.check_output(["git", "ls-files", "--cached", "--others", "--exclude-standard"]).decode().split("\n")
-htmls = [f for f in arquivos if f.endswith((".html", ".php"))]
+htmls = [f for f in arquivos if f.endswith((".html", ".php")) and not f.startswith("scripts/")]
 
 
 def url_de(f):
