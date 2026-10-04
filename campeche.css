@@ -11,7 +11,7 @@
 .quote-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.75rem;align-items:end}
 .quote-fields label{display:grid;min-width:0;gap:.25rem;font-size:.76rem;font-weight:700;letter-spacing:.01em}
 .quote-fields input,.quote-fields select{width:100%;min-width:0;min-height:46px;padding:.5rem .7rem;color:var(--ink);background:var(--white);border:1px solid var(--line);border-radius:10px;font:inherit;font-size:.95rem;font-weight:500}
-.quote-fields .button{width:100%;margin:0;color:var(--white);background:var(--ocean);border-color:var(--ocean)}
+.quote-fields .button{grid-column:1/-1;justify-self:center;width:auto;min-width:240px;margin:0;white-space:nowrap;color:var(--white);background:var(--ocean);border-color:var(--ocean)}
 .quote-fields .button:hover,.quote-fields .button:focus-visible{background:var(--ocean-deep);border-color:var(--ocean-deep);color:var(--white)}
 .quote-erro{min-height:0;margin:.6rem 0 0;color:#a3322a;font-size:.82rem;font-weight:600}
 .quote-erro:empty{display:none}
@@ -24,7 +24,7 @@
 .quote-aviso:empty{display:none}
 .quote-apoio{margin:.7rem 0 0;color:var(--ink-soft);font-size:.8rem}
 .quote-info{margin:.35rem 0 0;color:var(--ink-soft);font-size:.78rem;line-height:1.45}
-@media(max-width:720px){.quote-fields .button{grid-column:1/-1}.quote-form{padding:1rem}}
+@media(max-width:720px){.quote-fields .button{justify-self:stretch;width:100%}.quote-form{padding:1rem}}
 .quote-fields .q-mes{grid-column:span 2}
 .quote-passo{margin:.25rem 0 0;color:var(--ink-soft);font-size:.8rem}
 .lead-dialog{width:min(440px,calc(100% - 32px));padding:1.4rem;color:var(--ink);background:var(--white);border:0;border-radius:var(--radius-md);box-shadow:var(--shadow)}
