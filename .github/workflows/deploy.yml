@@ -3,6 +3,7 @@ name: Deploy (FTP)
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:  # usado pela publicação de artigos (push do bot não dispara o deploy)
 
 jobs:
   deploy:

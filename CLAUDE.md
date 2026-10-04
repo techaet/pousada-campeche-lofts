@@ -53,8 +53,15 @@ Conteúdo: usar a skill `criar-artigo-blog` (marca "Campeche Lofts"). Publicaç�
 3. Atualizar no `<head>`: `title` (≤ 60 caracteres, termina em `| Campeche Lofts`), `description` (≤ 160), `canonical` e `og:url` = `https://www.campechelofts.floripa.br/blog/<slug>/`, `og:title`, `og:description`, JSON-LD `BlogPosting` (headline, description, image, datePublished, dateModified, inLanguage), `BreadcrumbList` e `FAQPage` (mesmas perguntas do FAQ visível).
 4. Corpo: breadcrumb, kicker, `h1`, capa, sumário (`article-toc`) com âncoras para cada `h2`, CTA de WhatsApp (`article-cta`), FAQ (`<details>`), fontes consultadas com data, "Última revisão", "Leia também" com 2–3 artigos, aside com checklist. HTML de verdade: listas em `<ul><li>`, negrito em `<strong>` — nada de `- ` ou `**` de markdown.
 5. **Capa própria e exclusiva:** `images/blog/<slug>.webp`, 1600×1067 (3:2), < 200 KB. Converter com Pillow: `python3 -c "from PIL import Image; Image.open('in.png').convert('RGB').save('out.webp', quality=80, method=6)"` (o `cwebp` desta máquina está quebrado). Nunca reaproveitar a capa de outro artigo.
-6. Registrar em **3 lugares**: card no topo de `blog/index.html` (mais recente primeiro; só a capa do 1º card tem `fetchpriority="high"`, os demais `loading="lazy"`), `<item>` no topo de `blog/feed.xml` (+ `lastBuildDate`) e `<url>` em `sitemap.xml`.
-7. `python3 scripts/check_site.py` → commit "Novo artigo de blog: <slug>" → push.
+   Capa de banco gratuito (Unsplash/Pexels): crédito ao fotógrafo na seção de fontes ("Foto de capa: Nome / Unsplash", com link).
+6. **Não editar `blog/index.html`, `blog/feed.xml` nem `sitemap.xml` à mão.** Quem registra o artigo nos três é `python3 scripts/publicar_artigo.py <slug>` (card no topo, item no feed, sitemap, datas = dia da publicação).
+7. **Nunca publicar direto na `main`.** Commitar só a pasta do artigo + a capa num branch `artigo/<slug>` e dar push do branch. Para validar antes: rodar `publicar_artigo.py <slug>` + `check_site.py` e depois `git checkout -- blog/index.html blog/feed.xml sitemap.xml`.
+
+### Aprovação por e-mail
+
+- Push em `artigo/**` → workflow `artigo-revisao.yml` abre uma issue (label `artigo`) mencionando @LSFcamp → GitHub envia e-mail com link de prévia (raw.githack).
+- Leonardo responde o e-mail com `PUBLICAR` ou `EXCLUIR` na primeira linha → `artigo-decisao.yml` (só aceita LSFcamp/techaet): publicar = merge do branch na main + `publicar_artigo.py` + `check_site.py` + push + dispara `deploy.yml`; excluir = apaga o branch. Push de novo no mesmo branch = comentário "rascunho atualizado" na mesma issue.
+- Automação semanal: tarefa agendada no app Claude deste Mac, quintas 8h, 1 artigo PT + 1 ES.
 
 ## Guias (iscas digitais / lead magnets)
 
