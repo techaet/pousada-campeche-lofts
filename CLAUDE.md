@@ -37,6 +37,9 @@ O mesmo script roda no GitHub Actions e **bloqueia o deploy** se falhar.
 - Reserva: sinal de 50% via Pix, saldo no check-in.
 - Preços, disponibilidade e regras comerciais: **nunca inventar** — perguntar ao Leonardo.
 - Fatos de marca/tom de voz vêm da pasta da marca em "Negócios AET" no Google Drive (usada pelas skills `criar-artigo-blog` e `criar-guia-html`).
+  - `FAQ - Pousada Campeche Lofts.md` (corrigido para 50% em 04/10/2026; a versão antiga com 15% foi para a lixeira).
+  - Planilha `Campeche Lofts - Tarifario/FAQ` (abas `tarifario`, `faq`, `lofts`): tarifas por temporada e respostas do atendimento automático ("Sra. Constância"). Se o site mudar de domínio, contato ou regra, atualizar também a aba `faq`.
+  - Se Drive e site divergirem, o site/CLAUDE.md vale e a divergência deve ser avisada ao Leonardo.
 
 ## Idiomas
 
@@ -61,7 +64,8 @@ Conteúdo: usar a skill `criar-artigo-blog` (marca "Campeche Lofts"). Publicaç�
 
 - Push em `artigo/**` → workflow `artigo-revisao.yml` abre uma issue (label `artigo`) mencionando @LSFcamp → GitHub envia e-mail com link de prévia (raw.githack).
 - Leonardo responde o e-mail com `PUBLICAR` ou `EXCLUIR` como primeira palavra (o resto, como assinatura e e-mail citado, é ignorado) → `artigo-decisao.yml` (só aceita LSFcamp/techaet): publicar = merge do branch na main + `publicar_artigo.py` + `check_site.py` + push + dispara `deploy.yml`; excluir = apaga o branch. Push de novo no mesmo branch = comentário "rascunho atualizado" na mesma issue.
-- Automação semanal: tarefa agendada no app Claude deste Mac, quintas 8h, 1 artigo PT + 1 ES.
+- Automação semanal: tarefa agendada `artigos-semanais-campeche-lofts` no app Claude deste Mac (`~/.claude/scheduled-tasks/artigos-semanais-campeche-lofts/SKILL.md`), quintas 8h, 1 artigo PT + 1 ES. Só roda com o app aberto (senão, roda ao abrir). Primeira execução em 04/10/2026 publicou `ilha-do-campeche-como-visitar` e `documentos-viajar-brasil-argentinos` — fluxo PUBLICAR validado de ponta a ponta.
+- E-mails chegam na conta GitHub **LSFcamp** (Leonardo; tem permissão de escrita no repo `techaet/pousada-campeche-lofts`, que é público).
 
 ## Guias (iscas digitais / lead magnets)
 
