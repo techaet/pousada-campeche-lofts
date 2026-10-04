@@ -1,0 +1,70 @@
+# Campeche Lofts — site da pousada
+
+Site estático (HTML/CSS/JS puro, sem build) da Pousada Campeche Lofts, Praia do Campeche, Florianópolis.
+Produção: **https://www.campechelofts.floripa.br** (domínio único e canônico; `pousada.aetsolidez.com.br` e variantes só redirecionam via `.htaccess`).
+
+## Regra de ouro
+
+**Antes de todo commit:** `python3 scripts/check_site.py` precisa terminar com `0 erro(s)`.
+O mesmo script roda no GitHub Actions e **bloqueia o deploy** se falhar.
+
+## Deploy
+
+- Push na `main` → `.github/workflows/deploy.yml` → verificação → FTP (FTPS) para a hospedagem (cPanel). Não há staging: push na main = no ar em ~30 s.
+- Arquivos que não sobem: `CLAUDE.md`, `.claude/`, `scripts/`, `template_loft.html`, `.git*`. Novo arquivo interno → adicionar ao `exclude` do workflow.
+- Sempre `git pull` antes de começar: há commits feitos por automação (autor "Tech AET").
+
+## Mapa do site
+
+| Caminho | O que é |
+|---|---|
+| `index.html` | Home (prova social, disponibilidade, FAQ `#faq`, catálogo `#lofts`, `#localizacao`, `#contato`) |
+| `loft_03.html` … `loft_09.html` | Uma página por loft (fotos em `images/loftNN/`). `template_loft.html` é só o modelo com placeholders `{{...}}` |
+| `galeria_geral.html`, `planejador.html` | Galeria geral e planejador de viagem |
+| `blog/` | Índice (`blog/index.html`), RSS (`blog/feed.xml`) e um artigo por pasta `blog/<slug>/index.html` |
+| `guia-floripa-argentinos/` | Guia público em espanhol (isca para argentinos) |
+| `guia/` | **Guia do Hóspede protegido por senha (PHP).** Contém Wi‑Fi e instruções internas. Não copiar conteúdo dele para páginas públicas; não mexer em `session.php` (hash da senha) sem pedido explícito. Bloqueado no `robots.txt` |
+| `guia-do-hospede.html`, `guest-guide.html`, `guia-del-huesped.html` | Redirecionamentos para `/guia/` |
+| `campeche.css` / `campeche.js` | CSS e JS únicos do site (minificados, editar com cuidado) |
+
+## Dados fixos (não inventar outros)
+
+- WhatsApp: `5548991223600` → `https://wa.me/5548991223600?text=...` (mensagem pré-preenchida no idioma da página)
+- Endereço: Rua das Corticeiras, 270 · Campeche · Florianópolis/SC · CEP 88063-160
+- Instagram: `https://www.instagram.com/campechelofts/`
+- GA4: `G-E857NMXM15` (bloco gtag em toda página pública) · `fb:app_id` `1058264569998928`
+- og:image padrão: `https://www.campechelofts.floripa.br/images/logo_campeche_lofts_quadrada.png`
+- Reserva: sinal de 50% via Pix, saldo no check-in.
+- Preços, disponibilidade e regras comerciais: **nunca inventar** — perguntar ao Leonardo.
+- Fatos de marca/tom de voz vêm da pasta da marca em "Negócios AET" no Google Drive (usada pelas skills `criar-artigo-blog` e `criar-guia-html`).
+
+## Idiomas
+
+- `pt-BR` (padrão) e `es-AR` (público argentino: voseo — "planificá", "escribinos"). `<html lang>` e `og:locale` coerentes com o idioma.
+- No `blog/index.html`, cards em espanhol levam `hreflang="es"`, kicker com 🇦🇷 e "Leer artículo".
+- `translate="no"` + `<meta name="google" content="notranslate">` em todas as páginas (evita páginas espelho translate.goog). Manter.
+
+## Publicar um artigo novo no blog
+
+Conteúdo: usar a skill `criar-artigo-blog` (marca "Campeche Lofts"). Publicação neste repo:
+
+1. **Copiar um artigo existente do mesmo idioma** como base (`blog/pago-pix-tarjetas-argentinos/` para es, `blog/baleias-franca-litoral-santa-catarina/` para pt). Nunca escrever `<head>`/header/footer do zero — já quebrou o layout uma vez.
+2. Slug curto, sem acento, em minúsculas com hífens (evitar slugs gigantes). Pasta `blog/<slug>/index.html`.
+3. Atualizar no `<head>`: `title` (≤ 60 caracteres, termina em `| Campeche Lofts`), `description` (≤ 160), `canonical` e `og:url` = `https://www.campechelofts.floripa.br/blog/<slug>/`, `og:title`, `og:description`, JSON-LD `BlogPosting` (headline, description, image, datePublished, dateModified, inLanguage), `BreadcrumbList` e `FAQPage` (mesmas perguntas do FAQ visível).
+4. Corpo: breadcrumb, kicker, `h1`, capa, sumário (`article-toc`) com âncoras para cada `h2`, CTA de WhatsApp (`article-cta`), FAQ (`<details>`), fontes consultadas com data, "Última revisão", "Leia também" com 2–3 artigos, aside com checklist. HTML de verdade: listas em `<ul><li>`, negrito em `<strong>` — nada de `- ` ou `**` de markdown.
+5. **Capa própria e exclusiva:** `images/blog/<slug>.webp`, 1600×1067 (3:2), < 200 KB. Converter com Pillow: `python3 -c "from PIL import Image; Image.open('in.png').convert('RGB').save('out.webp', quality=80, method=6)"` (o `cwebp` desta máquina está quebrado). Nunca reaproveitar a capa de outro artigo.
+6. Registrar em **3 lugares**: card no topo de `blog/index.html` (mais recente primeiro; só a capa do 1º card tem `fetchpriority="high"`, os demais `loading="lazy"`), `<item>` no topo de `blog/feed.xml` (+ `lastBuildDate`) e `<url>` em `sitemap.xml`.
+7. `python3 scripts/check_site.py` → commit "Novo artigo de blog: <slug>" → push.
+
+## Guias (iscas digitais / lead magnets)
+
+Conteúdo: skill `criar-guia-html`. Publicação: pasta própria na raiz (`/<slug>/index.html`, modelo: `guia-floripa-argentinos/`), canonical/og/GA4 como qualquer página pública, entrada no `sitemap.xml`, e link a partir de pelo menos uma página existente (home, blog ou artigo relacionado) para não ficar órfão.
+
+## Convenções técnicas
+
+- Toda página pública: favicons, GA4, `canonical` absoluto no domínio novo, `og:*`, `twitter:card`, `meta description`, `viewport`.
+- Imagens: WebP para fotos novas; sempre `width`/`height`, `alt` descritivo no idioma da página, `loading="lazy"` fora da primeira dobra. Fotos > 500 KB geram aviso no verificador — redimensionar para no máx. 1920 px.
+- Menu (mesma ordem em todas as páginas, rótulos traduzidos): Planeje sua viagem · Lofts · Galeria · Blog · Guia do Hóspede · FAQ · Localização · Contato. Mudou o menu? Mudar em **todas** as páginas (`git grep 'class="site-nav"'`).
+- Links internos relativos (`../../`) como nas páginas existentes.
+- Ao mudar uma página, atualizar o `<lastmod>` dela no `sitemap.xml`.
+- `.htaccess`: redirecionamentos 301 para o domínio canônico, headers de segurança, cache e 404. Testar com `curl -sI` depois do deploy.

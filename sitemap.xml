@@ -114,4 +114,16 @@
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>https://www.campechelofts.floripa.br/blog/primavera-florianopolis-campeche-sem-multidao/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.campechelofts.floripa.br/blog/baleias-francas-em-floripa-onde-e-como-avistar-da-areia-setembro-outubro-2026/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>
