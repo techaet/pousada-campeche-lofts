@@ -5,22 +5,108 @@
   "menu": {
     "pt": {
       "aria": "Navegação principal",
-      "itens": [["Planeje sua viagem", "/planejador.html"], ["Lofts", "/#lofts"], ["Galeria", "/galeria_geral.html"], ["Blog", "/blog/"], ["Guia do Hóspede", "/guia/"], ["FAQ", "/#faq"], ["Localização", "/#localizacao"]],
-      "cta": ["Contato", "/#contato"],
-      "busca": "Buscar artigos"
+      "itens": [
+        [
+          "Planeje sua viagem",
+          "/planejador.html"
+        ],
+        [
+          "Lofts",
+          "/#lofts"
+        ],
+        [
+          "Galeria",
+          "/galeria_geral.html"
+        ],
+        [
+          "Blog",
+          "/blog/"
+        ],
+        [
+          "Guia do Hóspede",
+          "/guia/"
+        ],
+        [
+          "FAQ",
+          "/#faq"
+        ],
+        [
+          "Localização",
+          "/#localizacao"
+        ]
+      ],
+      "cta": [
+        "Contato",
+        "/#contato"
+      ]
     },
     "es": {
       "aria": "Navegación principal",
-      "itens": [["Planificá tu viaje", "/planejador.html"], ["Lofts", "/#lofts"], ["Galería", "/galeria_geral.html"], ["Blog", "/blog/"], ["Guía del Huésped", "/guia/"], ["FAQ", "/#faq"], ["Ubicación", "/#localizacao"]],
-      "cta": ["Contacto", "/#contato"],
-      "busca": "Buscar artículos"
+      "itens": [
+        [
+          "Planificá tu viaje",
+          "/planejador.html"
+        ],
+        [
+          "Lofts",
+          "/#lofts"
+        ],
+        [
+          "Galería",
+          "/galeria_geral.html"
+        ],
+        [
+          "Blog",
+          "/blog/"
+        ],
+        [
+          "Guía del Huésped",
+          "/guia/"
+        ],
+        [
+          "FAQ",
+          "/#faq"
+        ],
+        [
+          "Ubicación",
+          "/#localizacao"
+        ]
+      ],
+      "cta": [
+        "Contacto",
+        "/#contato"
+      ]
     }
   },
   "temas": [
-    {"slug": "planejamento", "nome": {"pt": "Planejamento e logística", "es": "Planificación y logística"}},
-    {"slug": "passeios", "nome": {"pt": "Passeios e natureza", "es": "Paseos y naturaleza"}},
-    {"slug": "temporada", "nome": {"pt": "Temporada e clima", "es": "Temporada y clima"}},
-    {"slug": "estadias", "nome": {"pt": "Estadias e economia", "es": "Estadías y ahorro"}}
+    {
+      "slug": "planejamento",
+      "nome": {
+        "pt": "Planejamento e logística",
+        "es": "Planificación y logística"
+      }
+    },
+    {
+      "slug": "passeios",
+      "nome": {
+        "pt": "Passeios e natureza",
+        "es": "Paseos y naturaleza"
+      }
+    },
+    {
+      "slug": "temporada",
+      "nome": {
+        "pt": "Temporada e clima",
+        "es": "Temporada y clima"
+      }
+    },
+    {
+      "slug": "estadias",
+      "nome": {
+        "pt": "Estadias e economia",
+        "es": "Estadías y ahorro"
+      }
+    }
   ],
   "comece_por_aqui": [
     "ilha-do-campeche-como-visitar",
@@ -33,6 +119,12 @@
     "texto": "Guias práticos sobre o Campeche e Florianópolis, com fontes e datas de revisão visíveis.",
     "ver_todos": "Ver todos os artigos"
   },
-  "sem_menu": ["404.html", "planejador.html", "guia-floripa-argentinos/index.html"],
-  "paginas_ignoradas": ["template_loft.html"]
+  "sem_menu": [
+    "404.html",
+    "planejador.html",
+    "guia-floripa-argentinos/index.html"
+  ],
+  "paginas_ignoradas": [
+    "template_loft.html"
+  ]
 }

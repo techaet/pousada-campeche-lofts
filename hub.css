@@ -1,32 +1,5 @@
-/* Hub de conteúdo do blog: temas, "Comece por aqui", bloco do blog na home e busca (Pagefind).
+/* Hub de conteúdo do blog: temas, "Comece por aqui" e bloco do blog na home.
    Arquivo complementar ao campeche.css (que é minificado: não editar lá). */
-:root {
-  --pf-font: inherit;
-  --pf-text: var(--ink);
-  --pf-text-secondary: var(--ink-soft);
-  --pf-border: var(--line);
-  --pf-border-focus: var(--ocean);
-  --pf-hover: var(--paper);
-  --pf-mark: var(--ocean-deep);
-  --pf-outline-focus: var(--ocean);
-  --pf-border-radius: 12px;
-}
-
-/* ---- busca no menu ---- */
-.site-nav .nav-busca { display: inline-flex; align-items: center; }
-.nav-busca pagefind-modal-trigger { display: flex; align-items: center; --pf-input-height: 38px; --pf-border-radius: 999px; }
-.nav-busca .pf-trigger-btn { font-family: inherit !important; font-size: .78rem !important; padding: 0 14px !important; }
-.nav-busca .pf-trigger-btn:hover { border-color: var(--ocean); }
-/* menu em linha: só a lupa (o menu já é denso); no menu do celular, campo com texto */
-@media (min-width: 1081px) {
-  .nav-busca .pf-trigger-text { display: none !important; }
-  .nav-busca .pf-trigger-btn { width: 38px !important; padding: 0 !important; justify-content: center; }
-}
-@media (max-width: 1080px) {
-  .site-nav .nav-busca { display: block; padding: .6rem 0 .2rem; border-bottom: 1px solid var(--line); }
-  .nav-busca pagefind-modal-trigger { width: 100%; }
-}
-
 /* ---- tema do artigo (kicker) ---- */
 .article-kicker a.article-tema { color: inherit; text-decoration: none; }
 .article-kicker a.article-tema:hover, .article-kicker a.article-tema:focus-visible { text-decoration: underline; }

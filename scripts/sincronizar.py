@@ -2,9 +2,9 @@
 """Mantém o que se repete no site a partir de uma fonte só (scripts/site.json). Idempotente.
 Uso: python3 scripts/sincronizar.py   (publicar_artigo.py já chama)
 Faz, em português e espanhol (pelo <html lang>):
-- menu (nav.site-nav) igual em todas as páginas com menu, com busca (Pagefind) e aria-current no blog;
-- <head> padrão: RSS, CSS do hub e do menu unificado, busca, ?v=<hash> nos CSS locais;
-- em cada artigo: tema (kicker) como link, marcação do Pagefind;
+- menu (nav.site-nav) igual em todas as páginas com menu, com aria-current no blog;
+- <head> padrão: RSS, CSS do hub e do menu unificado, ?v=<hash> nos CSS locais;
+- em cada artigo: tema (kicker) como link;
 - no blog: chips de tema, "Comece por aqui" e data-tema nos cards; na home: bloco "Do blog" com os 3 mais recentes."""
 import hashlib, html, json, re, sys
 from pathlib import Path
@@ -34,8 +34,7 @@ def nav(lang, atual):
     m = CFG["menu"][lang]
     links = "".join(f'<a href="{u}"' + (' aria-current="page"' if u == "/blog/" and atual == "blog/index.html" else "") + f">{n}</a>"
                     for n, u in m["itens"])
-    busca = f'<div class="nav-busca"><pagefind-modal-trigger placeholder="{h(m["busca"])}" hide-shortcut></pagefind-modal-trigger></div>'
-    return (f'<nav class="site-nav" aria-label="{m["aria"]}">{links}{busca}'
+    return (f'<nav class="site-nav" aria-label="{m["aria"]}">{links}'
             f'<a class="nav-reserve" href="{m["cta"][1]}">{m["cta"][0]}</a></nav>')
 
 
@@ -45,8 +44,6 @@ HEAD_TODAS = [  # (prova de que já existe, linha) — páginas com og:title
 HEAD_MENU = [   # páginas com menu
     ("navegacao-unificada.css", '<link rel="stylesheet" href="/navegacao-unificada.css">'),
     ("/hub.css", '<link rel="stylesheet" href="/hub.css">'),
-    ("pagefind-component-ui.css", '<link href="/pagefind/pagefind-component-ui.css" rel="stylesheet">'),
-    ("pagefind-component-ui.js", '<script src="/pagefind/pagefind-component-ui.js" type="module"></script>'),
 ]
 
 
@@ -73,8 +70,6 @@ def pagina(p):
     s, rel = ler(p), str(p.relative_to(RAIZ))
     if 'class="site-nav"' in s and rel not in CFG["sem_menu"]:
         s = re.sub(r'<nav class="site-nav".*?</nav>', lambda _: nav(idioma(s), rel), s, count=1, flags=re.S)
-        if "<pagefind-modal>" not in s:
-            s = s.replace("<main", "<pagefind-modal></pagefind-modal>\n  <main", 1)
         for prova, linha in HEAD_MENU:
             if prova not in s:
                 s = re.sub(r'(<link rel="stylesheet" href="[^"]*campeche\.css[^"]*">)', lambda m: m.group(1) + "\n  " + linha, s, count=1) \
@@ -83,7 +78,16 @@ def pagina(p):
         for prova, linha in HEAD_TODAS:
             if prova not in s:
                 s = s.replace("</head>", f"  {linha}\n</head>", 1)
-    gravar(p, versionar_css(p, s))
+    gravar(p, versionar_css(p, limpar_busca(s)))
+
+
+def limpar_busca(s):
+    """Remove restos da busca (Pagefind), que saiu do site: gatilho, modal, CSS/JS e marcação."""
+    s = re.sub(r'<div class="nav-busca">.*?</div>', "", s, flags=re.S)
+    s = re.sub(r'[ \t]*<pagefind-modal></pagefind-modal>\n?', "", s)
+    s = re.sub(r'\n?[ \t]*<(?:link|script)[^>]*pagefind-component-ui[^>]*>(?:</script>)?', "", s)
+    s = re.sub(r'<meta data-pagefind-meta="[^"]*" content="[^"]*">', "", s)
+    return re.sub(r' data-pagefind-(?:body|ignore|filter="[^"]*")', "", s)
 
 
 # ---------- artigos ----------
@@ -94,16 +98,8 @@ def artigo(p):
     nome = html.unescape(re.sub(r"<[^>]+>", "", m.group(1))).strip() if m else ""
     if nome not in TEMAS[lang]:
         sys.exit(f"ERRO {slug}: o kicker ({nome!r}) deve ser um tema de scripts/site.json em {lang}: {' | '.join(TEMAS[lang])}")
-    tema = f'<p class="article-kicker"><a class="article-tema" href="/blog/?tema={TEMAS[lang][nome]}" data-pagefind-filter="Tema">{h(nome)}</a></p>'
+    tema = f'<p class="article-kicker"><a class="article-tema" href="/blog/?tema={TEMAS[lang][nome]}">{h(nome)}</a></p>'
     s = re.sub(r'<p class="article-kicker">.*?</p>', lambda _: tema, s, count=1, flags=re.S)
-    s = s.replace('<main id="conteudo">', '<main id="conteudo" data-pagefind-body>', 1)
-    for velho in ('<nav class="article-breadcrumb"', '<nav class="article-toc"', '<div class="article-cta"',
-                  '<section class="article-related"', '<aside class="article-aside"'):
-        s = s.replace(velho, velho + " data-pagefind-ignore", 1) if velho in s and (velho + " data-pagefind-ignore") not in s else s
-    capa = re.search(r'class="article-cover"><img src="(?:\.\./\.\./|/)([^"]+)"', s)
-    meta = f'<meta data-pagefind-meta="image[content]" content="/{capa.group(1)}">' if capa else ""
-    if meta and meta not in s:
-        s = s.replace('data-pagefind-body>', 'data-pagefind-body>' + meta, 1)
     gravar(p, s)
     return slug, lang, TEMAS[lang][nome]
 
