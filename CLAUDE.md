@@ -25,6 +25,9 @@ O mesmo script roda no GitHub Actions e **bloqueia o deploy** se falhar.
 | `guia-floripa-argentinos/` | Guia público em espanhol (isca para argentinos) |
 | `guia/` | **Guia do Hóspede protegido por senha (PHP).** Contém Wi‑Fi e instruções internas. Não copiar conteúdo dele para páginas públicas; não mexer em `session.php` (hash da senha) sem pedido explícito. Bloqueado no `robots.txt` |
 | `guia-do-hospede.html`, `guest-guide.html`, `guia-del-huesped.html` | Redirecionamentos para `/guia/` |
+| `hub.css`, `blog/blog.js` | Estilos e filtro do hub de conteúdo (chips de tema, "Comece por aqui", bloco "Do blog" da home, busca). `campeche.css` é minificado: o que for novo do blog vai em `hub.css` |
+| `scripts/site.json`, `scripts/sincronizar.py` | Fonte única: marca, **menu pt/es**, **temas pt/es** e "Comece por aqui". O `sincronizar.py` gera o menu de todas as páginas, o `<head>` padrão (RSS, CSS, busca, `?v=` dos CSS), o tema/busca de cada artigo, os chips e cards do blog e o bloco "Do blog" da home. **Não edite à mão** esses trechos |
+| `pagefind/` | Índice de busca gerado no deploy (não versionado); gatilho (lupa) no menu, resultados em pt e es conforme o `<html lang>` |
 | `campeche.css` / `campeche.js` | CSS e JS únicos do site (minificados, editar com cuidado) |
 
 ## Dados fixos (não inventar outros)
@@ -60,12 +63,13 @@ Conteúdo: usar a skill `criar-artigo-blog` (marca "Campeche Lofts"). Publicaç�
 
 1. **Copiar um artigo existente do mesmo idioma** como base (`blog/pago-pix-tarjetas-argentinos/` para es, `blog/baleias-franca-litoral-santa-catarina/` para pt). Nunca escrever `<head>`/header/footer do zero — já quebrou o layout uma vez.
 2. Slug curto, sem acento, em minúsculas com hífens (evitar slugs gigantes). Pasta `blog/<slug>/index.html`.
+2b. **Tema:** o `<p class="article-kicker">` é o nome EXATO de um tema de `scripts/site.json` no idioma do artigo (pt: Planejamento e logística · Passeios e natureza · Temporada e clima · Estadias e economia; es: Planificación y logística · Paseos y naturaleza · Temporada y clima · Estadías y ahorro). Repita-o no último item da migalha. Não crie tema novo sem editar o `site.json`; o `sincronizar.py` recusa. Ele transforma o kicker em link, marca o artigo para a busca e cuida dos chips do blog e do bloco da home.
 3. Atualizar no `<head>`: `title` (≤ 60 caracteres, termina em `| Campeche Lofts`), `description` (≤ 160), `canonical` e `og:url` = `https://www.campechelofts.floripa.br/blog/<slug>/`, `og:title`, `og:description`, JSON-LD `BlogPosting` (headline, description, image, datePublished, dateModified, inLanguage), `BreadcrumbList` e `FAQPage` (mesmas perguntas do FAQ visível).
 4. Corpo: breadcrumb, kicker, `h1`, capa, sumário (`article-toc`) com âncoras para cada `h2`, CTA de WhatsApp (`article-cta`, link com o texto único acima, sem frase própria do artigo), FAQ (`<details>`), fontes consultadas com data, "Última revisão", "Leia também" com 2–3 artigos, aside com checklist. HTML de verdade: listas em `<ul><li>`, negrito em `<strong>` — nada de `- ` ou `**` de markdown.
 5. **Capa própria e exclusiva:** `images/blog/<slug>.webp`, 1600×1067 (3:2), < 200 KB. Converter com Pillow: `python3 -c "from PIL import Image; Image.open('in.png').convert('RGB').save('out.webp', quality=80, method=6)"` (o `cwebp` desta máquina está quebrado). Nunca reaproveitar a capa de outro artigo.
    Capa de banco gratuito (Unsplash/Pexels): crédito ao fotógrafo na seção de fontes ("Foto de capa: Nome / Unsplash", com link).
 6. **Não editar `blog/index.html`, `blog/feed.xml` nem `sitemap.xml` à mão.** Quem registra o artigo nos três é `python3 scripts/publicar_artigo.py <slug>` (card no topo, item no feed, sitemap, datas = dia da publicação).
-7. **Nunca publicar direto na `main`.** Commitar só a pasta do artigo + a capa num branch `artigo/<slug>` e dar push do branch. Para validar antes: rodar `publicar_artigo.py <slug>` + `check_site.py` e depois `git checkout -- blog/index.html blog/feed.xml sitemap.xml`.
+7. **Nunca publicar direto na `main`.** Commitar só a pasta do artigo + a capa num branch `artigo/<slug>` e dar push do branch. Para validar antes: rodar `publicar_artigo.py <slug>` + `check_site.py` e depois `git checkout -- .` (o `sincronizar.py` também mexe na home, no menu e nos CSS; só desfaz arquivos já versionados, a pasta nova do artigo e a capa ficam).
 
 ### Aprovação por e-mail
 
@@ -95,7 +99,7 @@ python3 scripts/comprovante.py --nome "Fulana de Tal" --doc 000.000.000-00 --lof
 
 - Toda página pública: favicons, GA4, `canonical` absoluto no domínio novo, `og:*`, `twitter:card`, `meta description`, `viewport`.
 - Imagens: WebP para fotos novas; sempre `width`/`height`, `alt` descritivo no idioma da página, `loading="lazy"` fora da primeira dobra. Fotos > 500 KB geram aviso no verificador — redimensionar para no máx. 1920 px.
-- Menu (mesma ordem em todas as páginas, rótulos traduzidos): Planeje sua viagem · Lofts · Galeria · Blog · Guia do Hóspede · FAQ · Localização · Contato. Mudou o menu? Mudar em **todas** as páginas (`git grep 'class="site-nav"'`).
+- Menu (mesma ordem em todas as páginas, rótulos traduzidos): Planeje sua viagem · Lofts · Galeria · Blog · Guia do Hóspede · FAQ · Localização · busca · Contato. **Gerado por `scripts/sincronizar.py` a partir de `scripts/site.json`** (menu pt/es): mudou o menu? Edite o `site.json` e rode `python3 scripts/sincronizar.py`; o `check_site.py` reprova menu fora do padrão. Ficam sem o menu padrão, de propósito: `404.html`, `planejador.html` e `guia-floripa-argentinos/` (lista `sem_menu`).
 - Links internos relativos (`../../`) como nas páginas existentes.
 - Ao mudar uma página, atualizar o `<lastmod>` dela no `sitemap.xml`.
 - `.htaccess`: redirecionamentos 301 para o domínio canônico, headers de segurança, cache e 404. Testar com `curl -sI` depois do deploy.

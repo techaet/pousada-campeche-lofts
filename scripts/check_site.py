@@ -14,6 +14,8 @@ IMG_LIMITE_KB = 500
 WA_TEXTOS = {"Olá! Vim pelo site do Campeche Lofts e gostaria de mais informações.",
              "¡Hola! Vine desde el sitio de Campeche Lofts y quisiera más información."}
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import sincronizar as sync  # fonte do menu, dos temas e do ?v= dos CSS
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 erros, avisos = [], []
 ler = lambda f: open(f, encoding="utf-8", errors="ignore").read()
@@ -31,6 +33,8 @@ def existe(origem, ref):
     p = urllib.parse.unquote(ref)
     p = p.lstrip("/") if p.startswith("/") else os.path.join(os.path.dirname(origem), p)
     p = os.path.normpath(p)
+    if p.startswith("pagefind"):  # índice de busca: gerado no deploy, não existe no repositório
+        return True
     if os.path.isdir(p):
         return any(os.path.exists(os.path.join(p, i)) for i in ("index.html", "index.php"))
     return os.path.exists(p)
@@ -63,6 +67,14 @@ for f in htmls:
     if GA4 not in s:
         erros.append(f"{f}: sem Google Analytics ({GA4})")
 
+# Hub de conteúdo: menu igual em todas as páginas com menu e CSS versionado (rode scripts/sincronizar.py se falhar)
+for p in sync.paginas():
+    f, s = str(p.relative_to(sync.RAIZ)), ler(str(p))
+    if 'class="site-nav"' in s and f not in sync.CFG["sem_menu"] and sync.nav(sync.idioma(s), f) not in s:
+        erros.append(f"{f}: menu fora do padrão — rode python3 scripts/sincronizar.py")
+    if sync.versionar_css(p, s) != s:
+        erros.append(f"{f}: ?v= dos CSS desatualizado — rode python3 scripts/sincronizar.py")
+
 # Blog: cada artigo precisa estar no padrão e nas 3 listagens
 sitemap, feed, indice = ler("sitemap.xml"), ler("blog/feed.xml"), ler("blog/index.html")
 capas = {}
@@ -74,7 +86,9 @@ for f in sorted(x for x in htmls if re.fullmatch(r"blog/[^/]+/index\.html", x)):
             erros.append(f"{f}: falta em {nome}")
     for trecho, o_que in (('class="site-header"', "cabeçalho padrão"), ('class="site-footer"', "rodapé padrão"),
                           ("campeche.css", "campeche.css"), ("campeche.js", "campeche.js"),
-                          ('"@type":"BlogPosting"', "JSON-LD BlogPosting"), ('class="article-cover"', "imagem de capa")):
+                          ('"@type":"BlogPosting"', "JSON-LD BlogPosting"), ('class="article-cover"', "imagem de capa"),
+                          ('class="article-tema"', "tema no kicker (rode scripts/sincronizar.py; o kicker deve ser um tema de scripts/site.json)"),
+                          ("data-pagefind-body", "marcação da busca (rode scripts/sincronizar.py)")):
         if trecho not in s:
             erros.append(f"{f}: sem {o_que} (copie a estrutura de um artigo existente)")
     if re.search(r"<p>\s*[-*] ", s) or "**" in s:

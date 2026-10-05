@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Registra um artigo já escrito em blog/index.html, blog/feed.xml e sitemap.xml.
 Uso: python3 scripts/publicar_artigo.py <slug>
-Lê título, descrição, kicker, capa e idioma do próprio artigo e usa a data de hoje
-como data de publicação. Rodar de novo para o mesmo slug não duplica nada."""
+Lê título, descrição, tema (kicker), capa e idioma do próprio artigo e usa a data de hoje
+como data de publicação. No fim roda sincronizar.py (tema, chips, home, menu). Rodar de novo para o mesmo slug não duplica nada."""
 import html, re, sys
 from email.utils import format_datetime
 from datetime import date, datetime, timedelta, timezone
@@ -11,6 +11,7 @@ from xml.sax.saxutils import escape
 
 sys.path.insert(0, str(Path(__file__).parent))
 from comprovante import MESES
+import sincronizar
 
 RAIZ = Path(__file__).resolve().parent.parent
 BASE = "https://www.campechelofts.floripa.br"
@@ -34,7 +35,7 @@ def main(slug):
     idioma = "es" if es else "pt"
     titulo = meta(s, r'property="og:title" content="([^"]+)"')
     descricao = meta(s, r'property="og:description" content="([^"]+)"')
-    kicker = meta(s, r'class="article-kicker">(.*?)</p>')
+    kicker = meta(s, r'class="article-kicker">(.*?)</p>')  # com ou sem o <a class="article-tema">: meta() tira as tags
     capa = meta(s, r'class="article-cover"><img src="(?:\.\./\.\./|/|' + re.escape(BASE) + r'/)([^"]+)"')
     alt = meta(s, r'class="article-cover"><img [^>]*alt="([^"]*)"')
     url = f"{BASE}/blog/{slug}/"
@@ -72,6 +73,7 @@ def main(slug):
         s = s.replace("</urlset>", f"  <url>\n    <loc>{url}</loc>\n    <lastmod>{hoje}</lastmod>\n"
                                    f"    <changefreq>yearly</changefreq>\n    <priority>0.5</priority>\n  </url>\n</urlset>")
     sitemap.write_text(s, encoding="utf-8")
+    sincronizar.main()
     print(f"Registrado: {url}")
 
 
