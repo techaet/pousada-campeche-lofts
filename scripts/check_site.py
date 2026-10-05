@@ -33,8 +33,6 @@ def existe(origem, ref):
     p = urllib.parse.unquote(ref)
     p = p.lstrip("/") if p.startswith("/") else os.path.join(os.path.dirname(origem), p)
     p = os.path.normpath(p)
-    if p.startswith("pagefind"):  # índice de busca: gerado no deploy, não existe no repositório
-        return True
     if os.path.isdir(p):
         return any(os.path.exists(os.path.join(p, i)) for i in ("index.html", "index.php"))
     return os.path.exists(p)
@@ -87,8 +85,7 @@ for f in sorted(x for x in htmls if re.fullmatch(r"blog/[^/]+/index\.html", x)):
     for trecho, o_que in (('class="site-header"', "cabeçalho padrão"), ('class="site-footer"', "rodapé padrão"),
                           ("campeche.css", "campeche.css"), ("campeche.js", "campeche.js"),
                           ('"@type":"BlogPosting"', "JSON-LD BlogPosting"), ('class="article-cover"', "imagem de capa"),
-                          ('class="article-tema"', "tema no kicker (rode scripts/sincronizar.py; o kicker deve ser um tema de scripts/site.json)"),
-                          ("data-pagefind-body", "marcação da busca (rode scripts/sincronizar.py)")):
+                          ('class="article-tema"', "tema no kicker (rode scripts/sincronizar.py; o kicker deve ser um tema de scripts/site.json)")):
         if trecho not in s:
             erros.append(f"{f}: sem {o_que} (copie a estrutura de um artigo existente)")
     if re.search(r"<p>\s*[-*] ", s) or "**" in s:
