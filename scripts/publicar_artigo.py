@@ -54,7 +54,9 @@ def main(slug):
                 f'            <div class="article-card-body"><span class="article-card-kicker">{"🇦🇷 " if es else ""}{h(kicker)}</span><h2>{h(titulo)}</h2>'
                 f'<p>{h(descricao)}</p><div class="article-card-footer"><span>{data_txt}</span><span>{"Leer artículo" if es else "Ler artigo"}</span></div></div>\n'
                 f'          </a>\n')
-        s = s.replace('<div class="blog-grid">\n', '<div class="blog-grid">\n' + card, 1)
+        grade = '<div class="blog-grid" id="lista-artigos">\n'
+        assert grade in s, "blog/index.html sem a grade #lista-artigos"
+        s = s.replace(grade, grade + card, 1)
         indice.write_text(s, encoding="utf-8")
 
     feed = RAIZ / "blog/feed.xml"
