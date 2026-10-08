@@ -19,12 +19,13 @@
 .blog-lista-titulo { margin: 3.2rem 0 1.1rem; font-family: "Playfair Display", Georgia, serif; font-size: 1.7rem; font-weight: 600; letter-spacing: -.03em; }
 .blog-vazio { margin: 0 0 1.4rem; color: var(--ink-soft); }
 .article-card[hidden] { display: none; }
+/* capa dos cards sempre 3:2 (igual às capas 1600×1067), para a grade ficar alinhada */
+.article-card-media { aspect-ratio: 3 / 2; min-height: 0; }
 
 /* ---- "Comece por aqui" e blocos de 3 cards ---- */
 .blog-destaques { margin: 0 0 .5rem; }
 .blog-destaques .eyebrow { margin-bottom: 1.1rem; }
 .blog-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 0; }
-.blog-grid--3 .article-card-media { min-height: 190px; }
 .blog-grid--3 .article-card-body h2 { font-size: 1.2rem; }
 /* tablet: 2 colunas com 3 cards deixaria 2+1; mostra só os 2 primeiros. Celular: 1 coluna com os 3 */
 @media (min-width: 721px) and (max-width: 980px) {
