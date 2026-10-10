@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $v = trim((string) ($_POST[$k] ?? ''));
         if ($v !== '') $novo[$k] = $v;
     }
-    foreach (['groq_model', 'apps_script_url', 'n8n_cotacao_url'] as $k) $novo[$k] = trim((string) ($_POST[$k] ?? ''));
+    foreach (['groq_model', 'apps_script_url', 'n8n_texto_url'] as $k) $novo[$k] = trim((string) ($_POST[$k] ?? ''));
     if ($novo['apps_script_url'] !== '' && !preg_match('#^https://script\.google\.com/#', $novo['apps_script_url'])) {
         $erro = 'O endereço do Apps Script deve começar com https://script.google.com/';
     } else {
@@ -45,7 +45,7 @@ if ($erro) echo '<div class="erro">' . h($erro) . '</div>';
     <label style="text-transform:none;font-size:15px;margin-top:16px"><input type="checkbox" name="ativar_bot" value="1" style="width:auto"> Ativar/atualizar o bot ao salvar (necessário na 1ª vez e se trocar o token)</label>
     <?php if ($info): ?><p class="dica">Situação do webhook: <?= !empty($info['url']) ? '✔ ativo' : '✖ não ativado' ?><?= !empty($info['last_error_message']) ? ' · último erro: ' . h($info['last_error_message']) : '' ?></p><?php endif; ?>
   </div>
-  <div class="card"><strong>Leitura da conversa (Groq)</strong>
+  <div class="card"><strong>Leitura da conversa do comprovante (Groq)</strong>
     <label>Chave da API do Groq</label><input type="password" name="groq_key" placeholder="<?= h($salvo('groq_key')) ?>">
     <label>Modelo</label><input name="groq_model" value="<?= h(cfg('groq_model', '')) ?>" placeholder="vazio = escolho sozinho o melhor liberado">
   </div>
@@ -54,7 +54,7 @@ if ($erro) echo '<div class="erro">' . h($erro) . '</div>';
     <label>Segredo (o mesmo que está no script)</label><input type="password" name="apps_script_segredo" placeholder="<?= h($salvo('apps_script_segredo')) ?>">
   </div>
   <div class="card"><strong>Cotação pelo robô (n8n)</strong>
-    <label>Endereço do webhook da cotação</label><input name="n8n_cotacao_url" value="<?= h(cfg('n8n_cotacao_url', '')) ?>" placeholder="https://…app.n8n.cloud/webhook/painel-cotacao">
+    <label>Endereço do webhook da cotação (já vem preenchido; só mude se o robô mudar)</label><input name="n8n_texto_url" value="<?= h(cfg('n8n_texto_url') ?: 'https://tech-aetsolidez.app.n8n.cloud/webhook/painel-cotacao-texto') ?>">
     <label>Segredo (o mesmo cadastrado no n8n)</label><input type="password" name="n8n_cotacao_segredo" placeholder="<?= h($salvo('n8n_cotacao_segredo')) ?>">
   </div>
   <button>Salvar</button>
