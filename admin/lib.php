@@ -21,6 +21,19 @@ function valor_parse(string $s): ?float {
     return is_numeric($s) ? round((float) $s, 2) : null;
 }
 
+/** Envia JSON ao Apps Script (com o segredo) e devolve a resposta decodificada, ou null se não configurado/sem resposta. */
+function apps_script(array $payload): ?array {
+    $url = (string) cfg('apps_script_url', '');
+    if ($url === '') return null;
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [CURLOPT_POST => true, CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => true, CURLOPT_TIMEOUT => 60,
+        CURLOPT_HTTPHEADER => ['Content-Type: text/plain'],  // text/plain evita o preflight do Apps Script
+        CURLOPT_POSTFIELDS => json_encode(['segredo' => cfg('apps_script_segredo', '')] + $payload)]);
+    $r = json_decode((string) curl_exec($ch), true);
+    curl_close($ch);
+    return is_array($r) ? $r : ['ok' => false, 'erro' => 'sem resposta do Apps Script'];
+}
+
 function h($s): string { return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8'); }
 
 // ---------- armazenamento em JSON com trava ----------

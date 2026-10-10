@@ -156,13 +156,8 @@ function comprovante_emitir(array $d): array {
         $t = TEXTOS[$d['idioma']];
         $corpo = strtr($t['email'], ['{nome}' => explode(' ', $d['nome'])[0], '{loft}' => sprintf('%02d', $d['loft']),
             '{checkin}' => $d['ci']->format('d/m/Y'), '{checkout}' => $d['co']->format('d/m/Y')]);
-        $ch = curl_init($url);
-        curl_setopt_array($ch, [CURLOPT_POST => true, CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => true, CURLOPT_TIMEOUT => 60,
-            CURLOPT_HTTPHEADER => ['Content-Type: text/plain'],  // text/plain evita o preflight do Apps Script
-            CURLOPT_POSTFIELDS => json_encode(['segredo' => cfg('apps_script_segredo', ''), 'arquivo' => $arquivo, 'pdf' => base64_encode($pdf),
-                'email' => $d['email'], 'assunto' => str_replace('{numero}', $numero, $t['assunto']), 'corpo' => $corpo])]);
-        $resp = json_decode((string) curl_exec($ch), true);
-        curl_close($ch);
+        $resp = apps_script(['arquivo' => $arquivo, 'pdf' => base64_encode($pdf), 'email' => $d['email'],
+            'assunto' => str_replace('{numero}', $numero, $t['assunto']), 'corpo' => $corpo]);
         if (!empty($resp['ok'])) { $r['enviado'] = $d['email'] !== '' ? !empty($resp['enviado']) : null; $r['drive'] = $resp['drive'] ?? null; }
         else $r['avisos'][] = 'O envio por e-mail/Drive falhou: ' . ($resp['erro'] ?? 'sem resposta do Apps Script') . '. O PDF foi gerado e pode ser baixado.';
     } else {

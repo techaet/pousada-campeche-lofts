@@ -162,6 +162,7 @@ if ($cmd === '/start' || $cmd === '/ajuda') {
         return $d;
     });
     estado_gravar($chat, null);
+    planilha_enviar($pagas);
     $soma = array_sum(array_map(fn($t) => (float) $t['valor'], $pagas));
     $lista = implode(', ', array_map(fn($t) => '#' . $t['id'], $pagas));
     $aviso = "💰 Pagamento de " . brl($soma) . " registrado (tarefas $lista).";

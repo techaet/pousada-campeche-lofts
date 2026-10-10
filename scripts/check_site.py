@@ -49,7 +49,7 @@ for f in htmls:
             if urllib.parse.unquote(q[len("?text="):] if q.startswith("?text=") else "?") not in WA_TEXTOS:
                 erros.append(f"{f}: link de WhatsApp fora do texto padrão -> {urllib.parse.unquote(q) or '(sem texto)'}")
     for ref in re.findall(r'(?:src|href)="([^"#?]+)', s):
-        if "${" in ref or "{{" in ref or "'" in ref or "$" in ref:  # modelos JS/PHP montam o link em tempo de execução
+        if "${" in ref or "{{" in ref or "'" in ref or "$" in ref or ref.startswith("<"):  # modelos JS/PHP montam o link em tempo de execução
             continue
         if ref.startswith(BASE):
             ref = ref[len(BASE):] or "/"

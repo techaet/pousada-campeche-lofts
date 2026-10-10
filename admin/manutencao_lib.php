@@ -102,7 +102,20 @@ function tarefa_executar(int $id): ?array {
     [$qtd, $soma] = total_em_aberto();
     avisar_gerentes("✅ Tarefa #{$t['id']} executada — " . brl((float) $t['valor']) . "\n" . resumo($t)
         . "\n\nEm aberto para pagamento: " . brl($soma) . " ($qtd item" . ($qtd === 1 ? '' : 's') . "). Use /pagar.");
+    planilha_enviar([$t]);
     return $t;
+}
+
+/** Grava/atualiza as tarefas na planilha de custos (Drive). Falha não derruba o fluxo: o botão do painel reenvia tudo. */
+function planilha_enviar(array $tarefas): bool {
+    if (!$tarefas) return true;
+    $quando = fn($iso) => $iso ? date('d/m/Y H:i', strtotime($iso)) : '';
+    $r = apps_script(['acao' => 'manutencao', 'itens' => array_map(fn($t) => [
+        'id' => $t['id'], 'executada_em' => $quando($t['executada_em'] ?? ''), 'prioridade' => trim(preg_replace('/^\S+\s/u', '', PRIORIDADES[$t['prioridade']])),
+        'descricao' => trim((string) $t['texto']) !== '' ? trim((string) $t['texto']) : '(sem texto)', 'valor' => (float) $t['valor'],
+        'status' => $t['status'] === 'paga' ? 'Paga' : 'A pagar', 'paga_em' => $quando($t['paga_em'] ?? ''), 'anexos' => count($t['midias'])], array_values($tarefas))]);
+    if (!empty($r['ok']) && !empty($r['planilha'])) { cfg_salvar(['planilha_url' => $r['planilha']]); return true; }
+    return false;
 }
 
 function resumo(array $t): string {
