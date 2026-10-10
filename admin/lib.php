@@ -34,7 +34,7 @@ function apps_script(array $payload): ?array {
     return is_array($r) ? $r : ['ok' => false, 'erro' => 'sem resposta do Apps Script'];
 }
 
-const GROQ_PREFERIDOS = ['openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'llama-3.3-70b-versatile', 'llama-3.1-8b-instant', 'qwen/qwen3.8-27b'];
+const GROQ_PREFERIDOS = ['llama-3.3-70b-versatile', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'llama-3.1-8b-instant', 'qwen/qwen3.8-27b'];
 
 function groq_http(string $url, ?array $corpo = null): array {
     $ch = curl_init($url);
@@ -47,7 +47,8 @@ function groq_http(string $url, ?array $corpo = null): array {
 }
 
 /** Pergunta ao Groq e devolve um objeto JSON. $sistema = instruções; $usuario = texto do lead.
- *  Se o modelo configurado não existir para a chave, escolhe o melhor da lista que a chave enxerga e guarda. */
+ *  Tenta o modelo configurado; se a chave/organização não puder usá-lo (não existe, sem acesso, bloqueado), experimenta os outros
+ *  preferidos, um a um, e guarda o primeiro que funcionar. */
 function groq_json(string $sistema, string $usuario): array {
     if ((string) cfg('groq_key', '') === '') throw new RuntimeException('Chave do Groq não configurada (Configurações).');
     $url = (string) cfg('groq_api', 'https://api.groq.com/openai/v1/chat/completions');
@@ -56,16 +57,21 @@ function groq_json(string $sistema, string $usuario): array {
             'messages' => [['role' => 'system', 'content' => $sistema], ['role' => 'user', 'content' => mb_substr($usuario, 0, 12000)]]]
             + (str_starts_with($modelo, 'openai/gpt-oss') ? ['reasoning_effort' => 'low'] : []));
     };
-    $modelo = (string) (cfg('groq_model') ?: GROQ_PREFERIDOS[0]);
-    $r = $pedir($modelo);
-    $msg = (string) ($r['error']['message'] ?? '');
-    if ($msg !== '' && preg_match('/does not exist|do not have access|model_not_found|decommissioned/i', $msg)) {
+    $semAcesso = fn(array $r) => ($m = (string) ($r['error']['message'] ?? '')) !== ''
+        && preg_match('/does not exist|do not have access|model_not_found|decommissioned|blocked|organization level|not enabled/i', $m);
+
+    $configurado = (string) cfg('groq_model', '');
+    $r = $pedir($configurado ?: GROQ_PREFERIDOS[0]);
+    if ($semAcesso($r)) {
         $lista = array_column(groq_http(str_replace('/chat/completions', '/models', $url))['data'] ?? [], 'id');
-        $achado = null;
-        foreach (GROQ_PREFERIDOS as $m) if ($m !== $modelo && in_array($m, $lista, true)) { $achado = $m; break; }
-        if (!$achado) throw new RuntimeException('Sua chave do Groq não enxerga nenhum modelo de texto conhecido (' . implode(', ', array_slice($lista, 0, 8)) . '). Veja os modelos liberados no console do Groq.');
-        $r = $pedir($achado);
-        if (!empty($r['choices'])) cfg_salvar(['groq_model' => $achado]);
+        $testados = [$configurado ?: GROQ_PREFERIDOS[0]];
+        foreach (GROQ_PREFERIDOS as $m) {
+            if (in_array($m, $testados, true) || ($lista && !in_array($m, $lista, true))) continue;
+            $testados[] = $m;
+            $r = $pedir($m);
+            if (!$semAcesso($r)) { if (!empty($r['choices'])) cfg_salvar(['groq_model' => $m]); break; }
+        }
+        if ($semAcesso($r)) throw new RuntimeException('Nenhum modelo de texto do Groq está liberado para a sua organização (testei: ' . implode(', ', $testados) . '). Libere um em https://console.groq.com/settings/limits — por exemplo llama-3.3-70b-versatile.');
     }
     $j = json_decode((string) ($r['choices'][0]['message']['content'] ?? ''), true);
     if (!is_array($j)) throw new RuntimeException('O Groq não respondeu: ' . ($r['error']['message'] ?? 'sem resposta') . '. Preencha à mão.');
