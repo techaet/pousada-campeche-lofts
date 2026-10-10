@@ -52,3 +52,6 @@
 /* iPhone/Safari: campo de data ignora a largura da coluna e vaza do cartão; sem a aparência nativa ele obedece */
 .quote-fields input[type=date]{-webkit-appearance:none;appearance:none;display:block;box-sizing:border-box;width:100%;min-width:0;max-width:100%;text-align:left}
 .quote-fields input[type=date]::-webkit-date-and-time-value{text-align:left;min-height:1.2em}
+
+/* destaque em itálico legível sobre o painel verde (antes herdava o azul do fundo) */
+.contact-panel .section-heading em{color:#f2d5ac}
