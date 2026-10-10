@@ -35,8 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($j['ano_assumido'])) $aviso = 'O texto não dizia o ano das datas: escolhi o próximo ano possível. Confira.';
             $msg = 'Li o texto. Confira os campos abaixo (os vazios não estavam no texto) e clique em "Calcular cotação".';
         } catch (Throwable $e) { $erro = $e->getMessage(); }
-    } elseif ($acao === 'atualizar_tarifario') {
-        try { tarifario_carregar(true); $msg = 'Tarifário atualizado a partir da planilha.'; } catch (Throwable $e) { $erro = $e->getMessage(); }
     } elseif ($acao === 'calcular') {
         foreach ($campos as $c) $f[$c] = trim((string) ($_POST[$c] ?? ''));
         $idiomaConversa = in_array($_POST['conversa_idioma'] ?? '', ['pt', 'es', 'en'], true) ? $_POST['conversa_idioma'] : null;
@@ -48,13 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (!ctype_digit($x) || (int) $x > 17) throw new RuntimeException('Informe a idade de cada criança em números (ex.: 8, 14). Idade que não sei: pergunte ao lead.');
                 $idades[] = (int) $x;
             }
-            $t = tarifario_carregar();
-            if (!empty($t['aviso'])) $aviso = $t['aviso'];
-            $c = cotacao_calcular(tarifario_interpretar($t), $ci, $co, (int) $f['adultos'], $idades);
+            $c = cotacao_robo($ci, $co, (int) $f['adultos'], $idades);
             $fone = telefone_normalizar($f['whatsapp']);
             $idioma = in_array($f['idioma'], ['pt', 'es', 'en'], true) ? $f['idioma'] : (idioma_do_ddi($fone) ?? $idiomaConversa ?? 'pt');
             $res = ['c' => $c, 'fone' => $fone, 'idioma' => $idioma, 'origem' => in_array($f['idioma'], ['pt', 'es', 'en'], true) ? 'escolhido por você' : ($fone ? 'pelo DDI do número' : 'pelo idioma do texto'),
-                'texto' => cotacao_mensagem($idioma, $f['nome'], $c['noites'], $ci, $co, composicao_texto($idioma, (int) $f['adultos'], $idades), $c['total'])];
+                'texto' => cotacao_mensagem($idioma, $f['nome'], $c['noites'], $ci, $co, composicao_texto($idioma, (int) $f['adultos'], $idades, $c['lofts']), $c['total'])];
         } catch (Throwable $e) { $erro = $e->getMessage(); }
     }
 }
@@ -83,7 +79,7 @@ $sel = fn($v) => $f['idioma'] === $v ? ' selected' : '';
     <div><?= $i('whatsapp', 'WhatsApp do lead (com DDI)', 'inputmode="tel" placeholder="+54 9 11 2345-6789"') ?></div>
     <div><?= $i('checkin', 'Check-in', 'type="date" required') ?></div>
     <div><?= $i('checkout', 'Check-out', 'type="date" required') ?></div>
-    <div><?= $i('adultos', 'Adultos (18+)', 'type="number" min="1" max="3" required') ?></div>
+    <div><?= $i('adultos', 'Adultos (18+)', 'type="number" min="1" required') ?></div>
     <div><?= $i('criancas', 'Idades das crianças (ex.: 8, 14)', 'placeholder="vazio = sem crianças"') ?></div>
     <div><label>Idioma</label><select name="idioma"><option value="">Automático (pelo DDI)</option><option value="pt"<?= $sel('pt') ?>>Português</option><option value="es"<?= $sel('es') ?>>Español</option><option value="en"<?= $sel('en') ?>>English</option></select></div>
   </div>
@@ -92,8 +88,7 @@ $sel = fn($v) => $f['idioma'] === $v ? ' selected' : '';
 <?php if ($res): $c = $res['c']; ?>
 <div class="card">
   <strong>Total para o lead: <?= h(reais($c['total'])) ?></strong>
-  <p class="dica">Só você vê isto: <?= $c['noites'] ?> noite(s), tarifa "<?= h($c['coluna']) ?>"<?php foreach ($c['linhas'] as $l) echo ' · ' . h($l['noites'] . '× ' . reais($l['diaria']) . ' (' . $l['periodo'] . ')'); ?>
-    = <?= h(reais($c['diarias'])) ?><?= $c['acrescimo'] ? ' + acréscimo interno de ' . $c['acrescimo_pct'] . '% (soma das idades ' . $c['soma_idades'] . ') = ' . h(reais($c['acrescimo'])) : '' ?> + taxa de limpeza embutida <?= h(reais($c['limpeza'])) ?>.</p>
+  <p class="dica">Só você vê isto (valor calculado pelo robô): <?= $c['noites'] ?> noite(s)<?= $c['lofts'] > 1 ? ', ' . $c['lofts'] . ' lofts' : '' ?>, tarifa "<?= h($c['tarifa']) ?>"<?php foreach ($c['linhas'] as $l) echo ' · ' . h($l['noites'] . '× ' . reais($l['diaria']) . ' (' . $l['periodo'] . ')'); ?><?= $c['acrescimo'] ? ' · acréscimo interno ' . h(reais($c['acrescimo'])) : '' ?> · taxa de limpeza embutida <?= h(reais($c['limpeza'])) ?>.</p>
   <p class="dica">Idioma da mensagem: <strong><?= h(['pt' => 'Português', 'es' => 'Español', 'en' => 'English'][$res['idioma']]) ?></strong> (<?= h($res['origem']) ?>).</p>
   <label for="msg">Mensagem pronta (pode editar antes de enviar)</label>
   <textarea id="msg" style="min-height:360px"><?= h($res['texto']) ?></textarea>
@@ -112,7 +107,5 @@ $sel = fn($v) => $f['idioma'] === $v ? ' selected' : '';
 })();
 </script>
 <?php endif; ?>
-<form method="post" class="card"><?= csrf_campo() ?><input type="hidden" name="acao" value="atualizar_tarifario">
-  <span class="dica">O tarifário vem da planilha Campeche Automation (aba tarifario) e é guardado por 10 minutos.</span>
-  <button class="sec">Atualizar tarifário agora</button></form>
+
 <?php pagina_fim();

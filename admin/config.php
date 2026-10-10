@@ -8,11 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_checar();
     $novo = [];
     // segredos: campo vazio = manter o que já está salvo
-    foreach (['telegram_token', 'groq_key', 'apps_script_segredo'] as $k) {
+    foreach (['telegram_token', 'groq_key', 'apps_script_segredo', 'n8n_cotacao_segredo'] as $k) {
         $v = trim((string) ($_POST[$k] ?? ''));
         if ($v !== '') $novo[$k] = $v;
     }
-    foreach (['groq_model', 'apps_script_url'] as $k) $novo[$k] = trim((string) ($_POST[$k] ?? ''));
+    foreach (['groq_model', 'apps_script_url', 'n8n_cotacao_url'] as $k) $novo[$k] = trim((string) ($_POST[$k] ?? ''));
     if ($novo['apps_script_url'] !== '' && !preg_match('#^https://script\.google\.com/#', $novo['apps_script_url'])) {
         $erro = 'O endereço do Apps Script deve começar com https://script.google.com/';
     } else {
@@ -52,6 +52,10 @@ if ($erro) echo '<div class="erro">' . h($erro) . '</div>';
   <div class="card"><strong>Envio do comprovante (Google Apps Script)</strong>
     <label>Endereço da implantação (…/exec)</label><input name="apps_script_url" value="<?= h(cfg('apps_script_url', '')) ?>" placeholder="https://script.google.com/macros/s/…/exec">
     <label>Segredo (o mesmo que está no script)</label><input type="password" name="apps_script_segredo" placeholder="<?= h($salvo('apps_script_segredo')) ?>">
+  </div>
+  <div class="card"><strong>Cotação pelo robô (n8n)</strong>
+    <label>Endereço do webhook da cotação</label><input name="n8n_cotacao_url" value="<?= h(cfg('n8n_cotacao_url', '')) ?>" placeholder="https://…app.n8n.cloud/webhook/painel-cotacao">
+    <label>Segredo (o mesmo cadastrado no n8n)</label><input type="password" name="n8n_cotacao_segredo" placeholder="<?= h($salvo('n8n_cotacao_segredo')) ?>">
   </div>
   <button>Salvar</button>
 </form>

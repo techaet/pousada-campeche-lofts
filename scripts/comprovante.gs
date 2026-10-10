@@ -11,7 +11,6 @@
  */
 const SEGREDO = 'TROQUE-ESTE-TEXTO';
 const NOME_PASTA = 'Comprovantes de Reserva - Campeche Lofts';
-const ID_TARIFARIO = '169jgZZLCsf2lCq3PYF3VvLz59h8yWeRScUwlUKHHsdE'; // planilha Campeche Automation (abas tarifario e configuracao)
 const NOME_PLANILHA = 'Manutenção - Custos Campeche Lofts';
 const CABECALHO = ['Nº', 'Executada em', 'Prioridade', 'Descrição', 'Valor (R$)', 'Status', 'Pago em', 'Anexos'];
 
@@ -19,11 +18,6 @@ function doPost(e) {
   try {
     const d = JSON.parse(e.postData.contents);
     if (d.segredo !== SEGREDO) return resposta({ ok: false, erro: 'segredo inválido' });
-    if (d.acao === 'tarifario') {
-      const t = SpreadsheetApp.openById(ID_TARIFARIO);
-      return resposta({ ok: true, tarifario: t.getSheetByName('tarifario').getDataRange().getDisplayValues(),
-                       configuracao: t.getSheetByName('configuracao').getDataRange().getDisplayValues() });
-    }
     if (d.acao === 'manutencao') return resposta({ ok: true, planilha: registrarManutencao(d.itens) });
     const pdf = Utilities.newBlob(Utilities.base64Decode(d.pdf), 'application/pdf', d.arquivo);
     const arquivo = pastaComprovantes().createFile(pdf);

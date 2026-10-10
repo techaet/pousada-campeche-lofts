@@ -2,83 +2,46 @@
 declare(strict_types=1);
 require_once __DIR__ . '/lib.php';
 
-// Cotação para lead: lê o tarifário da planilha Campeche Automation (via Apps Script), calcula noite a noite
-// e monta a mensagem. Regras (aba "configuracao"): valores em centavos; período = início inclusivo, fim exclusivo;
-// taxa de limpeza única, embutida no total; criança 0–12 usa a tarifa de 2 adultos; 13–15 fica como criança;
-// 16+ vira adulto; soma das idades (13+) acima do limite aplica acréscimo interno, nunca mostrado ao lead.
-
-const COLUNAS_COMPOSICAO = ['1-0' => '1 adulto', '2-0' => '2 adultos', '3-0' => '3 adultos', '2-1' => '2 adultos + 1 criança', '2-2' => '2 adultos + 2 crianças'];
-
-// ---------- tarifário (cache de 10 min; se o Google falhar, usa a última cópia) ----------
-function tarifario_carregar(bool $forcar = false): array {
-    $c = json_ler('tarifario');
-    if (!$forcar && !empty($c['tarifario']) && time() - (int) ($c['buscado_em'] ?? 0) < 600) return $c;
-    $r = apps_script(['acao' => 'tarifario']);
-    if (!empty($r['ok']) && !empty($r['tarifario'])) {
-        $novo = ['buscado_em' => time(), 'tarifario' => $r['tarifario'], 'configuracao' => $r['configuracao'] ?? []];
-        json_atualizar('tarifario', fn() => $novo);
-        return $novo;
-    }
-    if (!empty($c['tarifario'])) return $c + ['aviso' => 'Não consegui ler a planilha agora; usei a cópia de ' . date('d/m H:i', (int) $c['buscado_em']) . '.'];
-    throw new RuntimeException('Não consegui ler o tarifário (' . ($r['erro'] ?? 'Apps Script não configurado') . '). Confira se a planilha Campeche Automation está compartilhada com lsf.loft@gmail.com e se o Apps Script foi atualizado.');
-}
+// Cotação para lead: o PREÇO vem do robô (workflow CNST-04 do n8n, por um webhook), nunca calculado aqui — assim painel e robô
+// sempre dão o mesmo valor, com as mesmas regras (bebês, vários lofts, descontos, taxa de limpeza). Este arquivo só chama o robô,
+// descobre telefone/idioma e monta a mensagem no modelo do Leonardo.
 
 function data_flex(string $s): ?DateTimeImmutable {
     foreach (['!Y-m-d', '!d/m/Y'] as $f) { $d = DateTimeImmutable::createFromFormat($f, trim($s)); if ($d) return $d; }
     return null;
 }
 
-/** Transforma as abas em ['periodos' => [...], 'cfg' => [chave => valor]]. */
-function tarifario_interpretar(array $dados): array {
-    $linhas = $dados['tarifario'];
-    $cab = array_map('trim', array_shift($linhas));
-    $col = array_flip($cab);
-    $periodos = [];
-    foreach ($linhas as $l) {
-        $ini = data_flex((string) ($l[$col['date_start']] ?? '')); $fim = data_flex((string) ($l[$col['date_end']] ?? ''));
-        if (!$ini || !$fim) continue;
-        $precos = [];
-        foreach (COLUNAS_COMPOSICAO as $nome) if (isset($col[$nome])) $precos[$nome] = (int) preg_replace('/\D/', '', (string) ($l[$col[$nome]] ?? '0'));
-        $periodos[] = ['nome' => (string) $l[0], 'ini' => $ini, 'fim' => $fim, 'precos' => $precos];
+/** Pede a cotação ao robô. Lança RuntimeException (mensagem para o Leonardo) se não der. */
+function cotacao_robo(DateTimeImmutable $ci, DateTimeImmutable $co, int $adultos, array $idades): array {
+    $url = (string) cfg('n8n_cotacao_url', '');
+    if ($url === '') throw new RuntimeException('Ligação com o robô não configurada (Configurações → Cotação pelo robô).');
+    if ($co <= $ci) throw new RuntimeException('O check-out precisa ser depois do check-in.');
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [CURLOPT_POST => true, CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 45,
+        CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'X-Painel-Secret: ' . cfg('n8n_cotacao_segredo', '')],
+        CURLOPT_POSTFIELDS => json_encode(['quote_input' => ['check_in' => $ci->format('Y-m-d'), 'check_out' => $co->format('Y-m-d'),
+            'adults' => $adultos, 'children' => count($idades), 'child_ages' => $idades, 'loft_count' => null]])]);
+    $corpo = curl_exec($ch);
+    $http = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    $q = json_decode((string) $corpo, true);
+    if ($http === 401 || $http === 403) throw new RuntimeException('O robô recusou o segredo. Confira o segredo em Configurações.');
+    if ($http !== 200 || !is_array($q)) throw new RuntimeException("O robô não respondeu à cotação (HTTP $http). Tente de novo ou cote pelo robô.");
+    if (($q['status'] ?? '') !== 'computed') {
+        $motivo = (string) ($q['internal_reason'] ?? $q['status'] ?? 'sem motivo');
+        throw new RuntimeException(match (true) {
+            str_contains($motivo, 'CHILD_AGES') => 'Faltam as idades das crianças.',
+            default => "O robô não conseguiu cotar: $motivo.",
+        });
     }
-    $cfg = [];
-    foreach ($dados['configuracao'] ?? [] as $l) if (isset($l[0], $l[1])) $cfg[trim((string) $l[0])] = trim((string) $l[1]);
-    return ['periodos' => $periodos, 'cfg' => $cfg];
-}
-
-// ---------- cálculo ----------
-/** @param int[] $idades idades das crianças. Lança RuntimeException (mensagem para o Leonardo) se não der para cotar. */
-function cotacao_calcular(array $t, DateTimeImmutable $ci, DateTimeImmutable $co, int $adultos, array $idades): array {
-    $noites = (int) $ci->diff($co)->format('%r%a');
-    if ($noites <= 0) throw new RuntimeException('O check-out precisa ser depois do check-in.');
-    if ($adultos < 1) throw new RuntimeException('Informe pelo menos 1 adulto.');
-
-    $adultosEf = $adultos + count(array_filter($idades, fn($i) => $i >= 16));
-    $teens = array_values(array_filter($idades, fn($i) => $i >= 13 && $i <= 15));
-    $coluna = COLUNAS_COMPOSICAO["$adultosEf-" . count($teens)] ?? null;
-    if (!$coluna) throw new RuntimeException("Composição sem tarifa na tabela ($adultosEf adulto(s) + " . count($teens) . ' criança(s) de 13 a 15): cote à mão ou divida em mais de um loft.');
-
     $linhas = [];
-    $soma = 0;
-    for ($d = $ci; $d < $co; $d = $d->modify('+1 day')) {
-        $p = null;
-        foreach ($t['periodos'] as $x) if ($d >= $x['ini'] && $d < $x['fim']) { $p = $x; break; }
-        if (!$p) throw new RuntimeException('A noite de ' . $d->format('d/m/Y') . ' está fora do tarifário. Peça ao Leonardo para atualizar a planilha.');
-        $v = $p['precos'][$coluna] ?? 0;
-        if ($v <= 0) throw new RuntimeException("Sem preço para \"$coluna\" em {$p['nome']}.");
-        $k = $p['nome'] . '|' . $v;
-        $linhas[$k] = ['periodo' => $p['nome'], 'noites' => ($linhas[$k]['noites'] ?? 0) + 1, 'diaria' => $v];
-        $soma += $v;
+    foreach ((array) json_decode((string) ($q['nightly_breakdown_json'] ?? '[]'), true) as $n) {
+        $k = ($n['period'] ?? '') . '|' . ($n['daily_rate_cents'] ?? 0);
+        $linhas[$k] = ['periodo' => $n['period'] ?? '', 'noites' => ($linhas[$k]['noites'] ?? 0) + 1, 'diaria' => (int) ($n['daily_rate_cents'] ?? 0)];
     }
-
-    $somaIdades = array_sum(array_filter($idades, fn($i) => $i >= 13));  // 0–12: "sem adicional" (regra da planilha)
-    $limite = (int) ($t['cfg']['child_age_sum_surcharge_threshold'] ?? 18);
-    $pct = (int) ($t['cfg']['child_age_sum_surcharge_percent'] ?? 20);
-    $acrescimo = $somaIdades > $limite ? (int) round($soma * $pct / 100) : 0;
-    $limpeza = (int) ($t['cfg']['cleaning_fee_cents'] ?? 0);
-
-    return ['noites' => $noites, 'coluna' => $coluna, 'linhas' => array_values($linhas), 'diarias' => $soma, 'acrescimo' => $acrescimo,
-        'acrescimo_pct' => $pct, 'soma_idades' => $somaIdades, 'limpeza' => $limpeza, 'total' => $soma + $acrescimo + $limpeza];
+    return ['noites' => (int) $q['nights'], 'total' => (int) $q['total_cents'], 'lofts' => max(1, (int) ($q['loft_count'] ?? 1)),
+        'tarifa' => (string) ($q['tariff_key'] ?? ''), 'linhas' => array_values($linhas), 'limpeza' => (int) ($q['cleaning_fee_cents'] ?? 0),
+        'acrescimo' => (int) ($q['child_surcharge_cents'] ?? 0)];
 }
 
 function reais(int $centavos): string { return 'R$ ' . number_format($centavos / 100, 2, ',', '.'); }
@@ -104,7 +67,7 @@ function idioma_do_ddi(?string $digitos): ?string {
 }
 
 // ---------- mensagem ----------
-function composicao_texto(string $idioma, int $adultos, array $idades): string {
+function composicao_texto(string $idioma, int $adultos, array $idades, int $lofts = 1): string {
     $n = count($idades);
     $t = [
         'pt' => ['a' => ['adulto', 'adultos'], 'c' => ['criança', 'crianças'], 'e' => ' e '],
@@ -112,7 +75,8 @@ function composicao_texto(string $idioma, int $adultos, array $idades): string {
         'en' => ['a' => ['adult', 'adults'], 'c' => ['child', 'children'], 'e' => ' and '],
     ][$idioma];
     $s = "$adultos " . $t['a'][$adultos === 1 ? 0 : 1];
-    return $n ? $s . $t['e'] . "$n " . $t['c'][$n === 1 ? 0 : 1] : $s;
+    $s = $n ? $s . $t['e'] . "$n " . $t['c'][$n === 1 ? 0 : 1] : $s;
+    return $lofts > 1 ? "$s ($lofts lofts)" : $s;
 }
 
 /** Modelo aprovado pelo Leonardo, sem a apresentação da Constância. */
