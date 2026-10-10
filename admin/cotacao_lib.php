@@ -23,7 +23,53 @@ function cotacao_pedir_ao_robo(string $texto): array {
     $r = json_decode((string) $corpo, true);
     if ($http !== 200 || !is_array($r)) throw new RuntimeException("O robô não respondeu (HTTP $http). Tente de novo em instantes.");
     if (empty($r['ok'])) throw new RuntimeException('O robô não conseguiu responder: ' . (($r['error'] ?? '') ?: 'sem motivo') . '.');
-    return ['text' => (string) $r['text'], 'decision' => (string) ($r['decision'] ?? ''), 'reason' => (string) ($r['reason'] ?? '')];
+    [$texto2, $completou] = cotacao_completar((string) $r['text']);
+    return ['text' => $texto2, 'decision' => (string) ($r['decision'] ?? ''), 'reason' => (string) ($r['reason'] ?? ''), 'completou' => $completou];
+}
+
+const BLOCO_COMERCIAL = [
+    'es' => ['promo' => 'Estos precios son para las primeras reservas de la temporada. ¡No pierdas esta oportunidad!',
+        'superhost' => '¡Somos Superhost en Airbnb — vas a guardar excelentes recuerdos de estas vacaciones!',
+        'pousada' => "🏆 Campeche Lofts es Airbnb SUPERHOST 5⭐\n16 años hospedando con calidad!\n\nNuestra pousada está muy cerca del mar, en la Praia do Campeche, en Florianópolis/SC. Nuestros lofts tienen aire acondicionado, excelente señal de internet, cocina completa y el coche queda estacionado en el patio de la pousada.\n📸 Fotos: https://www.campechelofts.floripa.br",
+        'cta' => "Si estás de acuerdo con el presupuesto y quieres finalizar la reserva, comunícate directamente con el propietario de Pousada Campeche Lofts. 🏡\nLeonardo te atenderá personalmente por WhatsApp (+5548991223600). 💬\n👉 Haz clic en este enlace: "],
+    'pt' => ['promo' => 'Esses preços são para as primeiras reservas da temporada. Não perca essa oportunidade!',
+        'superhost' => 'Somos Superhost no Airbnb — você vai guardar ótimas lembranças dessas férias!',
+        'pousada' => "🏆 Campeche Lofts é Airbnb SUPERHOST 5⭐\n16 anos hospedando com qualidade!\n\nNossa pousada fica bem pertinho do mar, na Praia do Campeche, em Florianópolis/SC. Nossos lofts têm ar-condicionado, ótimo sinal de internet, cozinha completa e o carro fica estacionado no pátio da pousada.\n📸 Fotos: https://www.campechelofts.floripa.br",
+        'cta' => "Caso você esteja de acordo com o orçamento e queira finalizar a reserva, entre em contato diretamente com o proprietário da Pousada Campeche Lofts. 🏡\nO Leonardo irá atender você pessoalmente pelo WhatsApp (+5548991223600). 💬\n👉 Clique neste link: "],
+    'en' => ['promo' => "These prices are for the first bookings of the season. Don't miss this opportunity!",
+        'superhost' => 'We are Airbnb Superhosts — you will have wonderful memories of this vacation!',
+        'pousada' => "🏆 Campeche Lofts is an Airbnb SUPERHOST 5⭐\n16 years hosting with quality!\n\nOur pousada is very close to the sea, at Campeche Beach in Florianópolis, Brazil. Our lofts have air conditioning, excellent internet signal, a fully equipped kitchen, and the car is parked in the pousada courtyard.\n📸 Photos: https://www.campechelofts.floripa.br",
+        'cta' => "If you agree with the quote and would like to finalize your booking, please contact the owner of Pousada Campeche Lofts directly. 🏡\nLeonardo will assist you personally on WhatsApp (+5548991223600). 💬\n👉 Click this link: "],
+];
+
+/** Link para o Leonardo (WhatsApp) com a mensagem "quero finalizar a reserva", encurtado como o robô faz; se o encurtador falhar, vale o longo. */
+function cta_link(): string {
+    $longo = 'https://wa.me/5548991223600?text=' . rawurlencode('Olá Leonardo! Recebi um orçamento da Pousada Campeche Lofts e quero finalizar a reserva.');
+    $c = json_ler('cta_link');
+    if (!empty($c['curto']) && ($c['longo'] ?? '') === $longo) return $c['curto'];
+    $ch = curl_init('https://tinyurl.com/api-create.php?url=' . rawurlencode($longo));
+    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 8]);
+    $curto = trim((string) curl_exec($ch));
+    curl_close($ch);
+    if (!preg_match('#^https://tinyurl\.com/\w+$#', $curto)) return $longo;
+    json_atualizar('cta_link', fn() => ['longo' => $longo, 'curto' => $curto]);
+    return $curto;
+}
+
+/** O robô não põe promoção, Superhost, descrição da pousada e link do Leonardo nas respostas de ficha só com o mês (decisão dele: sem valor fechado, sem CTA).
+ *  Para o uso do Leonardo, que envia à mão, o painel acrescenta esse bloco (no idioma da resposta, antes da assinatura) quando ele não veio. */
+function cotacao_completar(string $texto): array {
+    if (stripos($texto, 'SUPERHOST') !== false) return [$texto, false];
+    $idioma = preg_match('/^\s*(¡?Hola|Gracias|Perfecto)\b/iu', $texto) || preg_match('/\b(presupuesto|noche|fechas|contame|decime)\b/iu', $texto) ? 'es'
+        : (preg_match('/^\s*(Ol[aá]|Obrigad)/iu', $texto) || preg_match('/\b(orçamento|noites?|datas)\b/iu', $texto) ? 'pt' : 'en');
+    $b = BLOCO_COMERCIAL[$idioma];
+    $assinatura = '';
+    if (preg_match('/\n+\s*Constância\s*$/u', $texto, $m)) { $assinatura = $m[0]; $texto = substr($texto, 0, -strlen($m[0])); }
+    $partes = [rtrim($texto)];
+    if (str_contains($texto, 'R$')) $partes[] = $b['promo'] . "\n" . $b['superhost'];  // "estes preços" só faz sentido se há preço na resposta
+    $partes[] = $b['pousada'];
+    $partes[] = $b['cta'] . cta_link();
+    return [implode("\n\n", $partes) . ($assinatura !== '' ? "\n\nConstância" : ''), true];
 }
 
 /** Só dígitos com DDI. Sem "+" e com 10–11 dígitos assume Brasil (55). Argentina: 54 + 10 dígitos ganha o 9 do celular. */

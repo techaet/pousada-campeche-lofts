@@ -34,7 +34,7 @@ if ($erro) echo '<div class="erro">' . h($erro) . '</div>';
 </form>
 <?php if ($res): $f = telefone_normalizar($fone); ?>
 <div class="card">
-  <p class="dica">Resposta do robô (<?= h($res['reason'] ?: $res['decision']) ?>). Pode editar antes de enviar.</p>
+  <p class="dica">Resposta do robô (<?= h($res['reason'] ?: $res['decision']) ?>). Pode editar antes de enviar.<?= $res['completou'] ? ' Acrescentei no fim o bloco comercial (promoção, Superhost, pousada, fotos e o link para falar com você), que o robô não põe nas fichas só com o mês.' : '' ?></p>
   <textarea id="msg" style="min-height:420px"><?= h($res['text']) ?></textarea>
   <?php if ($f): ?>
     <a class="btn" id="wa" target="_blank" rel="noopener" data-fone="<?= h($f) ?>" href="https://wa.me/<?= h($f) ?>?text=<?= h(rawurlencode($res['text'])) ?>">Abrir no WhatsApp do lead (+<?= h($f) ?>)</a>
