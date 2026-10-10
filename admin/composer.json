@@ -1,0 +1,17 @@
+{
+    "name": "campeche/admin",
+    "authors": [
+        {
+            "name": "Leonardo Fioravanso",
+            "email": "lsf.camp@gmail.com"
+        }
+    ],
+    "require": {
+        "dompdf/dompdf": "^3"
+    },
+    "config": {
+        "platform": {
+            "php": "8.1.0"
+        }
+    }
+}

@@ -4,4 +4,10 @@ __pycache__/
 *.pdf
 comprovante*
 !scripts/comprovante.*
+!admin/comprovante.php
+!admin/comprovante_lib.php
+!admin/comprovante_pdf.php
+!admin/modelo_comprovante.php
 pagefind/
+admin/_dados/*
+!admin/_dados/.htaccess

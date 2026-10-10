@@ -20,7 +20,7 @@ os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 erros, avisos = [], []
 ler = lambda f: open(f, encoding="utf-8", errors="ignore").read()
 arquivos = subprocess.check_output(["git", "ls-files", "--cached", "--others", "--exclude-standard"]).decode().split("\n")
-htmls = [f for f in arquivos if f.endswith((".html", ".php")) and not f.startswith("scripts/")]
+htmls = [f for f in arquivos if f.endswith((".html", ".php")) and not f.startswith(("scripts/", "admin/vendor/"))]
 
 
 def url_de(f):
@@ -49,7 +49,7 @@ for f in htmls:
             if urllib.parse.unquote(q[len("?text="):] if q.startswith("?text=") else "?") not in WA_TEXTOS:
                 erros.append(f"{f}: link de WhatsApp fora do texto padrão -> {urllib.parse.unquote(q) or '(sem texto)'}")
     for ref in re.findall(r'(?:src|href)="([^"#?]+)', s):
-        if "${" in ref or "{{" in ref:
+        if "${" in ref or "{{" in ref or "'" in ref or "$" in ref:  # modelos JS/PHP montam o link em tempo de execução
             continue
         if ref.startswith(BASE):
             ref = ref[len(BASE):] or "/"

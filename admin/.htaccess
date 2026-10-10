@@ -1,0 +1,9 @@
+Options -Indexes
+# arquivos internos: só o PHP lê, ninguém abre direto pelo navegador
+<FilesMatch "^(lib|manutencao_lib|comprovante_lib|modelo_comprovante|composer)\.(php|json|lock)$">
+  Require all denied
+</FilesMatch>
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^vendor/ - [F]
+</IfModule>
