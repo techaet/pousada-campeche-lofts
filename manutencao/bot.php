@@ -27,13 +27,7 @@ function texto_tarefa(array $t): string {
 }
 
 function enviar_tarefa_ao_executor(int $chat, array $t): void {
-    foreach ($t['midias'] as $m) {
-        $metodo = ['photo' => 'sendPhoto', 'video' => 'sendVideo', 'animation' => 'sendAnimation', 'video_note' => 'sendVideoNote',
-            'voice' => 'sendVoice', 'audio' => 'sendAudio'][$m['tipo']] ?? 'sendDocument';
-        $campo = ['sendPhoto' => 'photo', 'sendVideo' => 'video', 'sendAnimation' => 'animation', 'sendVideoNote' => 'video_note',
-            'sendVoice' => 'voice', 'sendAudio' => 'audio'][$metodo] ?? 'document';
-        tg($metodo, ['chat_id' => $chat, $campo => $m['file_id']]);
-    }
+    foreach ($t['midias'] as $m) tg_enviar_midia($chat, $m);
     $v = $t['valor'] !== null ? ' · ' . brl((float) $t['valor']) : '';
     tg('sendMessage', ['chat_id' => $chat, 'text' => texto_tarefa($t) . $v, 'reply_markup' => ['inline_keyboard' => [[
         ['text' => '💲 Informar valor', 'callback_data' => "v:{$t['id']}"],

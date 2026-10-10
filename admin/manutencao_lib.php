@@ -10,11 +10,27 @@ const PRIORIDADES = [1 => '🔴 Alta', 2 => '🟡 Média', 3 => '🟢 Baixa'];
 // ---------- Telegram ----------
 function tg(string $metodo, array $p = []) {
     $ch = curl_init(cfg('telegram_api', 'https://api.telegram.org') . '/bot' . cfg('telegram_token') . '/' . $metodo);
-    curl_setopt_array($ch, [CURLOPT_POST => true, CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 30,
-        CURLOPT_POSTFIELDS => json_encode($p, JSON_UNESCAPED_UNICODE), CURLOPT_HTTPHEADER => ['Content-Type: application/json']]);
+    $upload = (bool) array_filter($p, fn($v) => $v instanceof CURLFile);
+    if ($upload) {  // multipart: arrays (reply_markup) vão como JSON dentro do campo
+        foreach ($p as $k => $v) if (is_array($v)) $p[$k] = json_encode($v, JSON_UNESCAPED_UNICODE);
+    }
+    curl_setopt_array($ch, [CURLOPT_POST => true, CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => $upload ? 180 : 30,
+        CURLOPT_POSTFIELDS => $upload ? $p : json_encode($p, JSON_UNESCAPED_UNICODE)]
+        + ($upload ? [] : [CURLOPT_HTTPHEADER => ['Content-Type: application/json']]));
     $r = json_decode((string) curl_exec($ch), true);
     curl_close($ch);
     return $r['result'] ?? null;
+}
+
+/** Manda uma mídia da tarefa a um chat: pelo file_id (veio do Telegram) ou subindo o arquivo local (veio do site). */
+function tg_enviar_midia(int $chat, array $m): void {
+    $metodo = ['photo' => 'sendPhoto', 'video' => 'sendVideo', 'animation' => 'sendAnimation', 'video_note' => 'sendVideoNote',
+        'voice' => 'sendVoice', 'audio' => 'sendAudio'][$m['tipo']] ?? 'sendDocument';
+    $campo = ['sendPhoto' => 'photo', 'sendVideo' => 'video', 'sendAnimation' => 'animation', 'sendVideoNote' => 'video_note',
+        'sendVoice' => 'voice', 'sendAudio' => 'audio'][$metodo] ?? 'document';
+    if (!empty($m['file_id'])) { tg($metodo, ['chat_id' => $chat, $campo => $m['file_id']]); return; }
+    $f = DADOS . '/midia/' . ($m['arquivo'] ?? '');
+    if (is_file($f)) tg($metodo, ['chat_id' => $chat, $campo => new CURLFile($f, '', $m['nome'] ?? basename($f))]);
 }
 
 /** Baixa um arquivo do Telegram para _dados/midia/ (bots só baixam até 20 MB). Devolve o nome local ou null. */
@@ -69,6 +85,38 @@ function tarefa_nova(int $por, string $texto, array $midia, ?string $grupo): arr
         return $d;
     });
     return $ret;
+}
+
+/** Cria a tarefa de uma vez (usado pelo painel, com várias mídias). */
+function tarefa_criar(int $por, string $texto, array $midias, int $prioridade): array {
+    $ret = null;
+    json_atualizar('tarefas', function ($d) use (&$ret, $por, $texto, $midias, $prioridade) {
+        $id = (string) (($d['seq'] ?? 0) + 1);
+        $d['seq'] = (int) $id;
+        $d['itens'][$id] = $ret = ['id' => (int) $id, 'criada' => date('c'), 'por' => $por, 'texto' => $texto, 'midias' => $midias,
+            'prioridade' => isset(PRIORIDADES[$prioridade]) ? $prioridade : 2, 'status' => 'aberta', 'valor' => null];
+        return $d;
+    });
+    return $ret;
+}
+
+const LIMITE_UPLOAD = 50 * 1024 * 1024;  // limite dos bots do Telegram para enviar arquivos
+
+/** Valida e guarda um arquivo enviado pelo painel. Devolve a mídia da tarefa; lança RuntimeException com a razão. */
+function midia_salvar_upload(string $nome, string $tmp, int $erro, int $tam): array {
+    if ($erro === UPLOAD_ERR_INI_SIZE || $erro === UPLOAD_ERR_FORM_SIZE) throw new RuntimeException("\"$nome\" é maior que o limite do servidor (" . ini_get('upload_max_filesize') . ').');
+    if ($erro !== UPLOAD_ERR_OK || !is_uploaded_file($tmp)) throw new RuntimeException("Não consegui receber \"$nome\".");
+    if ($tam > LIMITE_UPLOAD) throw new RuntimeException("\"$nome\" passa de 50 MB.");
+    $mime = (string) (new finfo(FILEINFO_MIME_TYPE))->file($tmp);
+    $ext = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp', 'image/gif' => 'gif', 'image/heic' => 'heic', 'image/heif' => 'heic',
+        'video/mp4' => 'mp4', 'video/quicktime' => 'mov', 'video/webm' => 'webm',
+        'audio/mpeg' => 'mp3', 'audio/mp4' => 'm4a', 'audio/x-m4a' => 'm4a', 'audio/aac' => 'aac', 'audio/ogg' => 'ogg', 'audio/wav' => 'wav', 'audio/x-wav' => 'wav', 'audio/webm' => 'webm'][$mime] ?? null;
+    if (!$ext) throw new RuntimeException("\"$nome\": tipo de arquivo não aceito ($mime). Use foto, vídeo ou áudio.");
+    if (!is_dir(DADOS . '/midia')) mkdir(DADOS . '/midia', 0700, true);
+    $arq = bin2hex(random_bytes(8)) . '.' . $ext;
+    if (!move_uploaded_file($tmp, DADOS . '/midia/' . $arq)) throw new RuntimeException("Não consegui guardar \"$nome\".");
+    $tipo = $ext === 'heic' ? 'document' : (str_starts_with($mime, 'image/') ? 'photo' : (str_starts_with($mime, 'video/') ? 'video' : 'audio'));
+    return ['tipo' => $tipo, 'file_id' => null, 'nome' => mb_substr(basename($nome), 0, 80), 'arquivo' => $arq];
 }
 
 /** Aplica $fn(tarefa) -> tarefa sob trava. Devolve a tarefa nova (ou null se não existe). */

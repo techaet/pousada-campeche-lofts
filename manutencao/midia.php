@@ -9,7 +9,7 @@ $f = basename((string) ($_GET['f'] ?? ''));
 $caminho = DADOS . '/midia/' . $f;
 if (!$ok || $f === '' || !is_file($caminho)) { http_response_code(404); exit; }
 $tipos = ['jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png', 'webp' => 'image/webp', 'gif' => 'image/gif',
-    'mp4' => 'video/mp4', 'mov' => 'video/quicktime', 'oga' => 'audio/ogg', 'ogg' => 'audio/ogg', 'mp3' => 'audio/mpeg', 'm4a' => 'audio/mp4', 'pdf' => 'application/pdf'];
+    'mp4' => 'video/mp4', 'mov' => 'video/quicktime', 'oga' => 'audio/ogg', 'ogg' => 'audio/ogg', 'mp3' => 'audio/mpeg', 'm4a' => 'audio/mp4', 'pdf' => 'application/pdf', 'webm' => 'video/webm', 'wav' => 'audio/wav', 'aac' => 'audio/aac'];
 $ext = strtolower(pathinfo($f, PATHINFO_EXTENSION));
 // só tipos conhecidos são exibidos; o resto vai como download (nunca executa)
 header('Content-Type: ' . ($tipos[$ext] ?? 'application/octet-stream'));
