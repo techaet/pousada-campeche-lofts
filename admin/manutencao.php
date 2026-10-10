@@ -32,6 +32,25 @@ if ($falha) echo '<div class="erro">' . h($falha) . '</div>';
 [$q, $soma] = total_em_aberto();
 $link = 'https://www.campechelofts.floripa.br/manutencao/?k=' . cfg('executor_token');
 ?>
+<div class="card"><strong>Comandos do bot do Telegram</strong>
+  <?php if ($bot = cfg('telegram_bot_username')): ?><p class="dica"><a href="https://t.me/<?= h($bot) ?>" target="_blank" rel="noopener">Abrir o bot (@<?= h($bot) ?>)</a></p><?php endif; ?>
+  <p style="margin-bottom:4px"><strong>Gerentes (você e a Fernanda)</strong></p>
+  <ul style="margin:0 0 12px;padding-left:20px">
+    <li><b>Texto, foto, vídeo ou áudio</b> (pode juntar tudo): registra uma demanda. Depois toque em 🔴 Alta, 🟡 Média ou 🟢 Baixa, ou em 🗑 Excluir.</li>
+    <li><code>/tarefas</code>: lista as demandas em aberto e o total em aberto para pagamento.</li>
+    <li><code>/pagar</code>: mostra o que o prestador já executou; depois envie a foto ou o PDF do comprovante e tudo é marcado como pago e enviado a ele.</li>
+    <li><code>/cancelar</code>: desiste de uma ação em andamento (por exemplo, o envio do comprovante).</li>
+    <li><code>/ajuda</code> ou <code>/start</code>: mostra a ajuda no próprio Telegram.</li>
+  </ul>
+  <p style="margin-bottom:4px"><strong>Executor (prestador)</strong></p>
+  <ul style="margin:0 0 12px;padding-left:20px">
+    <li><code>/tarefas</code>: vê as tarefas em aberto, da mais urgente para a menos, com as fotos e vídeos.</li>
+    <li>Botão <b>💲 Informar valor</b>: digita o valor (ex.: 150 ou 150,50). Botão <b>✅ Executada</b>: marca como feita; vocês dois recebem o aviso.</li>
+    <li><code>/cancelar</code>, <code>/ajuda</code> e <code>/start</code>: igual aos gerentes.</li>
+  </ul>
+  <p style="margin-bottom:4px"><strong>Quem ainda não foi liberado</strong></p>
+  <ul style="margin:0;padding-left:20px"><li><code>/meuid</code> ou <code>/start</code>: o bot responde com o ID do Telegram da pessoa. É o número para cadastrar em Configurações.</li></ul>
+</div>
 <form method="post" enctype="multipart/form-data" class="card">
   <?= csrf_campo() ?><input type="hidden" name="acao" value="nova">
   <strong>Nova demanda de manutenção</strong>
