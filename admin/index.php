@@ -41,6 +41,7 @@ pagina_topo('Painel');
 ?>
 <div class="grid">
   <a class="card item" href="senha.php"><strong>Senha do Guia do Hóspede</strong><span class="dica">Trocar a senha que os hóspedes usam em /guia/</span></a>
+  <a class="card item" href="cotacao.php"><strong>Cotação para lead</strong><span class="dica">Colar o texto, calcular pelo tarifário e enviar pelo WhatsApp</span></a>
   <a class="card item" href="comprovante.php"><strong>Comprovante de reserva</strong><span class="dica">Colar a conversa, conferir e enviar ao hóspede</span></a>
   <a class="card item" href="manutencao.php"><strong>Manutenção</strong><span class="dica">Tarefas, valores e pagamentos</span></a>
   <a class="card item" href="config.php"><strong>Configurações</strong><span class="dica">Bot do Telegram, Groq e envio de e-mail</span></a>

@@ -45,8 +45,6 @@ function slug(string $s): string {
 
 // ---------- leitura da conversa (Groq) ----------
 function groq_extrair(string $conversa): array {
-    $chave = (string) cfg('groq_key', '');
-    if ($chave === '') throw new RuntimeException('Chave do Groq não configurada (Configurações).');
     $hoje = date('Y-m-d');
     $sistema = "Você extrai dados de reserva de uma conversa de WhatsApp de uma pousada em Florianópolis. Hoje é $hoje.\n"
         . "Responda SOMENTE um objeto JSON com estas chaves: nome (nome completo do hóspede responsável), documento (CPF, DNI ou passaporte, como escrito), "
@@ -56,19 +54,8 @@ function groq_extrair(string $conversa): array {
         . "ano_assumido (true se a conversa não dizia o ano e você escolheu o próximo ano futuro possível).\n"
         . "Use null para qualquer dado que NÃO esteja claramente na conversa. Nunca invente nome, documento, e-mail, valores ou loft. "
         . "Se um valor estiver em outra moeda que não reais, use null no total.";
-    $ch = curl_init('https://api.groq.com/openai/v1/chat/completions');
-    curl_setopt_array($ch, [CURLOPT_POST => true, CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 40,
-        CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'Authorization: Bearer ' . $chave],
-        CURLOPT_POSTFIELDS => json_encode(['model' => cfg('groq_model') ?: 'llama-3.3-70b-versatile', 'temperature' => 0,
-            'response_format' => ['type' => 'json_object'],
-            'messages' => [['role' => 'system', 'content' => $sistema], ['role' => 'user', 'content' => mb_substr($conversa, 0, 12000)]]])]);
-    $r = json_decode((string) curl_exec($ch), true);
-    curl_close($ch);
-    $j = json_decode((string) ($r['choices'][0]['message']['content'] ?? ''), true);
-    if (!is_array($j)) throw new RuntimeException('O Groq não respondeu: ' . ($r['error']['message'] ?? 'sem resposta') . '. Preencha à mão.');
-    return $j;
+    return groq_json($sistema, $conversa);
 }
-
 // ---------- validação ----------
 /** Devolve [dados|null, erros, avisos]. $in = campos do formulário. */
 function comprovante_validar(array $in): array {

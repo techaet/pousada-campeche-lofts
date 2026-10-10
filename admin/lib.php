@@ -34,6 +34,23 @@ function apps_script(array $payload): ?array {
     return is_array($r) ? $r : ['ok' => false, 'erro' => 'sem resposta do Apps Script'];
 }
 
+/** Pergunta ao Groq e devolve um objeto JSON. $sistema = instruções; $usuario = texto do lead. */
+function groq_json(string $sistema, string $usuario): array {
+    $chave = (string) cfg('groq_key', '');
+    if ($chave === '') throw new RuntimeException('Chave do Groq não configurada (Configurações).');
+    $ch = curl_init(cfg('groq_api', 'https://api.groq.com/openai/v1/chat/completions'));
+    curl_setopt_array($ch, [CURLOPT_POST => true, CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 40,
+        CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'Authorization: Bearer ' . $chave],
+        CURLOPT_POSTFIELDS => json_encode(['model' => cfg('groq_model') ?: 'llama-3.3-70b-versatile', 'temperature' => 0,
+            'response_format' => ['type' => 'json_object'],
+            'messages' => [['role' => 'system', 'content' => $sistema], ['role' => 'user', 'content' => mb_substr($usuario, 0, 12000)]]])]);
+    $r = json_decode((string) curl_exec($ch), true);
+    curl_close($ch);
+    $j = json_decode((string) ($r['choices'][0]['message']['content'] ?? ''), true);
+    if (!is_array($j)) throw new RuntimeException('O Groq não respondeu: ' . ($r['error']['message'] ?? 'sem resposta') . '. Preencha à mão.');
+    return $j;
+}
+
 function h($s): string { return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8'); }
 
 // ---------- armazenamento em JSON com trava ----------
