@@ -25,7 +25,7 @@ if (empty($_SESSION['guide_authenticated'])) {
   <title>Guía del huésped | Campeche Lofts</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:opsz,wght@5..1200,500;5..1200,600;5..1200,700&display=swap"><link rel="stylesheet" href="campeche.css?v=20260820-guia-protegido-v1">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:opsz,wght@5..1200,500;5..1200,600;5..1200,700&display=swap"><link rel="stylesheet" href="campeche.css?v=20261010-trilhas">
 </head>
 <body>
   <a class="skip-link" href="#contenido">Ir al contenido</a>
@@ -55,7 +55,7 @@ if (empty($_SESSION['guide_authenticated'])) {
 
     <nav class="guide-nav" aria-label="Navegación de la guía">
       <div class="guide-nav-inner">
-        <a href="#convivencia">Convivencia</a><a href="#porton">Portón y estacionamiento</a><a href="#wifi">Wi‑Fi</a><a href="#delivery">Delivery</a><a href="#parrilla">Parrilla</a><a href="#residuos">Residuos</a><a href="#lavanderia">Lavandería</a><a href="#ayuda">Ayuda</a>
+        <a href="#convivencia">Convivencia</a><a href="#porton">Portón y estacionamiento</a><a href="#wifi">Wi‑Fi</a><a href="#delivery">Delivery</a><a href="#parrilla">Parrilla</a><a href="#residuos">Residuos</a><a href="#lavanderia">Lavandería</a><a href="#playa">Playa</a><a href="#senderos">Senderos</a><a href="#telefonos">Teléfonos</a><a href="#tv">TV Sky</a><a href="#ayuda">Ayuda</a>
       </div>
     </nav>
 
@@ -157,6 +157,35 @@ if (empty($_SESSION['guide_authenticated'])) {
           <img src="images/lavanderia.webp" alt="Lavandería colectiva de la posada, con lavarropas y mesada" width="1086" height="1448" loading="lazy">
           <figcaption>Lavandería colectiva de la posada: uso gratuito, solo tenés que traer tu jabón.</figcaption>
         </figure>
+      </div>
+    </section>
+
+    <section id="playa" class="guide-section section-paper">
+      <div class="container">
+        <div class="guide-section-head"><div><p class="eyebrow">A pie hasta el mar</p><h2>Camino a la playa.</h2></div><p>De la posada a la orilla de la playa son pocos minutos a pie. El recorrido está marcado en rojo en el mapa.</p></div>
+        <figure class="guide-parking-map"><img src="images/caminho-praia.webp" alt="Mapa aéreo con el camino a pie de la posada hasta la Playa de Campeche, marcado en rojo" width="1200" height="693" loading="lazy"><figcaption>Camino a pie de la posada hasta la orilla de la playa (escala de 100 m en el mapa).</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="senderos" class="guide-section section-white">
+      <div class="container">
+        <div class="guide-section-head"><div><p class="eyebrow">Naturaleza alrededor</p><h2>Senderos.</h2></div><p>Sugerencias de senderos y paseos desde Campeche. Tocá “Abrir en Waze” para trazar la ruta hasta el punto de partida.</p></div>
+        <div class="guide-trails"><article class="guide-trail"><div class="guide-trail-body"><h3>Morro do Lampião</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.66506710%2C-48.48798890&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir en Waze →</a></div></article><article class="guide-trail"><img src="images/trilhas/morro-das-pedras.webp" alt="Rocas junto al mar en Morro das Pedras, con cerros al fondo" width="800" height="533" loading="lazy"><div class="guide-trail-body"><h3>Mirador del Morro das Pedras</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.72027187%2C-48.50332044&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir en Waze →</a><small>Foto: Jeferson Felix / <a href="https://commons.wikimedia.org/wiki/File:Morro_das_Pedras,_Florian%C3%B3polis_-_Brasil_-_panoramio.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 3.0)</small></div></article><article class="guide-trail"><img src="images/trilhas/lagoa-do-peri.webp" alt="Cascada entre piedras y selva en la Lagoa do Peri" width="800" height="533" loading="lazy"><div class="guide-trail-body"><h3>Lagoa do Peri / Cascada</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.72598956%2C-48.50712885&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir en Waze →</a><small>Foto: Sovernigo / <a href="https://commons.wikimedia.org/wiki/File:Cachoeira_da_Lagoa_do_Peri.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 4.0)</small></div></article><article class="guide-trail"><img src="images/trilhas/matadeiro.webp" alt="Vista desde lo alto de la playa de Matadeiro y Armação" width="800" height="533" loading="lazy"><div class="guide-trail-body"><h3>Armação / Ponta das Campanhas / Matadeiro</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.75062217%2C-48.50271961&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir en Waze →</a><small>Foto: Marco Rosa / <a href="https://commons.wikimedia.org/wiki/File:Matadeiro_e_Arma%C3%A7%C3%A3o_-_panoramio.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 3.0)</small></div></article><article class="guide-trail"><img src="images/trilhas/lagoinha-do-leste.webp" alt="Playa Lagoinha do Leste vista desde arriba, entre cerros verdes" width="800" height="533" loading="lazy"><div class="guide-trail-body"><h3>Lagoinha do Leste / Pedra da Coroa</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.77882809%2C-48.50727912&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir en Waze →</a><small>Foto: Paulo Cameli / <a href="https://commons.wikimedia.org/wiki/File:Morro_Da_Coroa_Praia_Lagoinha_Do_Leste_(242401955).jpeg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 3.0)</small></div></article><article class="guide-trail"><img src="images/trilhas/solidao.webp" alt="Costa rocosa y mar cerca de la Playa do Saquinho" width="800" height="533" loading="lazy"><div class="guide-trail-body"><h3>Solidão / Playa do Saquinho / Cascada da Solidão</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.79477451%2C-48.53468962&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir en Waze →</a><small>Foto: Papa Pic / <a href="https://commons.wikimedia.org/wiki/File:Alto_saquinho_(16771033008).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC0)</small></div></article><article class="guide-trail"><img src="images/trilhas/costa-de-dentro.webp" alt="Barcos y muelle en la bahía de Ribeirão da Ilha" width="800" height="533" loading="lazy"><div class="guide-trail-body"><h3>Estrada da Costa de Dentro hasta Ribeirão da Ilha</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.78544424%2C-48.53216880&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir en Waze →</a><small>Foto: Andreia Reis / <a href="https://commons.wikimedia.org/wiki/File:Ribeir%C3%A3o_da_Ilha_(5418356405).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)</small></div></article><article class="guide-trail"><img src="images/trilhas/naufragados.webp" alt="Arroyo entre piedras en el sendero a Naufragados" width="800" height="533" loading="lazy"><div class="guide-trail-body"><h3>Sendero a la Playa de Naufragados</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.81624846%2C-48.56095677&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir en Waze →</a><small>Foto: Andreia Reis / <a href="https://commons.wikimedia.org/wiki/File:A_caminho_da_Praia_dos_Naufragados_(5375587795).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)</small></div></article></div>
+      </div>
+    </section>
+
+    <section id="telefonos" class="guide-section section-paper">
+      <div class="container">
+        <div class="guide-section-head"><div><p class="eyebrow">Cuando lo necesites</p><h2>Teléfonos útiles.</h2></div><p>Contactos para lo que necesites durante tu estadía. Tocá el número para abrirlo directo en tu WhatsApp.</p></div>
+        <div class="guide-table-wrap"><table class="guide-table"><tbody><tr><td><strong>Farmacia Tele-entrega</strong></td><td><a href="https://api.whatsapp.com/send?phone=5548988559010" target="_blank" rel="noopener">+55 48 98855-9010</a> · Escribir por WhatsApp</td></tr></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="tv" class="guide-section section-white">
+      <div class="container">
+        <div class="guide-section-head"><div><p class="eyebrow">Televisión</p><h2>Canales Sky (paquete Smart).</h2></div><p>El TV de los lofts tiene el paquete Smart de Sky. Estos son los principales canales y su número en el control remoto.</p></div>
+        <div class="guide-table-wrap"><table class="guide-table"><thead><tr><th scope="col">Categoría</th><th scope="col">Canales</th></tr></thead><tbody><tr><td><strong>Abiertos</strong></td><td>TV Cultura 2 · Rit 3 · Rede Vida 6 · Rede Record 7 · Canção Nova 8 · SBT 9 · TV Aparecida 11 · Band 13 · CNT 14 · Rede TV 15 · Record News 19</td></tr><tr><td><strong>Noticias</strong></td><td>Globo News 40 · Climatempo 170</td></tr><tr><td><strong>Películas y series</strong></td><td>Megapix 107 · TNT 108 · Cinemax 112 · Canal Brasil 113 · Sony Channel 137 · Warner 139 · Universal 140 · Fox 141</td></tr><tr><td><strong>Variedades</strong></td><td>GNT 41 · Multishow 42 · Viva 43 · +Globosat 44</td></tr><tr><td><strong>Deportes</strong></td><td>SporTV 2 38</td></tr><tr><td><strong>Infantil</strong></td><td>Discovery Kids 50 · Disney Channel 55 · Gloob 56 · Cartoon Network 60</td></tr><tr><td><strong>Públicos</strong></td><td>TV Câmara 22 · TV Justiça 24 · TV Brasil 23 · TV Senado 26</td></tr><tr><td><strong>Música y radios</strong></td><td>Canales de música 702–763 · Radios 776–796</td></tr></tbody></table></div>
+        <p class="guide-note">Los números pueden variar. Consultá la guía de canales en el propio TV.</p>
       </div>
     </section>
 

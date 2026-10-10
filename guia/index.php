@@ -25,7 +25,7 @@ if (empty($_SESSION['guide_authenticated'])) {
   <title>Guia do Hóspede | Campeche Lofts</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:opsz,wght@5..1200,500;5..1200,600;5..1200,700&display=swap"><link rel="stylesheet" href="campeche.css?v=20260820-guia-protegido-v1">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:opsz,wght@5..1200,500;5..1200,600;5..1200,700&display=swap"><link rel="stylesheet" href="campeche.css?v=20261010-trilhas">
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
@@ -64,6 +64,7 @@ if (empty($_SESSION['guide_authenticated'])) {
         <a href="#churrasqueira">Churrasqueira</a>
         <a href="#lixo">Lixo</a>
         <a href="#lavanderia">Lavanderia</a>
+        <a href="#praia">Praia</a><a href="#trilhas">Trilhas</a><a href="#telefones">Telefones</a><a href="#tv">TV Sky</a>
         <a href="#ajuda">Ajuda</a>
       </div>
     </nav>
@@ -266,6 +267,35 @@ if (empty($_SESSION['guide_authenticated'])) {
           <img src="images/lavanderia.webp" alt="Lavanderia coletiva da pousada, com máquinas de lavar roupa e bancada" width="1086" height="1448" loading="lazy">
           <figcaption>Lavanderia coletiva da pousada: uso gratuito, basta levar o seu sabão.</figcaption>
         </figure>
+      </div>
+    </section>
+
+    <section id="praia" class="guide-section section-paper">
+      <div class="container">
+        <div class="guide-section-head"><div><p class="eyebrow">A pé até o mar</p><h2>Caminho até a praia.</h2></div><p>Da pousada até a beira da praia são poucos minutos a pé. O trajeto está marcado em vermelho no mapa.</p></div>
+        <figure class="guide-parking-map"><img src="images/caminho-praia.webp" alt="Mapa aéreo com o caminho a pé da pousada até a Praia do Campeche, marcado em vermelho" width="1200" height="693" loading="lazy"><figcaption>Caminho a pé da pousada até a beira da praia (escala de 100 m no mapa).</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="trilhas" class="guide-section section-white">
+      <div class="container">
+        <div class="guide-section-head"><div><p class="eyebrow">Natureza ao redor</p><h2>Trilhas.</h2></div><p>Sugestões de trilhas e passeios a partir do Campeche. Toque em “Abrir no Waze” para traçar a rota até o ponto de partida.</p></div>
+        <div class="guide-trails"><article class="guide-trail"><div class="guide-trail-body"><h3>Morro do Lampião</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.66506710%2C-48.48798890&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir no Waze →</a></div></article><article class="guide-trail"><img src="images/trilhas/morro-das-pedras.webp" alt="Rochas à beira-mar no Morro das Pedras, com morros ao fundo" width="800" height="533" loading="lazy"><div class="guide-trail-body"><h3>Mirante do Morro das Pedras</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.72027187%2C-48.50332044&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir no Waze →</a><small>Foto: Jeferson Felix / <a href="https://commons.wikimedia.org/wiki/File:Morro_das_Pedras,_Florian%C3%B3polis_-_Brasil_-_panoramio.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 3.0)</small></div></article><article class="guide-trail"><img src="images/trilhas/lagoa-do-peri.webp" alt="Cachoeira entre pedras e mata na Lagoa do Peri" width="800" height="533" loading="lazy"><div class="guide-trail-body"><h3>Lagoa do Peri / Cachoeira</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.72598956%2C-48.50712885&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir no Waze →</a><small>Foto: Sovernigo / <a href="https://commons.wikimedia.org/wiki/File:Cachoeira_da_Lagoa_do_Peri.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 4.0)</small></div></article><article class="guide-trail"><img src="images/trilhas/matadeiro.webp" alt="Vista do alto da praia do Matadeiro e da Armação" width="800" height="533" loading="lazy"><div class="guide-trail-body"><h3>Armação / Ponta das Campanhas / Matadeiro</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.75062217%2C-48.50271961&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir no Waze →</a><small>Foto: Marco Rosa / <a href="https://commons.wikimedia.org/wiki/File:Matadeiro_e_Arma%C3%A7%C3%A3o_-_panoramio.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 3.0)</small></div></article><article class="guide-trail"><img src="images/trilhas/lagoinha-do-leste.webp" alt="Praia da Lagoinha do Leste vista do alto, entre morros verdes" width="800" height="533" loading="lazy"><div class="guide-trail-body"><h3>Lagoinha do Leste / Pedra da Coroa</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.77882809%2C-48.50727912&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir no Waze →</a><small>Foto: Paulo Cameli / <a href="https://commons.wikimedia.org/wiki/File:Morro_Da_Coroa_Praia_Lagoinha_Do_Leste_(242401955).jpeg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 3.0)</small></div></article><article class="guide-trail"><img src="images/trilhas/solidao.webp" alt="Costa rochosa e mar perto da Praia do Saquinho" width="800" height="533" loading="lazy"><div class="guide-trail-body"><h3>Solidão / Praia do Saquinho / Cachoeira da Solidão</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.79477451%2C-48.53468962&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir no Waze →</a><small>Foto: Papa Pic / <a href="https://commons.wikimedia.org/wiki/File:Alto_saquinho_(16771033008).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC0)</small></div></article><article class="guide-trail"><img src="images/trilhas/costa-de-dentro.webp" alt="Barcos e píer na baía do Ribeirão da Ilha" width="800" height="533" loading="lazy"><div class="guide-trail-body"><h3>Estrada da Costa de Dentro até o Ribeirão da Ilha</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.78544424%2C-48.53216880&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir no Waze →</a><small>Foto: Andreia Reis / <a href="https://commons.wikimedia.org/wiki/File:Ribeir%C3%A3o_da_Ilha_(5418356405).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)</small></div></article><article class="guide-trail"><img src="images/trilhas/naufragados.webp" alt="Riacho entre pedras na trilha para Naufragados" width="800" height="533" loading="lazy"><div class="guide-trail-body"><h3>Trilha p/ Praia de Naufragados</h3><a class="guide-trail-go" href="https://ul.waze.com/ul?ll=-27.81624846%2C-48.56095677&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Abrir no Waze →</a><small>Foto: Andreia Reis / <a href="https://commons.wikimedia.org/wiki/File:A_caminho_da_Praia_dos_Naufragados_(5375587795).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)</small></div></article></div>
+      </div>
+    </section>
+
+    <section id="telefones" class="guide-section section-paper">
+      <div class="container">
+        <div class="guide-section-head"><div><p class="eyebrow">Quando precisar</p><h2>Telefones úteis.</h2></div><p>Contatos para o que você precisar durante a estadia. Toque no número para abrir direto no seu WhatsApp.</p></div>
+        <div class="guide-table-wrap"><table class="guide-table"><tbody><tr><td><strong>Farmácia Tele-entrega</strong></td><td><a href="https://api.whatsapp.com/send?phone=5548988559010" target="_blank" rel="noopener">+55 48 98855-9010</a> · Chamar no WhatsApp</td></tr></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="tv" class="guide-section section-white">
+      <div class="container">
+        <div class="guide-section-head"><div><p class="eyebrow">Televisão</p><h2>Canais Sky (pacote Smart).</h2></div><p>A TV dos lofts tem o pacote Smart da Sky. Estes são os principais canais e seus números no controle.</p></div>
+        <div class="guide-table-wrap"><table class="guide-table"><thead><tr><th scope="col">Categoria</th><th scope="col">Canais</th></tr></thead><tbody><tr><td><strong>Abertos</strong></td><td>TV Cultura 2 · Rit 3 · Rede Vida 6 · Rede Record 7 · Canção Nova 8 · SBT 9 · TV Aparecida 11 · Band 13 · CNT 14 · Rede TV 15 · Record News 19</td></tr><tr><td><strong>Notícias</strong></td><td>Globo News 40 · Climatempo 170</td></tr><tr><td><strong>Filmes e séries</strong></td><td>Megapix 107 · TNT 108 · Cinemax 112 · Canal Brasil 113 · Sony Channel 137 · Warner 139 · Universal 140 · Fox 141</td></tr><tr><td><strong>Variedades</strong></td><td>GNT 41 · Multishow 42 · Viva 43 · +Globosat 44</td></tr><tr><td><strong>Esporte</strong></td><td>SporTV 2 38</td></tr><tr><td><strong>Infantil</strong></td><td>Discovery Kids 50 · Disney Channel 55 · Gloob 56 · Cartoon Network 60</td></tr><tr><td><strong>Públicos</strong></td><td>TV Câmara 22 · TV Justiça 24 · TV Brasil 23 · TV Senado 26</td></tr><tr><td><strong>Música e rádios</strong></td><td>Canais de música 702–763 · Rádios 776–796</td></tr></tbody></table></div>
+        <p class="guide-note">Os números podem variar. Consulte o guia de canais na própria TV.</p>
       </div>
     </section>
 
