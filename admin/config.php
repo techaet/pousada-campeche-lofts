@@ -19,6 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $novo['gerentes'] = array_values(array_filter(array_map('intval', preg_split('/[\s,;]+/', (string) ($_POST['gerentes'] ?? '')) ?: [])));
         $novo['executor_id'] = (int) trim((string) ($_POST['executor_id'] ?? ''));
         cfg_salvar($novo);
+        if (isset($novo['telegram_token'])) cfg_salvar(['telegram_bot_username' => '']);
+        bot_username_garantir();
         $msg = 'Configurações salvas.';
         if (isset($_POST['ativar_bot'])) {
             $r = tg('setWebhook', ['url' => 'https://www.campechelofts.floripa.br/manutencao/bot.php', 'secret_token' => cfg('telegram_secret'),

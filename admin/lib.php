@@ -120,7 +120,7 @@ function pagina_topo(string $titulo, bool $menu = true): void {
         . '<title>' . h($titulo) . ' · Admin Campeche Lofts</title><style>'
         . ':root{--teal:#1d4038;--cream:#f1ece1;--line:#d9d3c6;--ink:#173234;--muted:#5d6b6b;--gold:#c9a96a;--red:#b3261e}'
         . '*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:var(--cream)}'
-        . 'header{background:var(--teal);color:#fff;padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}'
+        . 'header{background:var(--teal);color:#fff;padding:14px 20px;display:flex;gap:8px 18px;align-items:center;flex-wrap:wrap}header strong{margin-right:6px}'
         . 'header a{color:#fff;text-decoration:none;opacity:.85}header a:hover{opacity:1}header .sp{flex:1}'
         . 'main{max-width:720px;margin:0 auto;padding:24px 20px 60px}h1{font-size:24px;margin:0 0 18px}'
         . '.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:18px}'
@@ -134,8 +134,27 @@ function pagina_topo(string $titulo, bool $menu = true): void {
         . '.dica{font-size:14px;color:var(--muted)}.grid{display:grid;gap:14px}@media(min-width:560px){.grid.dois{grid-template-columns:1fr 1fr}}'
         . 'a.item{display:block;text-decoration:none;color:inherit}a.item:hover{border-color:var(--teal)}a.item strong{display:block;font-size:18px}'
         . '</style></head><body><header><strong>Campeche Lofts · Admin</strong>';
-    if ($menu) echo '<a href="/admin/">Início</a><span class="sp"></span><a href="/admin/?sair=1">Sair</a>';
+    $inicio = ($_SERVER['SCRIPT_NAME'] ?? '') === '/admin/index.php';
+    if ($menu && !$inicio) echo '<a href="/admin/" onclick="if(history.length>1){history.back();return false}">← Voltar</a><a href="/admin/">Início</a>';
+    echo '<a href="https://www.campechelofts.floripa.br/" target="_blank" rel="noopener">Ir para o site</a>';
+    if ($menu && ($bot = cfg('telegram_bot_username'))) echo '<a href="https://t.me/' . h($bot) . '" target="_blank" rel="noopener">Bot do Telegram</a>';
+    if ($menu && ($pl = cfg('planilha_url'))) echo '<a href="' . h($pl) . '" target="_blank" rel="noopener">Planilha de custos</a>';
+    if ($menu) echo '<span class="sp"></span><a href="/admin/?sair=1">Sair</a>';
     echo '</header><main><h1>' . h($titulo) . '</h1>';
 }
 
-function pagina_fim(): void { echo '</main></body></html>'; }
+function pagina_fim(): void {
+    $ult = array_slice(array_values(array_filter(json_ler('comprovantes')['itens'] ?? [], fn($i) => !empty($i['arquivo']))), -3);
+    if ($ult && !empty($_SESSION['admin'])) {
+        echo '<div class="card"><strong>Últimos comprovantes</strong><br>';
+        foreach (array_reverse($ult) as $i) {
+            echo '<a href="/admin/comprovante_pdf.php?f=' . h(rawurlencode($i['arquivo'])) . '" target="_blank">' . h($i['numero'] . ' · ' . $i['nome'] . ' · Loft ' . $i['loft']) . '</a><br>';
+        }
+        echo '</div>';
+    }
+    // botão "Mostrar" em todo campo de senha
+    echo '</main><script>document.querySelectorAll("input[type=password]").forEach(function(i){var w=document.createElement("div");w.style.position="relative";'
+        . 'i.parentNode.insertBefore(w,i);w.appendChild(i);i.style.paddingRight="92px";var b=document.createElement("button");b.type="button";b.textContent="Mostrar";b.className="sec";'
+        . 'b.style.cssText="position:absolute;right:6px;top:50%;transform:translateY(-50%);margin:0;padding:6px 12px;font-size:14px";'
+        . 'b.onclick=function(){var v=i.type==="password";i.type=v?"text":"password";b.textContent=v?"Ocultar":"Mostrar"};w.appendChild(b)});</script></body></html>';
+}

@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require __DIR__ . '/lib.php';
+require __DIR__ . '/manutencao_lib.php';
 admin_sessao();
 
 if (!cfg('admin_hash')) { header('Location: instalar.php', true, 302); exit; }
@@ -36,6 +36,7 @@ if (empty($_SESSION['admin'])) {
     exit;
 }
 
+bot_username_garantir();
 pagina_topo('Painel');
 ?>
 <div class="grid">

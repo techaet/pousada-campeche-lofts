@@ -35,6 +35,11 @@ function tg_baixar(string $file_id, string $prefixo): ?string {
     return $nome;
 }
 
+/** Guarda o @username do bot (via getMe) para o link do Telegram no painel. */
+function bot_username_garantir(): void {
+    if (cfg('telegram_token') && !cfg('telegram_bot_username') && ($me = tg('getMe')) && !empty($me['username'])) cfg_salvar(['telegram_bot_username' => $me['username']]);
+}
+
 function gerentes(): array { return array_map('intval', array_filter((array) cfg('gerentes', []))); }
 function executor(): int { return (int) cfg('executor_id', 0); }
 
