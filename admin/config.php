@@ -47,7 +47,7 @@ if ($erro) echo '<div class="erro">' . h($erro) . '</div>';
   </div>
   <div class="card"><strong>Leitura da conversa (Groq)</strong>
     <label>Chave da API do Groq</label><input type="password" name="groq_key" placeholder="<?= h($salvo('groq_key')) ?>">
-    <label>Modelo</label><input name="groq_model" value="<?= h(cfg('groq_model', 'llama-3.3-70b-versatile')) ?>">
+    <label>Modelo</label><input name="groq_model" value="<?= h(cfg('groq_model', '')) ?>" placeholder="vazio = escolho sozinho o melhor liberado">
   </div>
   <div class="card"><strong>Envio do comprovante (Google Apps Script)</strong>
     <label>Endereço da implantação (…/exec)</label><input name="apps_script_url" value="<?= h(cfg('apps_script_url', '')) ?>" placeholder="https://script.google.com/macros/s/…/exec">

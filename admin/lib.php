@@ -34,18 +34,39 @@ function apps_script(array $payload): ?array {
     return is_array($r) ? $r : ['ok' => false, 'erro' => 'sem resposta do Apps Script'];
 }
 
-/** Pergunta ao Groq e devolve um objeto JSON. $sistema = instruções; $usuario = texto do lead. */
-function groq_json(string $sistema, string $usuario): array {
-    $chave = (string) cfg('groq_key', '');
-    if ($chave === '') throw new RuntimeException('Chave do Groq não configurada (Configurações).');
-    $ch = curl_init(cfg('groq_api', 'https://api.groq.com/openai/v1/chat/completions'));
-    curl_setopt_array($ch, [CURLOPT_POST => true, CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 40,
-        CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'Authorization: Bearer ' . $chave],
-        CURLOPT_POSTFIELDS => json_encode(['model' => cfg('groq_model') ?: 'llama-3.3-70b-versatile', 'temperature' => 0,
-            'response_format' => ['type' => 'json_object'],
-            'messages' => [['role' => 'system', 'content' => $sistema], ['role' => 'user', 'content' => mb_substr($usuario, 0, 12000)]]])]);
+const GROQ_PREFERIDOS = ['openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'llama-3.3-70b-versatile', 'llama-3.1-8b-instant', 'qwen/qwen3.8-27b'];
+
+function groq_http(string $url, ?array $corpo = null): array {
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 40,
+        CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'Authorization: Bearer ' . cfg('groq_key', '')]]
+        + ($corpo === null ? [] : [CURLOPT_POST => true, CURLOPT_POSTFIELDS => json_encode($corpo)]));
     $r = json_decode((string) curl_exec($ch), true);
     curl_close($ch);
+    return is_array($r) ? $r : [];
+}
+
+/** Pergunta ao Groq e devolve um objeto JSON. $sistema = instruções; $usuario = texto do lead.
+ *  Se o modelo configurado não existir para a chave, escolhe o melhor da lista que a chave enxerga e guarda. */
+function groq_json(string $sistema, string $usuario): array {
+    if ((string) cfg('groq_key', '') === '') throw new RuntimeException('Chave do Groq não configurada (Configurações).');
+    $url = (string) cfg('groq_api', 'https://api.groq.com/openai/v1/chat/completions');
+    $pedir = function (string $modelo) use ($url, $sistema, $usuario) {
+        return groq_http($url, ['model' => $modelo, 'temperature' => 0, 'response_format' => ['type' => 'json_object'],
+            'messages' => [['role' => 'system', 'content' => $sistema], ['role' => 'user', 'content' => mb_substr($usuario, 0, 12000)]]]
+            + (str_starts_with($modelo, 'openai/gpt-oss') ? ['reasoning_effort' => 'low'] : []));
+    };
+    $modelo = (string) (cfg('groq_model') ?: GROQ_PREFERIDOS[0]);
+    $r = $pedir($modelo);
+    $msg = (string) ($r['error']['message'] ?? '');
+    if ($msg !== '' && preg_match('/does not exist|do not have access|model_not_found|decommissioned/i', $msg)) {
+        $lista = array_column(groq_http(str_replace('/chat/completions', '/models', $url))['data'] ?? [], 'id');
+        $achado = null;
+        foreach (GROQ_PREFERIDOS as $m) if ($m !== $modelo && in_array($m, $lista, true)) { $achado = $m; break; }
+        if (!$achado) throw new RuntimeException('Sua chave do Groq não enxerga nenhum modelo de texto conhecido (' . implode(', ', array_slice($lista, 0, 8)) . '). Veja os modelos liberados no console do Groq.');
+        $r = $pedir($achado);
+        if (!empty($r['choices'])) cfg_salvar(['groq_model' => $achado]);
+    }
     $j = json_decode((string) ($r['choices'][0]['message']['content'] ?? ''), true);
     if (!is_array($j)) throw new RuntimeException('O Groq não respondeu: ' . ($r['error']['message'] ?? 'sem resposta') . '. Preencha à mão.');
     return $j;
