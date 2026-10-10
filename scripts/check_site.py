@@ -42,7 +42,8 @@ for f in htmls:
     s = ler(f)
     if "aetsolidez.com.br" in s:
         erros.append(f"{f}: ainda cita o domínio antigo aetsolidez.com.br")
-    for n in set(re.findall(r"wa\.me/(\d+)", s)) - {WHATSAPP}:
+    # admin/ é privado (não é página pública): o CTA da cotação leva o lead ao WhatsApp do Leonardo, de propósito (como no guia/)
+    for n in (set(re.findall(r"wa\.me/(\d+)", s)) - {WHATSAPP} if not f.startswith("admin/") else set()):
         erros.append(f"{f}: WhatsApp {n} diferente de {WHATSAPP}")
     if not f.startswith("guia/"):
         for q in re.findall(r'href="https://wa\.me/\d+([^"]*)"', s):
