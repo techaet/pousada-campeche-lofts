@@ -22,6 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($novo['telegram_token'])) cfg_salvar(['telegram_bot_username' => '']);
         bot_username_garantir();
         $msg = 'Configurações salvas.';
+        if (cfg('telegram_token')) {
+            $n = bot_registrar_comandos();
+            $msg .= $n ? " Menu de comandos do Telegram atualizado ($n conversa" . ($n > 1 ? 's' : '') . ' — quem ainda não abriu o bot não recebe o menu até enviar /start).' : ' Não consegui atualizar o menu de comandos do Telegram: confira o token.';
+        }
         if (isset($_POST['ativar_bot'])) {
             $r = tg('setWebhook', ['url' => 'https://www.campechelofts.floripa.br/manutencao/bot.php', 'secret_token' => cfg('telegram_secret'),
                 'allowed_updates' => ['message', 'callback_query'], 'drop_pending_updates' => true]);

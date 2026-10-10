@@ -56,6 +56,18 @@ function bot_username_garantir(): void {
     if (cfg('telegram_token') && !cfg('telegram_bot_username') && ($me = tg('getMe')) && !empty($me['username'])) cfg_salvar(['telegram_bot_username' => $me['username']]);
 }
 
+/** Registra no Telegram o menu "/" de cada pessoa: gerentes, executor e (para os demais) só /start e /meuid. Devolve quantos menus foram aceitos. */
+function bot_registrar_comandos(): int {
+    $cmd = fn(array $l) => array_map(fn($c, $d) => ['command' => $c, 'description' => $d], array_keys($l), $l);
+    $gerente = $cmd(['tarefas' => 'Ver as demandas em aberto', 'pagar' => 'Pagar o que o prestador executou', 'cancelar' => 'Cancelar a ação em andamento', 'ajuda' => 'Como usar o bot']);
+    $executor = $cmd(['tarefas' => 'Ver as tarefas em aberto', 'cancelar' => 'Cancelar a ação em andamento', 'ajuda' => 'Como usar o bot']);
+    $padrao = $cmd(['start' => 'Começar', 'meuid' => 'Ver o meu ID do Telegram']);
+    $ok = (int) (tg('setMyCommands', ['commands' => $padrao, 'scope' => ['type' => 'default']]) === true);
+    foreach (gerentes() as $g) $ok += (int) (tg('setMyCommands', ['commands' => $gerente, 'scope' => ['type' => 'chat', 'chat_id' => $g]]) === true);
+    if (executor()) $ok += (int) (tg('setMyCommands', ['commands' => $executor, 'scope' => ['type' => 'chat', 'chat_id' => executor()]]) === true);
+    return $ok;
+}
+
 function gerentes(): array { return array_map('intval', array_filter((array) cfg('gerentes', []))); }
 function executor(): int { return (int) cfg('executor_id', 0); }
 
