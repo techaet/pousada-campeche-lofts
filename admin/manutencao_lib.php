@@ -18,7 +18,6 @@ function tg(string $metodo, array $p = []) {
         CURLOPT_POSTFIELDS => $upload ? $p : json_encode($p, JSON_UNESCAPED_UNICODE)]
         + ($upload ? [] : [CURLOPT_HTTPHEADER => ['Content-Type: application/json']]));
     $r = json_decode((string) curl_exec($ch), true);
-    curl_close($ch);
     return $r['result'] ?? null;
 }
 
@@ -45,7 +44,6 @@ function tg_baixar(string $file_id, string $prefixo): ?string {
     $ch = curl_init(cfg('telegram_api', 'https://api.telegram.org') . '/file/bot' . cfg('telegram_token') . '/' . $info['file_path']);
     curl_setopt_array($ch, [CURLOPT_FILE => $fp, CURLOPT_TIMEOUT => 120]);
     $ok = curl_exec($ch) !== false && curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200;
-    curl_close($ch);
     fclose($fp);
     if (!$ok) { @unlink(DADOS . '/midia/' . $nome); return null; }
     return $nome;

@@ -51,4 +51,41 @@ if ($erro) echo '<div class="erro">' . h($erro) . '</div>';
 })();
 </script>
 <?php endif; ?>
+<div class="card" id="trad-card">
+  <strong>Tradutor</strong>
+  <label for="trad-txt">Digite o texto (em qualquer idioma)</label>
+  <textarea id="trad-txt" style="min-height:120px" placeholder="Ex.: Oi Flavio! Já te mando as datas disponíveis."></textarea>
+  <label for="trad-idioma">Traduzir para</label>
+  <select id="trad-idioma"><?php foreach (IDIOMAS_TRADUCAO as $cod => $i) echo '<option value="' . h($cod) . '">' . h($i[0]) . '</option>'; ?></select>
+  <button type="button" id="trad-ir">Traduzir</button>
+  <div id="trad-saida" hidden>
+    <label for="trad-res">Tradução (pode editar)</label>
+    <textarea id="trad-res" style="min-height:120px"></textarea>
+    <button type="button" class="sec" id="trad-copiar">Copiar</button>
+    <button type="button" class="sec" id="trad-add" hidden>Acrescentar à mensagem da cotação</button>
+  </div>
+  <p class="erro" id="trad-erro" hidden></p>
+  <input type="hidden" id="trad-csrf" value="<?= h($_SESSION['csrf'] ?? '') ?>">
+</div>
+<script>
+(function () {
+  var $ = function (i) { return document.getElementById(i); }, msg = $('msg');
+  if (msg) $('trad-add').hidden = false;
+  $('trad-ir').addEventListener('click', function () {
+    var b = this, fd = new FormData();
+    fd.append('csrf', $('trad-csrf').value); fd.append('texto', $('trad-txt').value); fd.append('idioma', $('trad-idioma').value);
+    $('trad-erro').hidden = true; b.disabled = true; b.textContent = 'Traduzindo…';
+    fetch('traduzir.php', { method: 'POST', body: fd, credentials: 'same-origin' })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j.ok) throw new Error(j.erro || 'Não consegui traduzir.');
+        $('trad-res').value = j.traducao; $('trad-saida').hidden = false;
+      })
+      .catch(function (e) { $('trad-erro').textContent = e.message; $('trad-erro').hidden = false; })
+      .then(function () { b.disabled = false; b.textContent = 'Traduzir'; });
+  });
+  $('trad-copiar').addEventListener('click', function () { var b = this; navigator.clipboard.writeText($('trad-res').value).then(function () { b.textContent = 'Copiado ✔'; setTimeout(function () { b.textContent = 'Copiar'; }, 1500); }); });
+  $('trad-add').addEventListener('click', function () { if (msg) { msg.value = msg.value.replace(/\s+$/, '') + '\n\n' + $('trad-res').value; msg.scrollIntoView({ behavior: 'smooth' }); } });
+})();
+</script>
 <?php pagina_fim();

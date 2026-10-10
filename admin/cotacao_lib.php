@@ -18,7 +18,6 @@ function cotacao_pedir_ao_robo(string $texto): array {
         CURLOPT_POSTFIELDS => json_encode(['text' => mb_substr($texto, 0, 4000)])]);
     $corpo = curl_exec($ch);
     $http = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
     if ($http === 401 || $http === 403) throw new RuntimeException('O robô recusou o segredo. Confira o segredo em Configurações.');
     $r = json_decode((string) $corpo, true);
     if ($http !== 200 || !is_array($r)) throw new RuntimeException("O robô não respondeu (HTTP $http). Tente de novo em instantes.");
@@ -50,7 +49,6 @@ function cta_link(): string {
     $ch = curl_init('https://tinyurl.com/api-create.php?url=' . rawurlencode($longo));
     curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 8]);
     $curto = trim((string) curl_exec($ch));
-    curl_close($ch);
     if (!preg_match('#^https://tinyurl\.com/\w+$#', $curto)) return $longo;
     json_atualizar('cta_link', fn() => ['longo' => $longo, 'curto' => $curto]);
     return $curto;
@@ -93,4 +91,27 @@ function telefone_do_texto(string $texto): ?string {
         if (preg_match($p, $texto, $m) && ($f = telefone_normalizar(implode('', array_slice($m, 1))))) return $f;
     }
     return null;
+}
+
+const IDIOMAS_TRADUCAO = [
+    'es-AR' => ['Español (Argentina, com "vos")', 'español rioplatense de Argentina, con voseo (vos, querés, contame)'],
+    'es' => ['Español (neutro)', 'español neutro (tú)'],
+    'pt-BR' => ['Português (Brasil)', 'português do Brasil'],
+    'en' => ['English', 'English'],
+    'fr' => ['Français', 'français'],
+    'it' => ['Italiano', 'italiano'],
+    'de' => ['Deutsch', 'Deutsch'],
+];
+
+/** Traduz um texto (qualquer idioma de origem) para o idioma escolhido, com o tom cordial da pousada. */
+function traduzir_texto(string $texto, string $idioma): string {
+    if (!isset(IDIOMAS_TRADUCAO[$idioma])) throw new RuntimeException('Idioma não suportado.');
+    $destino = IDIOMAS_TRADUCAO[$idioma][1];
+    $j = groq_json("Você é tradutor profissional da Pousada Campeche Lofts (Florianópolis, Brasil). Traduza o texto do usuário para $destino. "
+        . "Detecte o idioma de origem sozinho. Mantenha o sentido, o tom cordial e natural, as quebras de linha, os emojis, os números, valores em R\$, datas, links e nomes próprios exatamente como estão. "
+        . "Não explique, não comente e não acrescente nada. Se o texto já estiver no idioma pedido, devolva-o corrigido, sem mudar o sentido. "
+        . 'Responda SOMENTE um objeto JSON com uma chave: {"traducao": "texto traduzido"}.', mb_substr($texto, 0, 4000));
+    $t = trim((string) ($j['traducao'] ?? ''));
+    if ($t === '') throw new RuntimeException('A IA não devolveu a tradução. Tente de novo.');
+    return $t;
 }

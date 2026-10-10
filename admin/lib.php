@@ -30,7 +30,6 @@ function apps_script(array $payload): ?array {
         CURLOPT_HTTPHEADER => ['Content-Type: text/plain'],  // text/plain evita o preflight do Apps Script
         CURLOPT_POSTFIELDS => json_encode(['segredo' => cfg('apps_script_segredo', '')] + $payload)]);
     $r = json_decode((string) curl_exec($ch), true);
-    curl_close($ch);
     return is_array($r) ? $r : ['ok' => false, 'erro' => 'sem resposta do Apps Script'];
 }
 
@@ -42,7 +41,6 @@ function groq_http(string $url, ?array $corpo = null): array {
         CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'Authorization: Bearer ' . cfg('groq_key', '')]]
         + ($corpo === null ? [] : [CURLOPT_POST => true, CURLOPT_POSTFIELDS => json_encode($corpo)]));
     $r = json_decode((string) curl_exec($ch), true);
-    curl_close($ch);
     return is_array($r) ? $r : [];
 }
 
