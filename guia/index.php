@@ -65,6 +65,7 @@ if (empty($_SESSION['guide_authenticated'])) {
         <a href="#lixo">Lixo</a>
         <a href="#lavanderia">Lavanderia</a>
         <a href="#praia">Praia</a><a href="#trilhas">Trilhas</a><a href="#telefones">Telefones</a><a href="#tv">TV Sky</a>
+        <a href="#grupo">Grupo</a>
         <a href="#ajuda">Ajuda</a>
       </div>
     </nav>
@@ -296,6 +297,13 @@ if (empty($_SESSION['guide_authenticated'])) {
         <div class="guide-section-head"><div><p class="eyebrow">Televisão</p><h2>Canais Sky (pacote Smart).</h2></div><p>A TV dos lofts tem o pacote Smart da Sky. Estes são os principais canais e seus números no controle.</p></div>
         <div class="guide-table-wrap"><table class="guide-table"><thead><tr><th scope="col">Categoria</th><th scope="col">Canais</th></tr></thead><tbody><tr><td><strong>Abertos</strong></td><td>TV Cultura 2 · Rit 3 · Rede Vida 6 · Rede Record 7 · Canção Nova 8 · SBT 9 · TV Aparecida 11 · Band 13 · CNT 14 · Rede TV 15 · Record News 19</td></tr><tr><td><strong>Notícias</strong></td><td>Globo News 40 · Climatempo 170</td></tr><tr><td><strong>Filmes e séries</strong></td><td>Megapix 107 · TNT 108 · Cinemax 112 · Canal Brasil 113 · Sony Channel 137 · Warner 139 · Universal 140 · Fox 141</td></tr><tr><td><strong>Variedades</strong></td><td>GNT 41 · Multishow 42 · Viva 43 · +Globosat 44</td></tr><tr><td><strong>Esporte</strong></td><td>SporTV 2 38</td></tr><tr><td><strong>Infantil</strong></td><td>Discovery Kids 50 · Disney Channel 55 · Gloob 56 · Cartoon Network 60</td></tr><tr><td><strong>Públicos</strong></td><td>TV Câmara 22 · TV Justiça 24 · TV Brasil 23 · TV Senado 26</td></tr><tr><td><strong>Música e rádios</strong></td><td>Canais de música 702–763 · Rádios 776–796</td></tr></tbody></table></div>
         <p class="guide-note">Os números podem variar. Consulte o guia de canais na própria TV.</p>
+      </div>
+    </section>
+
+    <section id="grupo" class="guide-section section-paper">
+      <div class="container">
+        <div class="guide-section-head"><div><p class="eyebrow">Comunicação durante a estadia</p><h2>Grupo da pousada no WhatsApp.</h2></div><p>Durante a estadia, entre no grupo da pousada para receber avisos e falar com a gente e com outros hóspedes.</p></div>
+        <a class="button" href="https://chat.whatsapp.com/ECTD6I0cV2C0iAoRbQn3o3" target="_blank" rel="noopener">Entrar no grupo</a>
       </div>
     </section>
 

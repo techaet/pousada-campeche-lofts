@@ -55,7 +55,7 @@ if (empty($_SESSION['guide_authenticated'])) {
 
     <nav class="guide-nav" aria-label="Guide navigation">
       <div class="guide-nav-inner">
-        <a href="#house-rules">House rules</a><a href="#gate">Gate &amp; parking</a><a href="#wifi">Wi‑Fi</a><a href="#deliveries">Deliveries</a><a href="#barbecue">Barbecue</a><a href="#rubbish">Rubbish</a><a href="#laundry">Laundry</a><a href="#beach">Beach</a><a href="#trails">Trails</a><a href="#phones">Phones</a><a href="#tv">Sky TV</a><a href="#help">Help</a>
+        <a href="#house-rules">House rules</a><a href="#gate">Gate &amp; parking</a><a href="#wifi">Wi‑Fi</a><a href="#deliveries">Deliveries</a><a href="#barbecue">Barbecue</a><a href="#rubbish">Rubbish</a><a href="#laundry">Laundry</a><a href="#beach">Beach</a><a href="#trails">Trails</a><a href="#phones">Phones</a><a href="#tv">Sky TV</a><a href="#group">Group</a><a href="#help">Help</a>
       </div>
     </nav>
 
@@ -186,6 +186,13 @@ if (empty($_SESSION['guide_authenticated'])) {
         <div class="guide-section-head"><div><p class="eyebrow">Television</p><h2>Sky channels (Smart package).</h2></div><p>The lofts’ TV has Sky’s Smart package. These are the main channels and their numbers on the remote.</p></div>
         <div class="guide-table-wrap"><table class="guide-table"><thead><tr><th scope="col">Category</th><th scope="col">Channels</th></tr></thead><tbody><tr><td><strong>Free-to-air</strong></td><td>TV Cultura 2 · Rit 3 · Rede Vida 6 · Rede Record 7 · Canção Nova 8 · SBT 9 · TV Aparecida 11 · Band 13 · CNT 14 · Rede TV 15 · Record News 19</td></tr><tr><td><strong>News</strong></td><td>Globo News 40 · Climatempo 170</td></tr><tr><td><strong>Movies and series</strong></td><td>Megapix 107 · TNT 108 · Cinemax 112 · Canal Brasil 113 · Sony Channel 137 · Warner 139 · Universal 140 · Fox 141</td></tr><tr><td><strong>Variety</strong></td><td>GNT 41 · Multishow 42 · Viva 43 · +Globosat 44</td></tr><tr><td><strong>Sports</strong></td><td>SporTV 2 38</td></tr><tr><td><strong>Kids</strong></td><td>Discovery Kids 50 · Disney Channel 55 · Gloob 56 · Cartoon Network 60</td></tr><tr><td><strong>Public</strong></td><td>TV Câmara 22 · TV Justiça 24 · TV Brasil 23 · TV Senado 26</td></tr><tr><td><strong>Music and radio</strong></td><td>Music channels 702–763 · Radio 776–796</td></tr></tbody></table></div>
         <p class="guide-note">Numbers may vary. Check the channel guide on the TV itself.</p>
+      </div>
+    </section>
+
+    <section id="group" class="guide-section section-paper">
+      <div class="container">
+        <div class="guide-section-head"><div><p class="eyebrow">Communication during your stay</p><h2>Guesthouse WhatsApp group.</h2></div><p>During your stay, join the guesthouse group to get notices and chat with us and other guests.</p></div>
+        <a class="button" href="https://chat.whatsapp.com/ECTD6I0cV2C0iAoRbQn3o3" target="_blank" rel="noopener">Join the group</a>
       </div>
     </section>
 

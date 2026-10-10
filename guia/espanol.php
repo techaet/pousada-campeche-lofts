@@ -55,7 +55,7 @@ if (empty($_SESSION['guide_authenticated'])) {
 
     <nav class="guide-nav" aria-label="Navegación de la guía">
       <div class="guide-nav-inner">
-        <a href="#convivencia">Convivencia</a><a href="#porton">Portón y estacionamiento</a><a href="#wifi">Wi‑Fi</a><a href="#delivery">Delivery</a><a href="#parrilla">Parrilla</a><a href="#residuos">Residuos</a><a href="#lavanderia">Lavandería</a><a href="#playa">Playa</a><a href="#senderos">Senderos</a><a href="#telefonos">Teléfonos</a><a href="#tv">TV Sky</a><a href="#ayuda">Ayuda</a>
+        <a href="#convivencia">Convivencia</a><a href="#porton">Portón y estacionamiento</a><a href="#wifi">Wi‑Fi</a><a href="#delivery">Delivery</a><a href="#parrilla">Parrilla</a><a href="#residuos">Residuos</a><a href="#lavanderia">Lavandería</a><a href="#playa">Playa</a><a href="#senderos">Senderos</a><a href="#telefonos">Teléfonos</a><a href="#tv">TV Sky</a><a href="#grupo">Grupo</a><a href="#ayuda">Ayuda</a>
       </div>
     </nav>
 
@@ -186,6 +186,13 @@ if (empty($_SESSION['guide_authenticated'])) {
         <div class="guide-section-head"><div><p class="eyebrow">Televisión</p><h2>Canales Sky (paquete Smart).</h2></div><p>El TV de los lofts tiene el paquete Smart de Sky. Estos son los principales canales y su número en el control remoto.</p></div>
         <div class="guide-table-wrap"><table class="guide-table"><thead><tr><th scope="col">Categoría</th><th scope="col">Canales</th></tr></thead><tbody><tr><td><strong>Abiertos</strong></td><td>TV Cultura 2 · Rit 3 · Rede Vida 6 · Rede Record 7 · Canção Nova 8 · SBT 9 · TV Aparecida 11 · Band 13 · CNT 14 · Rede TV 15 · Record News 19</td></tr><tr><td><strong>Noticias</strong></td><td>Globo News 40 · Climatempo 170</td></tr><tr><td><strong>Películas y series</strong></td><td>Megapix 107 · TNT 108 · Cinemax 112 · Canal Brasil 113 · Sony Channel 137 · Warner 139 · Universal 140 · Fox 141</td></tr><tr><td><strong>Variedades</strong></td><td>GNT 41 · Multishow 42 · Viva 43 · +Globosat 44</td></tr><tr><td><strong>Deportes</strong></td><td>SporTV 2 38</td></tr><tr><td><strong>Infantil</strong></td><td>Discovery Kids 50 · Disney Channel 55 · Gloob 56 · Cartoon Network 60</td></tr><tr><td><strong>Públicos</strong></td><td>TV Câmara 22 · TV Justiça 24 · TV Brasil 23 · TV Senado 26</td></tr><tr><td><strong>Música y radios</strong></td><td>Canales de música 702–763 · Radios 776–796</td></tr></tbody></table></div>
         <p class="guide-note">Los números pueden variar. Consultá la guía de canales en el propio TV.</p>
+      </div>
+    </section>
+
+    <section id="grupo" class="guide-section section-paper">
+      <div class="container">
+        <div class="guide-section-head"><div><p class="eyebrow">Comunicación durante la estadía</p><h2>Grupo de la posada en WhatsApp.</h2></div><p>Durante tu estadía, sumate al grupo de la posada para recibir avisos y hablar con nosotros y con otros huéspedes.</p></div>
+        <a class="button" href="https://chat.whatsapp.com/ECTD6I0cV2C0iAoRbQn3o3" target="_blank" rel="noopener">Unirme al grupo</a>
       </div>
     </section>
 
