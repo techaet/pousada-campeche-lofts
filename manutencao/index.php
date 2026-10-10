@@ -3,7 +3,7 @@ declare(strict_types=1);
 // Página do executor: acesso pelo link com chave (?k=...). Mesma lista do bot do Telegram.
 require __DIR__ . '/../admin/manutencao_lib.php';
 $k = (string) ($_REQUEST['k'] ?? '');
-if ($k === '' || !hash_equals((string) cfg('executor_token', 'x'), $k)) { http_response_code(404); exit('Página não encontrada.'); }
+if ($k === '' || !cfg('executor_token') || !hash_equals((string) cfg('executor_token'), $k)) { http_response_code(404); exit('Página não encontrada.'); }
 
 $msg = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 require __DIR__ . '/../admin/manutencao_lib.php';
 
 http_response_code(200);
-if (!hash_equals((string) cfg('telegram_secret', 'x'), (string) ($_SERVER['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN'] ?? ''))) exit;
+if (!cfg('telegram_secret') || !hash_equals((string) cfg('telegram_secret'), (string) ($_SERVER['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN'] ?? ''))) exit;
 $u = json_decode((string) file_get_contents('php://input'), true);
 if (!is_array($u)) exit;
 

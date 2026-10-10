@@ -4,7 +4,7 @@ declare(strict_types=1);
 require __DIR__ . '/../admin/manutencao_lib.php';
 admin_sessao();
 $k = (string) ($_GET['k'] ?? '');
-$ok = !empty($_SESSION['admin']) || ($k !== '' && hash_equals((string) cfg('executor_token', 'x'), $k));
+$ok = !empty($_SESSION['admin']) || ($k !== '' && cfg('executor_token') && hash_equals((string) cfg('executor_token'), $k));
 $f = basename((string) ($_GET['f'] ?? ''));
 $caminho = DADOS . '/midia/' . $f;
 if (!$ok || $f === '' || !is_file($caminho)) { http_response_code(404); exit; }
