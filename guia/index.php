@@ -63,6 +63,7 @@ if (empty($_SESSION['guide_authenticated'])) {
         <a href="#delivery">Delivery</a>
         <a href="#churrasqueira">Churrasqueira</a>
         <a href="#lixo">Lixo</a>
+        <a href="#lavanderia">Lavanderia</a>
         <a href="#ajuda">Ajuda</a>
       </div>
     </nav>
@@ -252,7 +253,23 @@ if (empty($_SESSION['guide_authenticated'])) {
       </div>
     </section>
 
-    <section id="ajuda" class="guide-section section-white">
+    <section id="lavanderia" class="guide-section section-white">
+      <div class="container">
+        <div class="guide-section-head">
+          <div>
+            <p class="eyebrow">Uso compartilhado</p>
+            <h2>Lavanderia.</h2>
+          </div>
+          <p>A pousada tem uma <strong>lavanderia coletiva</strong>, de uso <strong>gratuito</strong> para os hóspedes. Você só precisa comprar o seu sabão.</p>
+        </div>
+        <figure class="guide-parking-map" style="max-width:560px">
+          <img src="images/lavanderia.webp" alt="Lavanderia coletiva da pousada, com máquinas de lavar roupa e bancada" width="1086" height="1448" loading="lazy">
+          <figcaption>Lavanderia coletiva da pousada: uso gratuito, basta levar o seu sabão.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="ajuda" class="guide-section section-paper">
       <div class="container">
         <div class="guide-contact-panel">
           <div>

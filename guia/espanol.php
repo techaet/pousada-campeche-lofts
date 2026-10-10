@@ -55,7 +55,7 @@ if (empty($_SESSION['guide_authenticated'])) {
 
     <nav class="guide-nav" aria-label="Navegación de la guía">
       <div class="guide-nav-inner">
-        <a href="#convivencia">Convivencia</a><a href="#porton">Portón y estacionamiento</a><a href="#wifi">Wi‑Fi</a><a href="#delivery">Delivery</a><a href="#parrilla">Parrilla</a><a href="#residuos">Residuos</a><a href="#ayuda">Ayuda</a>
+        <a href="#convivencia">Convivencia</a><a href="#porton">Portón y estacionamiento</a><a href="#wifi">Wi‑Fi</a><a href="#delivery">Delivery</a><a href="#parrilla">Parrilla</a><a href="#residuos">Residuos</a><a href="#lavanderia">Lavandería</a><a href="#ayuda">Ayuda</a>
       </div>
     </nav>
 
@@ -144,7 +144,23 @@ if (empty($_SESSION['guide_authenticated'])) {
       </div>
     </section>
 
-    <section id="ayuda" class="guide-section section-white">
+    <section id="lavanderia" class="guide-section section-white">
+      <div class="container">
+        <div class="guide-section-head">
+          <div>
+            <p class="eyebrow">Uso compartido</p>
+            <h2>Lavandería.</h2>
+          </div>
+          <p>La posada cuenta con una <strong>lavandería colectiva</strong>, de uso <strong>gratuito</strong> para los huéspedes. Solo necesitás comprar tu jabón.</p>
+        </div>
+        <figure class="guide-parking-map" style="max-width:560px">
+          <img src="images/lavanderia.webp" alt="Lavandería colectiva de la posada, con lavarropas y mesada" width="1086" height="1448" loading="lazy">
+          <figcaption>Lavandería colectiva de la posada: uso gratuito, solo tenés que traer tu jabón.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="ayuda" class="guide-section section-paper">
       <div class="container"><div class="guide-contact-panel"><div><p class="eyebrow">Estamos cerca</p><h2>¿Tiene alguna duda?</h2><p>Escríbale a Leo por WhatsApp. Estamos disponibles para ayudar con el estacionamiento, la parrilla, las orientaciones de la posada o cualquier otra necesidad durante su estadía.</p></div><a class="button button-light" href="https://api.whatsapp.com/send?phone=5548991223600&text=Hola%2C%20estoy%20hospedado(a)%20en%20Campeche%20Lofts%20y%20necesito%20ayuda." target="_blank" rel="noopener">Hablar por WhatsApp</a></div></div>
     </section>
   </main>

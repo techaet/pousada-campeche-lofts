@@ -55,7 +55,7 @@ if (empty($_SESSION['guide_authenticated'])) {
 
     <nav class="guide-nav" aria-label="Guide navigation">
       <div class="guide-nav-inner">
-        <a href="#house-rules">House rules</a><a href="#gate">Gate &amp; parking</a><a href="#wifi">Wi‑Fi</a><a href="#deliveries">Deliveries</a><a href="#barbecue">Barbecue</a><a href="#rubbish">Rubbish</a><a href="#help">Help</a>
+        <a href="#house-rules">House rules</a><a href="#gate">Gate &amp; parking</a><a href="#wifi">Wi‑Fi</a><a href="#deliveries">Deliveries</a><a href="#barbecue">Barbecue</a><a href="#rubbish">Rubbish</a><a href="#laundry">Laundry</a><a href="#help">Help</a>
       </div>
     </nav>
 
@@ -144,7 +144,23 @@ if (empty($_SESSION['guide_authenticated'])) {
       </div>
     </section>
 
-    <section id="help" class="guide-section section-white">
+    <section id="laundry" class="guide-section section-white">
+      <div class="container">
+        <div class="guide-section-head">
+          <div>
+            <p class="eyebrow">Shared space</p>
+            <h2>Laundry.</h2>
+          </div>
+          <p>The guesthouse has a <strong>shared laundry</strong> that guests can use <strong>free of charge</strong>. You only need to buy your own detergent.</p>
+        </div>
+        <figure class="guide-parking-map" style="max-width:560px">
+          <img src="images/lavanderia.webp" alt="Shared laundry at the guesthouse, with washing machines and a countertop" width="1086" height="1448" loading="lazy">
+          <figcaption>Shared laundry: free to use, just bring your own detergent.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="help" class="guide-section section-paper">
       <div class="container"><div class="guide-contact-panel"><div><p class="eyebrow">We are nearby</p><h2>Do you have any questions?</h2><p>Please message Leo on WhatsApp. We are available to help with parking, the barbecue area, property guidance or anything else you may need during your stay.</p></div><a class="button button-light" href="https://api.whatsapp.com/send?phone=5548991223600&text=Hello%2C%20I%20am%20staying%20at%20Campeche%20Lofts%20and%20need%20help." target="_blank" rel="noopener">Message us on WhatsApp</a></div></div>
     </section>
   </main>
