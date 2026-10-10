@@ -109,7 +109,7 @@ if ($cmd === '/cancelar') { estado_gravar($chat, null); tg('sendMessage', ['chat
 if ($eh_e) {  // ---- executor ----
     $est = estado_ler($chat);
     if ($cmd === '/start' || $cmd === '/ajuda') {
-        tg('sendMessage', ['chat_id' => $chat, 'text' => "Olá! Comandos:\n/tarefas — ver as tarefas em aberto (da mais urgente para a menos)\n\nEm cada tarefa use os botões para informar o valor e marcar como executada."]);
+        tg('sendMessage', ['chat_id' => $chat, 'text' => ajuda_texto('executor')]);
     } elseif ($cmd === '/tarefas') {
         listar_ao_executor($chat);
     } elseif (($est['tipo'] ?? '') === 'valor' && $cmd === '') {
@@ -132,7 +132,7 @@ if ($eh_e) {  // ---- executor ----
 // ---- gerente ----
 $est = estado_ler($chat);
 if ($cmd === '/start' || $cmd === '/ajuda') {
-    tg('sendMessage', ['chat_id' => $chat, 'text' => "Olá! Para registrar uma demanda de manutenção é só me mandar texto, foto, vídeo ou áudio (pode juntar tudo).\n\n/tarefas — demandas em aberto\n/pagar — pagar o que o prestador já executou (depois envie o comprovante)\n/cancelar — desistir de uma ação"]);
+    tg('sendMessage', ['chat_id' => $chat, 'text' => ajuda_texto('gerente')]);
 } elseif ($cmd === '/tarefas') {
     listar_ao_gerente($chat);
 } elseif ($cmd === '/pagar') {

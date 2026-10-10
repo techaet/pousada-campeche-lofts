@@ -52,4 +52,6 @@ if ($feitas) {
     foreach ($feitas as $t) echo '<div class="card"><strong>#' . $t['id'] . '</strong> · ' . h(brl((float) $t['valor'])) . '<br><span class="dica">' . h(resumo($t)) . '</span></div>';
 }
 ?>
+<h2>Comandos do Telegram</h2>
+<div class="card"><?php if ($bot = cfg('telegram_bot_username')) echo '<p><a href="https://t.me/' . h($bot) . '" target="_blank" rel="noopener">Abrir o bot no Telegram (@' . h($bot) . ')</a></p>'; ?><?= ajuda_html('executor') ?></div>
 </main></body></html>

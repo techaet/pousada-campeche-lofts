@@ -56,15 +56,47 @@ function bot_username_garantir(): void {
     if (cfg('telegram_token') && !cfg('telegram_bot_username') && ($me = tg('getMe')) && !empty($me['username'])) cfg_salvar(['telegram_bot_username' => $me['username']]);
 }
 
+/** Fonte única dos comandos do bot: alimenta o /ajuda do bot, a página do executor, o card do admin e o menu "/" do Telegram.
+ *  [comando ou ação, descrição]. Os que começam com "/" são comandos de verdade (entram no menu do Telegram). */
+const COMANDOS_BOT = [
+    'gerente' => [
+        ['texto, foto, vídeo ou áudio', 'registra uma demanda (pode juntar tudo). Depois toque em 🔴 Alta, 🟡 Média ou 🟢 Baixa, ou em 🗑 Excluir'],
+        ['/tarefas', 'ver as demandas em aberto e o total a pagar'],
+        ['/pagar', 'pagar o que o prestador executou: envie em seguida o comprovante (foto ou PDF)'],
+        ['/cancelar', 'cancelar a ação em andamento'],
+        ['/ajuda', 'mostrar esta ajuda'],
+    ],
+    'executor' => [
+        ['/tarefas', 'ver as tarefas em aberto, da mais urgente para a menos urgente, com fotos e vídeos'],
+        ['💲 Informar valor', 'botão em cada tarefa: digite o valor (ex.: 150 ou 150,50)'],
+        ['✅ Executada', 'botão em cada tarefa: marca como feita e avisa os gerentes'],
+        ['/cancelar', 'cancelar a ação em andamento'],
+        ['/ajuda', 'mostrar esta ajuda'],
+    ],
+    'novo' => [
+        ['/start', 'começar'],
+        ['/meuid', 'ver o meu ID do Telegram (o número que o Leonardo cadastra para liberar o acesso)'],
+    ],
+];
+
+/** Texto do /ajuda do bot para um papel ('gerente' ou 'executor'). */
+function ajuda_texto(string $papel): string {
+    $abre = $papel === 'gerente' ? "Olá! Estes são os comandos:\n\n" : "Olá! Estes são os comandos e botões:\n\n";
+    return $abre . implode("\n", array_map(fn($c) => $c[0] . ' — ' . $c[1], COMANDOS_BOT[$papel]));
+}
+
+/** Mesma lista em HTML (página do executor e card do admin). */
+function ajuda_html(string $papel): string {
+    return '<ul style="margin:0;padding-left:20px">' . implode('', array_map(fn($c) => '<li><b>' . h($c[0]) . '</b>: ' . h($c[1]) . '</li>', COMANDOS_BOT[$papel])) . '</ul>';
+}
+
 /** Registra no Telegram o menu "/" de cada pessoa: gerentes, executor e (para os demais) só /start e /meuid. Devolve quantos menus foram aceitos. */
 function bot_registrar_comandos(): int {
-    $cmd = fn(array $l) => array_map(fn($c, $d) => ['command' => $c, 'description' => $d], array_keys($l), $l);
-    $gerente = $cmd(['tarefas' => 'Ver as demandas em aberto', 'pagar' => 'Pagar o que o prestador executou', 'cancelar' => 'Cancelar a ação em andamento', 'ajuda' => 'Como usar o bot']);
-    $executor = $cmd(['tarefas' => 'Ver as tarefas em aberto', 'cancelar' => 'Cancelar a ação em andamento', 'ajuda' => 'Como usar o bot']);
-    $padrao = $cmd(['start' => 'Começar', 'meuid' => 'Ver o meu ID do Telegram']);
-    $ok = (int) (tg('setMyCommands', ['commands' => $padrao, 'scope' => ['type' => 'default']]) === true);
-    foreach (gerentes() as $g) $ok += (int) (tg('setMyCommands', ['commands' => $gerente, 'scope' => ['type' => 'chat', 'chat_id' => $g]]) === true);
-    if (executor()) $ok += (int) (tg('setMyCommands', ['commands' => $executor, 'scope' => ['type' => 'chat', 'chat_id' => executor()]]) === true);
+    $menu = fn(string $papel) => array_values(array_map(fn($c) => ['command' => ltrim($c[0], '/'), 'description' => mb_substr($c[1], 0, 100)],
+        array_filter(COMANDOS_BOT[$papel], fn($c) => str_starts_with($c[0], '/'))));
+    $ok = (int) (tg('setMyCommands', ['commands' => $menu('novo'), 'scope' => ['type' => 'default']]) === true);
+    foreach (gerentes() as $g) $ok += (int) (tg('setMyCommands', ['commands' => $menu('gerente'), 'scope' => ['type' => 'chat', 'chat_id' => $g]]) === true);
+    if (executor()) $ok += (int) (tg('setMyCommands', ['commands' => $menu('executor'), 'scope' => ['type' => 'chat', 'chat_id' => executor()]]) === true);
     return $ok;
 }
 
